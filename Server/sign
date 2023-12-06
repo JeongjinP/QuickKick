@@ -1,0 +1,27 @@
+app.post('/user/join', function (req, res) {
+    var userEmail = req.body.userEmail;
+    var userPwd = req.body.userPwd;
+    var userName = req.body.userName;
+
+    // sql문 삽입
+    var sql = 'INSERT INTO Users (UserEmail, UserPwd, UserName) VALUES (?, ?, ?)';
+    var params = [userEmail, userPwd, userName];
+    
+    
+    connection.query(sql, params, function (err, result) {
+        var resultCode = 404;
+        var message = '에러가 발생했습니다';
+
+        if (err) {
+            console.log(err);
+        } else {
+            resultCode = 200;
+            message = '회원가입에 성공했습니다.';
+        }
+
+        res.json({
+            'code': resultCode,
+            'message': message
+        });
+    });
+});

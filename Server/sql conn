@@ -1,10 +1,10 @@
 var mysql = require('mysql');
 
 var connection = mysql.createConnection({
-    host: "엔드포인트 주소",
-    user: "유저 이름",
-    database: "접근할 데이터베이스 이름",
-    password: "설정해두었던 패스워드",
+    host: "127.0.0.1",
+    user: "root",
+    database: "quickkickdb",
+    password: "root",
     port: 3306
 });
 

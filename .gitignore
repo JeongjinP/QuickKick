@@ -1,1 +1,8 @@
-.DS_Store
+# macos
+.DS_STORE
+
+# vscode
+.vscode/
+.history/
+
+

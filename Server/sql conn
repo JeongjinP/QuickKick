@@ -1,0 +1,19 @@
+var mysql = require('mysql');
+
+var connection = mysql.createConnection({
+    host: "엔드포인트 주소",
+    user: "유저 이름",
+    database: "접근할 데이터베이스 이름",
+    password: "설정해두었던 패스워드",
+    port: 3306
+});
+
+
+con.connect(function(err) {
+  if (err) throw err;
+  console.log("Connected!");
+  con.query(sql, function (err, result) {
+    if (err) throw err;
+    console.log("Result: " + result);
+  });
+});

@@ -1,13 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import HeaderComponent from './src/screen/HeaderComponent';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.directory}>홈</Text>
-        <Text style={styles.directory}>알림</Text>
-      </View>
+      <HeaderComponent></HeaderComponent>
 
       <View style={styles.body}>
         <View style={styles.userinfo}>
@@ -17,6 +15,7 @@ export default function App() {
           <Text style={styles.info}>10승 1패</Text>
         </View>
         <View style={styles.board}>
+          
           <Text style={styles.boardDescription}>게시판</Text>
         </View>  
       </View>
@@ -37,23 +36,6 @@ const styles = StyleSheet.create({
     flex:1,
     backgroundColor: "white",
   }, 
-  header: {
-    flex:1.2,
-    backgroundColor: "#0A4A9B",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingLeft: 30,
-    paddingRight: 30,
-    paddingTop:20,
-  },
-  directory: {
-    color: "white",
-    fontSize: 32,
-    fontWeight: "bold",
-    marginTop: 10,
-    marginBottom:-10,
-  },
   body: {
     flex: 8,
     backgroundColor: "white",

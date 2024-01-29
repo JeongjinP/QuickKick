@@ -2,11 +2,12 @@ import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 
 const HeaderComponent = () =>{
+
   return (
     <View style={styles.header}>
-    <Text style={styles.directory}>홈</Text>
-    <Text style={styles.directory}>알림</Text>
-  </View>
+      <Text style={styles.directory}>홈</Text>
+      <Text style={styles.directory}>알림</Text>
+    </View>
   );
 };
 

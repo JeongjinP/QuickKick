@@ -1,13 +1,12 @@
 import React from "react";
 import {View, Text} from "react-native";
 
-function Reservation () {
+function MyPage () {
   return (
     <View>
-      <Text>This is Reservation Page</Text>
+      <Text>This is MyPage</Text>
     </View>
-
   )
 }
 
-export default Reservation;
+export default MyPage;

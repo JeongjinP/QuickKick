@@ -1,5 +1,5 @@
 import React from "react";
-import {defaultScreenOptions, Stack} from "./NavigationStack";
+import {defaultScreenOptions, Stack} from "./DefaultStackOptions";
 import Board from "../screens/Board";
 
 function BoardStack() {

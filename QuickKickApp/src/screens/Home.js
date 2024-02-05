@@ -1,21 +1,33 @@
 import React from "react";
-import {Text, View, StyleSheet, Button, SafeAreaView} from "react-native";
+import {Text, View, StyleSheet, SafeAreaView, TouchableOpacity} from "react-native";
+import AntDesign from '@expo/vector-icons/AntDesign';
 
-function Home ({navigation}){
-  return ( <SafeAreaView style={styles.body}>
-    <View style={styles.userinfo}>
-      <Text style={styles.info}>로그인해주세요</Text>
-      <Button
-        title={"로그인"}
-        onPress={() => navigation.navigate("Team")}/>
-    </View>
-    <View style={styles.board}>
-      <Text style={styles.boardDescription}>예약이 없습니다.</Text>
-    </View>
-    <View style={styles.board}>
-      <Text style={styles.boardDescription}>용병 급구</Text>
-    </View>
-  </SafeAreaView>);
+
+
+function Home ({ navigation }){
+
+  return (
+    <SafeAreaView style={styles.body}>
+      <View style={styles.userinfo}>
+        <Text style={styles.infoText}>xx님 안녕하세요</Text>
+        <TouchableOpacity
+          onPress={() => navigation.reset({
+          index: 0,
+          routes: [{name: "Login"}]})} style={styles.outButton}
+        >
+          <AntDesign name="logout" size={30} color="white" />
+          {/*<Text style={styles.outButtonText}>로그아웃</Text>*/}
+        </TouchableOpacity>
+      </View>
+
+      <View style={styles.board}>
+        <Text style={styles.boardDescription}>예약이 없습니다.</Text>
+      </View>
+
+      <View style={styles.board}>
+        <Text style={styles.boardDescription}>용병 구인</Text>
+      </View>
+    </SafeAreaView>);
 }
 
 export default Home;
@@ -27,17 +39,30 @@ const styles = StyleSheet.create({
 },
   userinfo:{
     flex: 1,
+    flexDirection: "row",
     backgroundColor: '#0A4A9B',
     margin: 30,
     borderRadius: 10,
-    justifyContent:"center",
+    paddingHorizontal: 20,
+    justifyContent:"space-around",
     alignItems: "center"
-
 },
-  info: {
+  outButton: {
+    backgroundColor: "#ffbd03",
+    borderRadius: 10,
+    padding: 10,
+  },
+  // outButtonText: {
+  //   fontSize: 20,
+  //   fontWeight: "bold",
+  //   color: "white",
+// },
+  infoText: {
+    margin: 10,
     fontSize: 20,
     fontWeight: "bold",
     color: "white",
+
 },
   board: {
     flex:2,

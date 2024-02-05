@@ -1,13 +1,11 @@
 import React from "react";
-import {defaultScreenOptions, Stack} from "./NavigationStack";
+import {defaultScreenOptions, Stack} from "./DefaultStackOptions";
 import Home from "../screens/Home";
-import Login from "../screens/Login";
-
 
 function HomeStack () {
   return (
     <Stack.Navigator screenOptions={defaultScreenOptions}>
-      <Stack.Screen name={"HomePage"} component={Home} />
+      <Stack.Screen name={"HomeScreen"} component={Home} />
     </Stack.Navigator>
   )
 }

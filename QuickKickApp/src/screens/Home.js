@@ -1,5 +1,5 @@
 import React from "react";
-import {Text, View, StyleSheet, SafeAreaView, TouchableOpacity} from "react-native";
+import {Text, View, StyleSheet, SafeAreaView, TouchableOpacity, Platform} from "react-native";
 import AntDesign from '@expo/vector-icons/AntDesign';
 
 
@@ -7,9 +7,12 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 function Home ({ navigation, route }) {
 
   return (
-    <SafeAreaView style={styles.body}>
-      <View style={styles.userinfo}>
-        <Text style={styles.infoText}>{route.params.user}님 안녕하세요</Text>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.userInfo}>
+        <View>
+          <Text style={styles.userInfoText}>{route.params.user}님 안녕하세요</Text>
+          <Text style={[styles.userInfoText,{fontSize: 18}]}>현재 소속팀이 없습니다</Text>
+        </View>
         <TouchableOpacity
           onPress={() => navigation.reset({
           index: 0,
@@ -21,11 +24,11 @@ function Home ({ navigation, route }) {
       </View>
 
       <View style={styles.board}>
-        <Text style={styles.boardDescription}>예약이 없습니다.</Text>
+        <Text style={styles.boardText}>예약이 없습니다.</Text>
       </View>
 
       <View style={styles.board}>
-        <Text style={styles.boardDescription}>용병 구인</Text>
+        <Text style={styles.boardText}>용병 구인</Text>
       </View>
     </SafeAreaView>);
 }
@@ -33,50 +36,44 @@ function Home ({ navigation, route }) {
 export default Home;
 
 const styles = StyleSheet.create({
-  body: {
+  container: {
     flex: 1,
     backgroundColor: "white",
 },
-  userinfo:{
+  userInfo:{
     flex: 1,
     flexDirection: "row",
     backgroundColor: '#0A4A9B',
-    margin: 30,
+    margin: 20,
     borderRadius: 10,
-    paddingHorizontal: 20,
+    paddingHorizontal: 10,
     justifyContent:"space-around",
     alignItems: "center"
 },
-  outButton: {
-    backgroundColor: "#ffa600",
-    borderRadius: 10,
-    padding: 10,
-  },
-  // outButtonText: {
-  //   fontSize: 20,
-  //   fontWeight: "bold",
-  //   color: "white",
-// },
-  infoText: {
-    margin: 10,
-    fontSize: 20,
-    fontWeight: "bold",
-    color: "white",
-
-},
+    userInfoText: {
+      margin: 5,
+      fontSize: 20,
+      fontWeight: "bold",
+      color: "white",
+    },
+    outButton: {
+      backgroundColor: "#ffa600",
+      borderRadius: 10,
+      padding: 10,
+    },
   board: {
     flex:2,
     backgroundColor: "white",
-    margin: 30,
+    margin: 20,
     marginTop: 0,
     borderColor: "#0A4A9B",
-    borderWidth: 2,
-    borderRadius: 10,
+    borderWidth: 1,
+    // borderRadius: 10,
     justifyContent: "center",
     alignItems: "center",
 },
-  boardDescription: {
-    fontSize: 30,
+  boardText: {
+    fontSize: 26,
     fontWeight: "bold",
     color: "#0A4A9B",
 },

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {Button, Image, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import Logo from "../img/inuLogo.png";
+import Home from "./Home";
 
 function Login ({ navigation }) {
   const [inputId,setInputId] = useState("");
@@ -39,7 +40,10 @@ function Login ({ navigation }) {
       <View style={{flex:2}}>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate("Root")}>
+          onPress={() => navigation.navigate("Root", {
+            screen: "홈",
+            params: {user: inputId},
+          })}>
           <Text style={styles.buttonText}>로그인</Text>
         </TouchableOpacity>
 

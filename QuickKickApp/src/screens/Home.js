@@ -4,12 +4,12 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 
 
 
-function Home ({ navigation }){
+function Home ({ navigation, route }) {
 
   return (
     <SafeAreaView style={styles.body}>
       <View style={styles.userinfo}>
-        <Text style={styles.infoText}>xx님 안녕하세요</Text>
+        <Text style={styles.infoText}>{route.params.user}님 안녕하세요</Text>
         <TouchableOpacity
           onPress={() => navigation.reset({
           index: 0,

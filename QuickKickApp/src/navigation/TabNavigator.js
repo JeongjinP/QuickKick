@@ -11,7 +11,7 @@ const Tab = createBottomTabNavigator();
 function TabNavigator() {
   return(
     <Tab.Navigator initialRouteName={"홈"}>
-      <Tab.Screen name={"홈"} component={HomeStack} />
+      <Tab.Screen name={"홈"} component={Home} />
       <Tab.Screen name={"예약"} component={ReservationStack} options={{headerShown:false}}/>
       <Tab.Screen name={"게시판"} component={BoardStack} />
       <Tab.Screen name={"팀"} component={TeamStack} />

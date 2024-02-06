@@ -1,21 +1,25 @@
 import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import DropdownComponent from "../../component/DropdownComponent";
+import CalendarComponent from "../../component/CalendarComponent";
 
 const data = [
-  { label: 'Item 1', value: '1' },
-  { label: 'Item 2', value: '2' },
-  { label: 'Item 3', value: '3' },
+  { label: '구장 1', value: '1' },
+  { label: '구장 2', value: '2' },
+  { label: '구장 3', value: '3' },
 ];
 function SelectFootballGround() {
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>구장선택</Text>
-      <View>
+      <Text style={styles.title}>예약</Text>
+      <View style={styles.dropdownbox}>
         <DropdownComponent
           label={"구장"}
           holder={"구장을 선택해주세요."}
           data = {data}
         />
+      </View>
+      <View>
+        <CalendarComponent/>
       </View>
     </SafeAreaView>
   );
@@ -30,10 +34,17 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
   },
   title: {
+    textAlign: "left",
+    marginHorizontal: 30,
+    marginVertical: 20,
+    color: "#0A4A9B",
     fontSize: 30,
     fontWeight: "bold",
-    color: "#0A4A9B",
-    margin: 30,
+
+  },
+  dropdownbox: {
+    borderTopWidth: 1,
+    borderColor: "#0A4A9B",
   },
 
 });

@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import {Button, Image, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import Logo from "../img/inuLogo.png";
-import Home from "./Home";
+import AntDesign from '@expo/vector-icons/AntDesign';
+
+const userIcon = <AntDesign name="user" size={20} color="black" />;
 
 function Login ({ navigation }) {
   const [inputId,setInputId] = useState("");
@@ -23,19 +25,20 @@ function Login ({ navigation }) {
           style={styles.input}
           label={"id"}
           onChangeText={onChangeText}
-
         />
+      </View>
+      <View style={styles.inputBox}>
+        {/*<AntDesign name="user" size={20} color="black" style={styles.icon}/>*/}
         <TextInput
           placeholder={"패스워드"}
           style={styles.input}
           secureTextEntry={true}
         />
-        <View style={styles.loginOptions}>
-          <Text style={styles.Text}>아이디저장</Text>
-          <Text style={styles.Text}>자동로그인</Text>
-        </View>
       </View>
-
+      <View style={styles.loginOptions}>
+        <Text style={styles.Text}>아이디저장</Text>
+        <Text style={styles.Text}>자동로그인</Text>
+      </View>
 
       <View style={{flex:2}}>
         <TouchableOpacity
@@ -49,6 +52,7 @@ function Login ({ navigation }) {
 
         <View style={styles.loginInfo}>
           <Text style={styles.Text}>로그인 정보는 포탈과 동일합니다.</Text>
+          <Text style={styles.Text}>(학생은 학번, 교원은 교번, 직원은 사번입니다)</Text>
           <Text style={styles.Text}>아이디찾기/비밀번호 찾기는 PC에서 포탈을 이용하시기 바랍니다.</Text>
         </View>
       </View>
@@ -71,7 +75,7 @@ const styles = StyleSheet.create({
     flex: 2,
     justifyContent: "flex-end",
     alignItems: "center",
-    marginBottom: 20,
+    marginBottom: 30,
     // marginTop: 200,
   },
   logoImg: {
@@ -80,19 +84,24 @@ const styles = StyleSheet.create({
     resizeMode: "contain", // 가로세로 비율 유지하고 이미지 리사이징
   },
   inputBox: {
-    flex: 1,
+    flexDirection: "row",
     justifyContent: "center",
   },
-  input: {
-    borderWidth: 1,
-    // borderRadius: 5,
-    width: '100%',
-    padding: 10,
-    marginBottom: 18,
-    fontSize: 16,
-    borderColor: "lightgrey",
-
-  },
+    input: {
+      flex: 1,
+      borderWidth: 1,
+      // borderRadius: 5,
+      width: '100%',
+      padding: 10,
+      marginBottom: 18,
+      fontSize: 16,
+      borderColor: "lightgrey",
+    },
+    // icon: {
+    //   position: "absolute",
+    //   top: 15,
+    //   left: 15,
+    // },
   loginOptions: {
     flexDirection: "row",
     justifyContent: "space-around",
@@ -106,11 +115,11 @@ const styles = StyleSheet.create({
     padding: 16,
     marginHorizontal: 10,
     // borderRadius: 5,
-  },
-  buttonText: {
-    color: "white",
-    fontSize: 16,
-  },
+    },
+    buttonText: {
+      color: "white",
+      fontSize: 14,
+    },
   loginInfo: {
     justifyContent: "flex-start",
     alignItems: "center",
@@ -118,7 +127,7 @@ const styles = StyleSheet.create({
     },
   Text: {
     marginTop: 5,
-    fontSize: 14,
+    fontSize: 12,
     color: "gray",
   }
 

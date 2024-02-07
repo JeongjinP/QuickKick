@@ -1,6 +1,7 @@
-import {Platform, SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import {Platform, SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
 import DropdownComponent from "../../component/DropdownComponent";
 import CalendarComponent from "../../component/CalendarComponent";
+import ReservationStatusViewer from "../../component/ReservationStatusViewer";
 
 const data = [
   { label: '구장 1', value: '1' },
@@ -22,6 +23,9 @@ function ReservationSelect() {
       </View>
       <View>
         <CalendarComponent/>
+      </View>
+      <View style={styles.selectTime}>
+          <ReservationStatusViewer/>
       </View>
     </SafeAreaView>
   );
@@ -49,5 +53,12 @@ const styles = StyleSheet.create({
     borderBottomWidth: 2,
     borderColor: "#0A4A9B",
   },
+  selectTime: {
+    flex: 1,
+    marginHorizontal: 30,
+    marginVertical: 20,
+    borderTopWidth: 2,
+    borderColor: "#0A4A9B",
+  }
 
 });

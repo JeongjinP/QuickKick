@@ -10,7 +10,7 @@ function Home ({ navigation, route }) {
     <SafeAreaView style={styles.container}>
       <View style={styles.userInfo}>
         <View>
-          <Text style={styles.userInfoText}>{route.params.user}님 안녕하세요</Text>
+          <Text style={styles.userInfoText}>{route.params.userName}님 안녕하세요</Text>
           <Text style={[styles.userInfoText,{fontSize: 18}]}>현재 소속팀이 없습니다</Text>
         </View>
         <TouchableOpacity

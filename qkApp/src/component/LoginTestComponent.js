@@ -22,10 +22,9 @@ const checkUser = (id, pw) => {
     }
 }
 
-function LoginTestComponent( props ) {
+export function LoginTestComponent( props ) {
     return (
       checkUser(props.credential.ID, props.credential.PW)
     );
 }
 
-export default LoginTestComponent;

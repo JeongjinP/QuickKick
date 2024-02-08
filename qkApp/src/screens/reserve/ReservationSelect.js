@@ -1,4 +1,4 @@
-import {Platform, SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {Platform, SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import DropdownComponent from "../../component/DropdownComponent";
 import CalendarComponent from "../../component/CalendarComponent";
 import ReservationStatusViewer from "../../component/ReservationStatusViewer";

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import Logo from "../img/inuLogo.png";
-import LoginTestComponent from "../component/LoginTestComponent";
+import { LoginTestComponent } from "../component/LoginTestComponent";
 // import AntDesign from '@expo/vector-icons/AntDesign';
 // const userIcon = <AntDesign name="user" size={20} color="black" />;
 

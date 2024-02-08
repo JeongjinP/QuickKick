@@ -13,7 +13,7 @@ function Login ({ navigation }) {
     setCredential({...credential, [field]: enteredText});
   };
 
-  // 로그인 여부를 판단해주는 함수 LoginTestComponent라는 외부 컴포넌트에 credentail 배열을 props로 전달한 다음
+  // 로그인 여부를 판단해주는 함수 LoginTestComponent라는 외부 컴포넌트에 credential 배열을 props로 전달한 다음
   // 결과를 true, false와 함께 userName을 받아와서 로그인 성공시 'Root'(RootStack = TabNavigator)로 이동하게끔 구현
   const loginHandler = () => {
     const loginResult = LoginTestComponent({credential});
@@ -69,16 +69,8 @@ function Login ({ navigation }) {
       <View style={{flex:2}}>
         <TouchableOpacity
           style={styles.button}
-<<<<<<< HEAD
-          onPress={() => navigation.navigate("Root", {
-            screen: "홈",
-            params: {user: inputId, password: inputPw},
-          })}>
-=======
-          onPress={() => loginHandler()}
+          onPress={() => loginHandler()}>
           // loginHandler 함수로  로그인 여부 판단
-        >
->>>>>>> 781ae96d9ea86318e1883f5a1453dbcf00a82dc9
           <Text style={styles.buttonText}>로그인</Text>
         </TouchableOpacity>
 

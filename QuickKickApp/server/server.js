@@ -23,15 +23,18 @@ app.post('/api/getUser', (req,res) => {
     const username = req.body.username;
     const password = req.body.password;
     if (username && password){
-        query = 'SELECT * FROM Login where id = ${user}', function (error, results, fields) {
+        query = 'SELECT * FROM Login where id = ${username} and password = ${password}', function (error, results, fields) {
             if (results.length > 0) {
-                    if (results === true) {
-                        username = '${stdName}';
+                bcrypt.compare(password, results[0].userchn, (err, result) => {
+                    if (result === true) {
+                        route.params.user = '${stdNum}';
                     }
-                }
+                })
             }
 
         }
+    }    
+
 })
 
 app.listen(port, () => {

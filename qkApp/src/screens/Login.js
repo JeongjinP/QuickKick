@@ -2,37 +2,35 @@ import React, { useState } from "react";
 import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import Logo from "../img/inuLogo.png";
 import { LoginTestComponent } from "../component/LoginTestComponent";
-// import AntDesign from '@expo/vector-icons/AntDesign';
-// const userIcon = <AntDesign name="user" size={20} color="black" />;
+
 
 function Login ({ navigation }) {
+  // useState 를 사용해 ID, PW를 저장할 credential 배열 생성
   const [credential,setCredential] = useState({ID: "", PW: ""});
 
-  // 유저 정보를 변수에 저장하기 위한 함수 inputChangeHandler
+  // id, pw 입력창에서 사용할 함수
   const inputChangeHandler = (enteredText, field) => {
     setCredential({...credential, [field]: enteredText});
   };
 
-  // 로그인 여부를 판단해주는 함수 LoginTestComponent 라는 외부 컴포넌트에 credentail 배열을 props로 전달한 다음
-  // 결과를 true, false 와 함께 사용자 이름인 userName 을 받아와서 로그인 성공시 'Root'(RootStack = TabNavigator)로 이동하게끔 구현
+  // 로그인 여부를 판단해주는 LoginTestComponent 라는 컴포넌트에 사용자로부터 입력받은 credential 배열을 props 로 전달
+  // 결과로 true, false 와 함께 사용자 이름, 팀 userName, userTeam 을 받아옴
+  // 로그인 성공시 "Root"(RootStack 에서 Login => TabNavigator)로 이동하게끔 구현
   const loginHandler = () => {
+    // loginResult 에 LoginTestComponent 에서 나온 return 값을을 저장
     const loginResult = LoginTestComponent({credential});
 
+    // 로그인 성공시
     if (loginResult.success) {
       navigation.navigate("Root", {
-        // 중첩 네비게이터일 때 이동할 화면 이름도 써주어야 함
+        // 여러 네비게이션을 동시에 사용한 중첩 네비게이션에서는 이동할 화면 이름도 써주어야 함
+        // return 받은 userName, userTeam 까지 전달해줌
           screen: "홈",
-          params: {userName: loginResult.userName},
+          params: {userName: loginResult.userName, userTeam:loginResult.userTeam},
       });
     } else {
         alert("로그인 실패");
     }
-    // if (LoginTestComponent({credential})) {
-    //   navigation.navigate("Root", {
-    //     screen: "홈",
-    //     params: {userName: },
-    //   });
-    // }
   }
 
   return (
@@ -41,16 +39,18 @@ function Login ({ navigation }) {
         <Image source={Logo} style={styles.logoImg}/>
       </View>
 
-      {/*아이디, 비밀번호 입력 박스*/}
+      {/*아이디 입력창*/}
       <View style={styles.inputBox}>
         <TextInput
           placeholder={"아이디"}
           style={styles.input}
           value={credential.ID}
+          // 입력 상자에서 텍스트 변화시 함수 실행
           onChangeText={(text) => inputChangeHandler(text, "ID")}
         />
       </View>
 
+      {/*비밀번호 입력창*/}
       <View style={styles.inputBox}>
         <TextInput
           placeholder={"패스워드"}
@@ -66,11 +66,13 @@ function Login ({ navigation }) {
         <Text style={styles.Text}>자동로그인</Text>
       </View>
 
+      {/*로그인 버튼*/}
       <View style={{flex:2}}>
         <TouchableOpacity
           style={styles.button}
+          // 버튼 눌렀을 때 loginHandler 함수로  로그인 여부 판단
+          // 함수에서 로그인 여부 확인해서 화면 이동까지 처리
           onPress={() => loginHandler()}
-          // loginHandler 함수로  로그인 여부 판단
         >
           <Text style={styles.buttonText}>로그인</Text>
         </TouchableOpacity>
@@ -114,18 +116,12 @@ const styles = StyleSheet.create({
     input: {
       flex: 1,
       borderWidth: 1,
-      // borderRadius: 5,
       width: '100%',
       padding: 10,
       marginBottom: 18,
       fontSize: 16,
       borderColor: "lightgrey",
     },
-    // icon: {
-    //   position: "absolute",
-    //   top: 15,
-    //   left: 15,
-    // },
   loginOptions: {
     flexDirection: "row",
     justifyContent: "space-around",

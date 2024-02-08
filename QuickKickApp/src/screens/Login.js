@@ -45,7 +45,7 @@ function Login ({ navigation }) {
           style={styles.button}
           onPress={() => navigation.navigate("Root", {
             screen: "홈",
-            params: {user: inputId},
+            params: {user: inputId, password: inputPw},
           })}>
           <Text style={styles.buttonText}>로그인</Text>
         </TouchableOpacity>

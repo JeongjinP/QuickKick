@@ -18,7 +18,8 @@
     "react": "18.2.0",
     "react-native": "0.73.4",
     "react-native-calendars": "^1.1303.0",
-    "react-native-element-dropdown": "^2.10.1"
+    "react-native-element-dropdown": "^2.10.1",
+    "react-native-gesture-handler": "^2.14.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

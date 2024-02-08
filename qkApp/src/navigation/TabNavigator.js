@@ -6,6 +6,10 @@ import BoardStack from "./BoardStack";
 import TeamStack from "./TeamStack";
 import MyPageStack from "./MyPageStack";
 
+
+// 하단바 5개를 가지는 화면이동 네비게이터 TabNavigator
+// 각 하단바에 단일 페이지를 넣는게 아닌 각 메뉴별 스택 네비게이터를 넣음
+// 스택 네비게이터와 탭 네비게이터의 헤더가 별도인데 탭 네비게이터의 헤더를 보이고 싶지 않을 땐 여기서 설정
 const Tab = createBottomTabNavigator();
 function TabNavigator() {
   return(

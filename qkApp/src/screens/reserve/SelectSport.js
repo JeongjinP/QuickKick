@@ -1,11 +1,12 @@
 import React from "react";
-import {View, Text, StyleSheet, Pressable, SafeAreaView, Platform} from "react-native";
+import { View, Text, StyleSheet, Pressable, Platform, SafeAreaView } from "react-native";
+import ReserveHeader from "./ReserveHeader";
 
 function SelectSport ({navigation} ) {
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.title}>종목선택</Text>
+    <SafeAreaView style={ReserveHeader.container}>
+      <View style={ReserveHeader.header}>
+        <Text style={ReserveHeader.title}>종목선택</Text>
       </View>
       <Pressable
         style={({pressed}) => [
@@ -38,23 +39,6 @@ function SelectSport ({navigation} ) {
 export default SelectSport;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "white",
-    paddingTop: Platform.OS === "android" ? 25 : 0,
-  },
-  header: {
-    borderBottomWidth: 2,
-    borderColor: "#0A4A9B",
-  },
-  title: {
-    textAlign: "left",
-    marginHorizontal: 30,
-    marginVertical: 20,
-    color: "#0A4A9B",
-    fontSize: 28,
-    fontWeight: "bold",
-  },
   board: {
     flex: 1,
     justifyContent: "center",
@@ -65,7 +49,6 @@ const styles = StyleSheet.create({
     // borderColor: "black",
     // borderWidth: 1,
     borderRadius: 45,
-
   },
   Text: {
     fontSize: 40,

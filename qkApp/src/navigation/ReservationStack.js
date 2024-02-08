@@ -1,5 +1,5 @@
 import React from "react";
-import {defaultScreenOptions, Stack} from "./DefaultStackOptions";
+import { Stack, defaultScreenOptions } from "./DefaultStackOptions";
 import SelectSport from "../screens/reserve/SelectSport";
 import ReservationSelect from "../screens/reserve/ReservationSelect";
 

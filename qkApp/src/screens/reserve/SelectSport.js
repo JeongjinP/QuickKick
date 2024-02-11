@@ -1,8 +1,8 @@
 import React from "react";
-import { View, Text, StyleSheet, Pressable, Platform, SafeAreaView } from "react-native";
+import { View, Text, StyleSheet, Pressable, SafeAreaView } from "react-native";
 import ReserveHeader from "./ReserveHeader";
 
-function SelectSport ({navigation} ) {
+function SelectSport ({ navigation }) {
   return (
     <SafeAreaView style={ReserveHeader.container}>
       <View style={ReserveHeader.header}>
@@ -14,11 +14,7 @@ function SelectSport ({navigation} ) {
           {borderColor: pressed ? 'white' : 'black'}, styles.board]}
         onPress={() => {navigation.navigate('ReservationSelect')}}
       >
-        {({ pressed }) => (
-            <Text style={styles.Text}>
-                {pressed ? 'Play!' : '축구'}
-            </Text>
-        )}
+        <Text style={styles.Text}>축구</Text>
       </Pressable>
       <Pressable
         style={({pressed}) => [
@@ -26,11 +22,7 @@ function SelectSport ({navigation} ) {
             {borderColor: pressed ? 'white' : 'black'}, styles.board, {marginTop: 0}]}
         onPress={() => {navigation.navigate('ReservationSelect')}}
       >
-        {({ pressed }) => (
-            <Text style={styles.Text}>
-                {pressed ? 'Play!' : '풋살'}
-            </Text>
-        )}
+        <Text style={styles.Text}>풋살</Text>
       </Pressable>
     </SafeAreaView>
   )
@@ -44,11 +36,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginHorizontal: 30,
-    marginVertical: 20,
+    marginVertical: 30,
     // backgroundColor: "#0A4A9B",
     // borderColor: "black",
     // borderWidth: 1,
-    borderRadius: 45,
+    borderRadius: 30,
   },
   Text: {
     fontSize: 40,

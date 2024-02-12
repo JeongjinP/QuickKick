@@ -1,23 +1,23 @@
 import React from "react";
-import { Pressable, SafeAreaView, View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Pressable, SafeAreaView } from "react-native";
 import ReserveHeader from "./ReserveHeader";
 
-function ReservationMain({navigation}){
+function ReservationMain({ navigation }){
   return (
     <SafeAreaView style={ReserveHeader.container}>
       <View style={ReserveHeader.header}>
         <Text style={ReserveHeader.title}>예약</Text>
       </View>
       <Pressable
-        style={({pressed}) => [
-          {backgroundColor: pressed ? '#33b249' : '#0A4A9B'},
-          {borderColor: pressed ? 'white' : 'black'}, styles.reserveButton]}
+        style={({ pressed }) => [
+          {opacity: pressed ? 0.3 : 1},
+          styles.reserveButton]}
         onPress={() => navigation.navigate('SelectSport')}
       >
         <Text style={styles.reserveButtonText}>예약하기</Text>
       </Pressable>
       <View style={styles.board}>
-        <Text style={styles.boardText}>예약 상세 정보 창</Text>
+        <Text style={styles.boardText}>예약 상세 정보 표시</Text>
       </View>
     </SafeAreaView>
   )
@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     marginTop: 20,
     borderRadius: 10,
+    backgroundColor: "#0A4A9B"
   },
   reserveButtonText: {
     fontSize: 28,

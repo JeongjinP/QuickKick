@@ -9,17 +9,18 @@ function SelectSport ({ navigation }) {
         <Text style={ReserveHeader.title}>종목선택</Text>
       </View>
       <Pressable
-        style={({pressed}) => [
-          {backgroundColor: pressed ? '#33b249' : '#0A4A9B'},
-          {borderColor: pressed ? 'white' : 'black'}, styles.board]}
+        style={({ pressed }) => [
+          {opacity: pressed ? 0.3 : 1},
+          styles.board]}
         onPress={() => {navigation.navigate('ReservationSelect')}}
       >
         <Text style={styles.Text}>축구</Text>
       </Pressable>
       <Pressable
-        style={({pressed}) => [
-            {backgroundColor: pressed ? '#33b249' : '#0A4A9B'},
-            {borderColor: pressed ? 'white' : 'black'}, styles.board, {marginTop: 0}]}
+        style={({ pressed }) => [
+          {opacity: pressed ? 0.3 : 1},
+          styles.board, {marginTop: 0}]}
+
         onPress={() => {navigation.navigate('ReservationSelect')}}
       >
         <Text style={styles.Text}>풋살</Text>
@@ -41,6 +42,7 @@ const styles = StyleSheet.create({
     // borderColor: "black",
     // borderWidth: 1,
     borderRadius: 30,
+    backgroundColor: "#0a4a9b",
   },
   Text: {
     fontSize: 40,

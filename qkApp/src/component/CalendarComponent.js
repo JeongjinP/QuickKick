@@ -15,29 +15,37 @@ LocaleConfig.locales["kr"] = {
 };
 LocaleConfig.defaultLocale = "kr";
 function CalendarComponent() {
+  
+  const [selectedDate, setSelectedDate] = useState("");
+
+  const markedDates = {
+    [selectedDate] : {
+      selected: true,
+      selectedColor: "#0A4A9B",
+      selectedTextColor: "#ffffff"
+    }
+  }
+
   return (
     // 달력 컴포넌트
     <Calendar
-        // 달력의 날짜를 누르면 해당 날짜의 정보를 가져옴
+        // useState 사용해서 터치하면 날짜 선택
         onDayPress={(day) => {
             console.log("selected day", day);
+            setSelectedDate(day.dateString);
         }}
-        // 달력의 날짜를 길게 누르면 해당 날짜의 정보를 가져옴
-        onDayLongPress={(day) => {
-            console.log("selected day", day);
-        }}
-        // 달력의 날짜를 누르고 드래그하면 해당 날짜의 정보를 가져옴
         onMonthChange={(month) => {
             console.log("month changed", month);
         }}
+      // 달력 상단 스타일을 설정
         monthFormat={"yyyy년 M월"}
-        // 달력의 날짜의 스타일을 설정
+
         // 달력의 날짜의 색상을 설정
         theme={{
             calendarBackground: "#ffffff",
             textSectionTitleColor: "#b6c1cd", // 상단 요일표시 색상
-            selectedDayBackgroundColor: "#00adf5",
-            selectedDayTextColor: "#ffffff",
+            selectedDayTextColor: '#6491ff',
+            selectedDayBackgroundColor: '#009688',
             todayTextColor: "#00adf5",
             dayTextColor: "#2d4150",
             textDisabledColor: "#d9e1e8",
@@ -55,7 +63,9 @@ function CalendarComponent() {
             textDayFontSize: 16,
             textMonthFontSize: 16,
             textDayHeaderFontSize: 16,
-        }}/>
+        }}
+        markedDates={markedDates}
+    />
 
 
   )

@@ -11,8 +11,8 @@ import React from "react";
 
 // 테스트용 데이터
 const dummyData = {
-  ID: "20241111",
-  PW: "1111",
+  ID: "2024",
+  PW: "1234",
   NAME:"이근찬",
   TEAM:"사상 최강의 팀"
 }

@@ -10,6 +10,7 @@ import axios from "axios";
   Backend 단에서 Spring boot를 통해서 DB 접근
 */
 
+<<<<<<< HEAD
 
 useEffect(async() => {
   try {
@@ -25,6 +26,15 @@ useEffect(async() => {
     console.error(e.message)
   }
 },[]);
+=======
+// 테스트용 데이터
+const dummyData = {
+  ID: "2024",
+  PW: "1234",
+  NAME:"이근찬",
+  TEAM:"사상 최강의 팀"
+}
+>>>>>>> 08b8100b8ea9840fe0c3b6e6e404c20738e36071
 
 export function LoginTestComponent( props ) {
   const baseUrl = "http://localhost:8080";

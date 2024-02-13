@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { View, Text, StyleSheet, Image, TextInput, Pressable } from 'react-native';
 import Logo from "../img/inuLogo.png";
 import { LoginTestComponent } from "../component/LoginTestComponent";
 
@@ -13,12 +13,12 @@ function Login ({ navigation }) {
     setCredential({...credential, [field]: enteredText});
   };
 
-  // 로그인 여부를 판단해주는 LoginTestComponent 라는 컴포넌트에 사용자로부터 입력받은 credential 배열을 props 로 전달
-  // 결과로 true, false 와 함께 사용자 이름, 팀 userName, userTeam 을 받아옴
-  // 로그인 성공시 "Root"(RootStack 에서 Login => TabNavigator)로 이동하게끔 구현
-  const loginHandler = () => {
+    // 로그인 여부를 판단해주는 LoginTestComponent 라는 컴포넌트에 사용자로부터 입력받은 credential 배열을 props 로 전달
+    // 결과로 true, false 와 함께 사용자 이름, 팀 userName, userTeam 을 받아옴
+    // 로그인 성공시 "Root"(RootStack 에서 Login => TabNavigator)로 이동하게끔 구현
+    const loginHandler = () => {
     // loginResult 에 LoginTestComponent 에서 나온 return 값을을 저장
-    const loginResult = LoginTestComponent({credential});
+    const loginResult = LoginTestComponent({ credential });
 
     // 로그인 성공시
     if (loginResult.success) {
@@ -68,14 +68,16 @@ function Login ({ navigation }) {
 
       {/*로그인 버튼*/}
       <View style={{flex:2}}>
-        <TouchableOpacity
-          style={styles.button}
+        <Pressable
+          style={({ pressed }) => [
+            {opacity: pressed ? 0.3: 1},
+            styles.button]}
           // 버튼 눌렀을 때 loginHandler 함수로  로그인 여부 판단
           // 함수에서 로그인 여부 확인해서 화면 이동까지 처리
           onPress={() => loginHandler()}
         >
           <Text style={styles.buttonText}>로그인</Text>
-        </TouchableOpacity>
+        </Pressable>
 
         <View style={styles.loginInfo}>
           <Text style={styles.Text}>로그인 정보는 포탈과 동일합니다.</Text>
@@ -83,7 +85,6 @@ function Login ({ navigation }) {
           <Text style={styles.Text}>아이디찾기/비밀번호 찾기는 PC에서 포탈을 이용하시기 바랍니다.</Text>
         </View>
       </View>
-
     </View>
   );
       }
@@ -102,7 +103,6 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     alignItems: "center",
     marginBottom: 30,
-    // marginTop: 200,
   },
   logoImg: {
     width: 130,
@@ -150,5 +150,4 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: "gray",
   }
-
 })

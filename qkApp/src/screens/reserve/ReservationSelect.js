@@ -1,4 +1,4 @@
-import {Platform, SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import { Pressable, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import DropdownComponent from "../../component/DropdownComponent";
 import CalendarComponent from "../../component/CalendarComponent";
 import ReservationStatusViewer from "../../component/ReservationStatusViewer";
@@ -9,7 +9,7 @@ const data = [
   { label: '구장 2', value: '2' },
   { label: '구장 3', value: '3' },
 ];
-function ReservationSelect() {
+function ReservationSelect({ navigation }) {
   return (
     <SafeAreaView style={ReserveHeader.container}>
       <View style={ReserveHeader.header}>
@@ -28,6 +28,16 @@ function ReservationSelect() {
       <View style={styles.selectTime}>
           <ReservationStatusViewer/>
       </View>
+      <View style={{flex: 1}}>
+        <Pressable
+          style={({ pressed }) => [
+            {opacity: pressed ? 0.3 : 1},
+            styles.reserveButton]}
+          onPress={() => navigation.navigate('ReservationReport')}
+        >
+          <Text style={styles.reserveButtonText}>신청서 작성</Text>
+        </Pressable>
+      </View>
     </SafeAreaView>
   );
 }
@@ -37,11 +47,25 @@ export default ReservationSelect;
 
 const styles = StyleSheet.create({
   selectTime: {
-    flex: 1,
+    flex: 2,
     marginHorizontal: 30,
     marginVertical: 20,
     borderTopWidth: 2,
     borderColor: "#0A4A9B",
-  }
+  },
+  reserveButton: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginHorizontal: 30,
+    marginBottom: 20,
+    borderRadius: 10,
+    backgroundColor: "#0A4A9B"
+  },
+  reserveButtonText: {
+    fontSize: 28,
+    fontWeight: "bold",
+    color: "white",
+  },
 
 });

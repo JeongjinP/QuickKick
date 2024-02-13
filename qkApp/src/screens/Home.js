@@ -1,5 +1,5 @@
 import React from "react";
-import {Text, View, StyleSheet, TouchableOpacity} from "react-native";
+import { View, Text, StyleSheet, Pressable } from "react-native";
 import AntDesign from '@expo/vector-icons/AntDesign';
 
 
@@ -18,21 +18,25 @@ function Home ({ navigation, route }) {
         </View>
 
         {/*로그아웃버튼*/}
-        <TouchableOpacity
+        <Pressable
+          style={({ pressed }) => [
+            {opacity: pressed ? 0.3 : 1},
+            styles.outButton]}
           onPress={() => navigation.reset({
           index: 0,
-          routes: [{name: "Login"}]})} style={styles.outButton}
+          routes: [{name: "Login"}]})}
+
         >
           <AntDesign name="logout" size={30} color="white" />
-        </TouchableOpacity>
+        </Pressable>
       </View>
 
       <View style={styles.board}>
-        <Text style={styles.boardText}>예약이 없습니다.</Text>
+        <Text style={styles.boardText}>내 예약 간단하게 표시</Text>
       </View>
 
       <View style={styles.board}>
-        <Text style={styles.boardText}>용병 구인</Text>
+        <Text style={styles.boardText}>게시판 글 표시</Text>
       </View>
     </View>);
 }

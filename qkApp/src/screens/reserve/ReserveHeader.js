@@ -1,4 +1,4 @@
-import {Platform, StyleSheet} from "react-native";
+import { StyleSheet, Platform } from "react-native";
 
 const ReserveHeader = StyleSheet.create({
   container: {
@@ -14,10 +14,11 @@ const ReserveHeader = StyleSheet.create({
   title: {
     textAlign: "left",
     marginHorizontal: 30,
-    marginVertical: 20,
+    marginTop: 15,
+    marginBottom: 10,
     color: "#0A4A9B",
-    fontSize: 28,
-    fontWeight: "bold",
+    fontSize: 26,
+    fontWeight: 'bold',
   },
 });
 

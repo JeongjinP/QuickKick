@@ -10,4 +10,7 @@ import java.util.List;
 public interface MemberMapper {
     @Select("SELECT * FROM login")
     List<Member> findAll();
+
+    @Select("SELECT * FROM login WHERE id=#{ID} and password=#{password}")
+    List<Member> findByID(int ID);
 }

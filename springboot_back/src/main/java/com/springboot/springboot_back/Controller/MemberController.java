@@ -4,10 +4,12 @@ import com.springboot.springboot_back.domain.Member;
 import com.springboot.springboot_back.Services.Login;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 @RestController
+@RequestMapping("/api/v1/Members")
 public class MemberController {
     private final Login login;
 

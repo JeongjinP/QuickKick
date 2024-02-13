@@ -1,7 +1,7 @@
 import React, { useState }  from "react";
 import { Calendar, LocaleConfig } from "react-native-calendars";
 
-// 외부 라이브러리 react-native-calendars 를 사용하여 달력 컴포넌트를 만듬
+// react-native-calendars 라이브러리를 사용해 달력 컴포넌트 구성
 // https://github.com/wix/react-native-calendars
 
 LocaleConfig.locales["kr"] = {
@@ -15,9 +15,11 @@ LocaleConfig.locales["kr"] = {
 };
 LocaleConfig.defaultLocale = "kr";
 function CalendarComponent() {
-  
+
+  // 선택된 날짜를 useState 사용해서 설정
   const [selectedDate, setSelectedDate] = useState("");
 
+  // 선택한 날짜 뒤에 파란 동그라미 표시
   const markedDates = {
     [selectedDate] : {
       selected: true,
@@ -31,7 +33,7 @@ function CalendarComponent() {
     <Calendar
         // useState 사용해서 터치하면 날짜 선택
         onDayPress={(day) => {
-            console.log("selected day", day);
+            console.log("selected day", selectedDate);
             setSelectedDate(day.dateString);
         }}
         onMonthChange={(month) => {

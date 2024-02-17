@@ -1,9 +1,9 @@
 import React from "react";
 import { Stack, defaultScreenOptions } from "./DefaultStackOptions";
-import ReservationMain from "../screens/reserve/ReservationMain";
-import SelectSport from "../screens/reserve/SelectSport";
-import ReservationSelect from "../screens/reserve/ReservationSelect";
-import ReservationReport from "../screens/reserve/ReservationReport";
+import ReservationMain from "../screens/reservation/ReservationMain";
+import SelectSport from "../screens/reservation/SelectSport";
+import ReservationSelect from "../screens/reservation/ReservationSelect";
+import ReservationReport from "../screens/reservation/ReservationReport";
 
 function ReservationStack() {
   return (

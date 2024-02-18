@@ -4,15 +4,15 @@ import BoardSection from "./BoardSection";
 function BoardMain({ navigation }) {
   // 게시글 더미 데이터
   const data = [
-    { title: 'hello world', content: 'Hello, world! ', header: '구인/구직' },
-    { title: 'Lorem ipsum', content: '"Lorem ipsum dolor sit amet, consectetur adipiscing elit"', header: '잡담' },
-    { title: '제목 3', content: 'Quick Kick', header: '잡담' },
-    { title: '제목 4', content: '내용', header: '잡담' },
-    { title: '제목 5', content: '내용', header: '잡담' },
-    { title: '제목 6', content: '내용', header: '매칭' },
-    { title: '제목 7', content: '내용', header: '구인/구직' },
-    { title: '제목 8', content: '내용', header: '구인/구직' },
-    { title: '제목 9', content: '내용', header: '매칭' },
+    { title: 'hello world', content: 'Hello, world! ', tag: '구인/구직' },
+    { title: 'Lorem ipsum', content: '"Lorem ipsum dolor sit amet, consectetur adipiscing elit"', tag: '잡담' },
+    { title: '제목 3', content: 'Quick Kick', tag: '잡담' },
+    { title: '제목 4', content: '내용', tag: '잡담' },
+    { title: '제목 5', content: '내용', tag: '잡담' },
+    { title: '제목 6', content: '내용', tag: '매칭' },
+    { title: '제목 7', content: '내용', tag: '구인/구직' },
+    { title: '제목 8', content: '내용', tag: '구인/구직' },
+    { title: '제목 9', content: '내용', tag: '매칭' },
   ]
   
   // 아래로 스크롤시 헤더 사라지는 기능 추가해야 함
@@ -24,12 +24,12 @@ function BoardMain({ navigation }) {
         data={data}
         keyExtractor={(_) => _.title}
         renderItem={({ item }) => {
-          const { title, content, header } = item;
+          const { title, content, tag } = item;
           return (
             <Pressable
               onPress={() => navigation.navigate('PostPage',
-                {title: item.title, content: item.content, header: item.header})}>
-              <BoardSection title={title} content={content} header={header} />
+                {title: item.title, content: item.content, tag: item.tag})}>
+              <BoardSection title={title} content={content} tag={tag} />
             </Pressable>
         )
       }}

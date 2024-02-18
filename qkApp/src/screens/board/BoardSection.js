@@ -1,12 +1,12 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
-function BoardSection({ title, content, header }) {
+function BoardSection({ title, content, tag }) {
   return (
     <View style={styles.container}>
       <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
         <Text style={styles.title}>{title}</Text>
-        <Text style={styles.header}>[{header}]</Text>
+        <Text style={styles.tag}>[{tag}]</Text>
       </View>
       <Text style={styles.content}>{content}</Text>
     </View>
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
       color: "black",
       fontSize: 16,
     },
-    header: {
+    tag: {
       color: "dimgray",
       fontSize: 16,
     }

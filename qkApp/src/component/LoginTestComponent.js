@@ -27,10 +27,13 @@ import axios from "axios";
 //   }
 // },[]);
 // =======
+
+
 // 테스트용 데이터
+// 테스트중 편하게 하려고 id pw 비워둠
 const dummyData = {
-  ID: "2024",
-  PW: "1234",
+  ID: "",
+  PW: "",
   NAME:"이근찬",
   TEAM:"사상 최강의 팀"
 }

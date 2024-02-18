@@ -5,7 +5,7 @@ const Stack = createStackNavigator();
 
 // 스택 네비게이터의 기본 옵션
 const defaultScreenOptions = {
-  headerShown: false, // 스택 네비게이터 헤더 가리기
+  headerShown: false, // 네비게이터 헤더 가리기
 };
 
 export { Stack, defaultScreenOptions };

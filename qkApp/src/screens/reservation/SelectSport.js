@@ -1,12 +1,12 @@
 import React from "react";
 import { View, Text, StyleSheet, Pressable, SafeAreaView } from "react-native";
-import ReserveHeader from "./ReserveHeader";
+import GeneralHeader from "../../component/GeneralHeader";
 
 function SelectSport ({ navigation }) {
   return (
-    <SafeAreaView style={ReserveHeader.container}>
-      <View style={ReserveHeader.header}>
-        <Text style={ReserveHeader.title}>종목선택</Text>
+    <SafeAreaView style={GeneralHeader.container}>
+      <View style={GeneralHeader.header}>
+        <Text style={GeneralHeader.title}>종목선택</Text>
       </View>
       <Pressable
         style={({ pressed }) => [

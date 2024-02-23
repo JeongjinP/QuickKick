@@ -1,11 +1,13 @@
 import React from "react";
 import { defaultScreenOptions, Stack } from "./DefaultStackOptions";
-import Board from "../screens/Board";
+import BoardMain from "../screens/board/BoardMain";
+import PostPage from "../screens/board/PostPage";
 
 function BoardStack() {
   return (
     <Stack.Navigator screenOptions={defaultScreenOptions}>
-      <Stack.Screen name={"BoardScreen"} component={Board} />
+      <Stack.Screen name={"BoardMain"} component={BoardMain} />
+      <Stack.Screen name={"PostPage"} component={PostPage} />
     </Stack.Navigator>
   )
 }

@@ -1,6 +1,6 @@
 import { StyleSheet, Platform } from "react-native";
 
-const ReserveHeader = StyleSheet.create({
+const GeneralHeader = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "white",
@@ -22,4 +22,4 @@ const ReserveHeader = StyleSheet.create({
   },
 });
 
-export default ReserveHeader;
+export default GeneralHeader;

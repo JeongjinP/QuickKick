@@ -1,12 +1,12 @@
 import React from "react";
 import { View, Text, StyleSheet, Pressable, SafeAreaView } from "react-native";
-import ReserveHeader from "./ReserveHeader";
+import GeneralHeader from "../../component/GeneralHeader";
 
 function ReservationMain({ navigation }){
   return (
-    <SafeAreaView style={ReserveHeader.container}>
-      <View style={ReserveHeader.header}>
-        <Text style={ReserveHeader.title}>예약</Text>
+    <SafeAreaView style={GeneralHeader.container}>
+      <View style={GeneralHeader.header}>
+        <Text style={GeneralHeader.title}>예약</Text>
       </View>
       <Pressable
         style={({ pressed }) => [

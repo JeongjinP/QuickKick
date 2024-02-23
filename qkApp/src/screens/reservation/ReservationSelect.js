@@ -2,7 +2,7 @@ import { Pressable, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import DropdownComponent from "../../component/DropdownComponent";
 import CalendarComponent from "../../component/CalendarComponent";
 import ReservationStatusViewer from "../../component/ReservationStatusViewer";
-import ReserveHeader from "./ReserveHeader";
+import GeneralHeader from "../../component/GeneralHeader";
 
 const data = [
   { label: '구장 1', value: '1' },
@@ -11,9 +11,9 @@ const data = [
 ];
 function ReservationSelect({ navigation }) {
   return (
-    <SafeAreaView style={ReserveHeader.container}>
-      <View style={ReserveHeader.header}>
-        <Text style={ReserveHeader.title}>예약</Text>
+    <SafeAreaView style={GeneralHeader.container}>
+      <View style={GeneralHeader.header}>
+        <Text style={GeneralHeader.title}>예약</Text>
       </View>
       <View>
         <DropdownComponent

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Main</title>
+</head>
+<body>
+<h1>Main 페이지</h1>
+
+<!-- Thymeleaf 표현식으로 세션에 저장된 로그인 정보를 출력 -->
+<p>
+    Welcome, 이름: <span th:text="${login.stdname}"></span>
+</p>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>detail</title>
+</head>
+<body>
+<table>
+    <tr>
+        <th>id</th>
+        <th>password</th>
+        <th>name</th>
+    </tr>
+    <tr>
+        <td th:text="${Login.id}"></td>
+        <td th:text="${Login.password}"></td>
+        <td th:text="${Login.stdName}"></td>
+    </tr>
+</table>
+</body>
+</html>

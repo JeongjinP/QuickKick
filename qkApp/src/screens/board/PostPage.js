@@ -1,34 +1,40 @@
 import React  from "react";
-import {View, Text, StyleSheet, ScrollView} from "react-native";
+import {View, Text, StyleSheet, ScrollView, SafeAreaView} from "react-native";
+import GeneralHeader from "../../component/GeneralHeader";
+import BoardHeader from "./BoardHeader";
 
 // 페이지 디자인 할 예정
 function PostPage({ navigation, route }) {
   return (
-    <ScrollView
-      overScrollMode={'always'}
-      style={styles.container}>
-      <View style={styles.titleBox}>
-        <Text style={styles.title}>{route.params.title}</Text>
-        <View style={{justifyContent: 'flex-end'}}>
-          <Text style={styles.tag}>[{route.params.tag}]</Text>
+    <SafeAreaView style={GeneralHeader.container}>
+      <BoardHeader/>
+      <ScrollView
+        overScrollMode={'always'}>
+        {/*// style={styles.container}>*/}
+        <View style={styles.titleBox}>
+          <Text style={styles.title}>{route.params.title}</Text>
+          <View style={{justifyContent: 'flex-end'}}>
+            <Text style={styles.tag}>[{route.params.tag}]</Text>
+          </View>
         </View>
-      </View>
-      <Text style={styles.content}>{route.params.content}</Text>
-    </ScrollView>
+        <Text style={styles.content}>{route.params.content}</Text>
+      </ScrollView>
+    </SafeAreaView>
   )
 }
 
 export default PostPage;
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: "white",
-    },
+    // container: {
+    //   flex: 1,
+    //   backgroundColor: "white",
+    // },
     titleBox: {
       flexDirection: 'row',
       justifyContent: 'space-between',
-      margin: 5,
+      marginVertical: 20,
+      marginHorizontal: 10,
       borderBottomWidth: 1,
       borderColor: "lightgray",
     },
@@ -49,7 +55,7 @@ const styles = StyleSheet.create({
       color: "black",
       fontSize: 18,
       marginHorizontal: 30,
-      marginVertical: 10,
+      marginVertical: 20,
     }
 
 })

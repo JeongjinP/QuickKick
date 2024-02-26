@@ -118,6 +118,7 @@ const styles = StyleSheet.create({
     borderColor: "#0A4A9B",
     borderBottomWidth: 1,
     marginBottom: 1,
+    paddingLeft: 10,
   },
   reportInput: {
     fontSize: 18,

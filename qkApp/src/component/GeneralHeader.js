@@ -4,19 +4,22 @@ const GeneralHeader = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "white",
-    // 안드로이드 기기에선 SafeAreaView 가 작동하지 않기 때문에 Platform 을 사용하여 헤더 모양 만듬
+    // 안드로이드 기기에선 SafeAreaView 가 작동하지 않아서
+    // Platform.OS를 사용하여 헤더 모양 만들어줬음
     paddingTop: Platform.OS === "android" ? 25 : 0,
   },
   header: {
+    justifyContent: "center",
+    alignItems: "center",
     borderBottomWidth: 2,
     borderColor: "#0A4A9B",
   },
   title: {
     textAlign: "left",
     marginHorizontal: 30,
-    marginTop: 15,
+    marginTop: 5,
     marginBottom: 10,
-    color: "#0A4A9B",
+    color: "#0a4a9b",
     fontSize: 26,
     fontWeight: 'bold',
   },

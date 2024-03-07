@@ -18,8 +18,8 @@ function TabNavigator() {
       <Tab.Screen name={"홈"} component={Home} options={{headerShown:true}}/>
       <Tab.Screen name={"예약"} component={ReservationStack} />
       <Tab.Screen name={"게시판"} component={BoardStack} />
-      <Tab.Screen name={"팀"} component={TeamStack} options={{headerShown:true}}/>
-      <Tab.Screen name={"내정보"} component={MyPageStack} options={{headerShown:true}}/>
+      <Tab.Screen name={"팀"} component={TeamStack} options={{headerShown:false}}/>
+      <Tab.Screen name={"내정보"} component={MyPageStack} options={{headerShown:false}}/>
     </Tab.Navigator>
   );
 }

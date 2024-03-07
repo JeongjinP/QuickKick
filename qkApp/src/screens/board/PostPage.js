@@ -7,7 +7,8 @@ import BoardHeader from "./BoardHeader";
 function PostPage({ navigation, route }) {
   return (
     <SafeAreaView style={GeneralHeader.container}>
-      <BoardHeader/>
+      {/*게시판 이라는 헤더 보여줄지 말지 선택*/}
+      {/*<BoardHeader/>*/}
       <ScrollView
         overScrollMode={'always'}>
         {/*// style={styles.container}>*/}

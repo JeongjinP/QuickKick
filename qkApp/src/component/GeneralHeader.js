@@ -11,17 +11,18 @@ const GeneralHeader = StyleSheet.create({
   header: {
     justifyContent: "center",
     alignItems: "center",
-    borderBottomWidth: 2,
-    borderColor: "#0A4A9B",
+    borderBottomWidth: 1,
+    borderColor: "lightgray",
+    paddingVertical: 10,
   },
   title: {
     textAlign: "left",
     marginHorizontal: 30,
-    marginTop: 5,
-    marginBottom: 10,
-    color: "#0a4a9b",
-    fontSize: 26,
-    fontWeight: 'bold',
+    // marginTop: 5,
+    // marginBottom: 10,
+    color: "#0A4A9B",
+    fontSize: 18,
+    fontWeight: '600',
   },
 });
 

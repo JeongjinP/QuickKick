@@ -13,7 +13,7 @@ function ReservationSelect({ navigation }) {
   return (
     <SafeAreaView style={GeneralHeader.container}>
       <View style={GeneralHeader.header}>
-        <Text style={GeneralHeader.title}>예약</Text>
+        <Text style={GeneralHeader.title}>예약선택</Text>
       </View>
       <View>
         <DropdownComponent

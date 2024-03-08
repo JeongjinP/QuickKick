@@ -1,13 +1,16 @@
 import React from "react";
-import { View, Text, StyleSheet, Pressable } from "react-native";
+import { View, Text, StyleSheet, Pressable, SafeAreaView } from "react-native";
 import AntDesign from '@expo/vector-icons/AntDesign';
+import GeneralHeader from "../component/GeneralHeader";
 
 
 function Home ({ navigation, route }) {
 
   return (
-    <View style={styles.container}>
-
+    <SafeAreaView style={GeneralHeader.container}>
+      <View style={GeneralHeader.header}>
+        <Text style={GeneralHeader.title}>홈</Text>
+      </View>
       {/*유저정보 표시 박스*/}
       <View style={styles.userInfo}>
         <View>
@@ -25,7 +28,6 @@ function Home ({ navigation, route }) {
           onPress={() => navigation.reset({
           index: 0,
           routes: [{name: "Login"}]})}
-
         >
           <AntDesign name="logout" size={30} color="white" />
         </Pressable>
@@ -38,7 +40,7 @@ function Home ({ navigation, route }) {
       <View style={styles.board}>
         <Text style={styles.boardText}>게시판 글 표시</Text>
       </View>
-    </View>);
+    </SafeAreaView>);
 }
 
 export default Home;

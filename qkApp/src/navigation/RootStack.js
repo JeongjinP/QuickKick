@@ -9,7 +9,9 @@ import TabNavigator from "./TabNavigator";
 // 스택 네비게이션에서 불러와야할 Stack 도 위 파일에서 불러와서 사용함
 function RootStack() {
   return (
-    <Stack.Navigator screenOptions={defaultScreenOptions}>
+    // 홈, 로그인 화면에서는 루트 스텍 네비게이터의 헤더가 보일 필요가 없고,
+    // 좌우 화면이동 제스쳐로 뒤로가기 등의 기능이 동작하면 안되기 때문에 이에 맞게 네비게이터 옵션 설정
+    <Stack.Navigator screenOptions={{headerShown: false, gestureEnabled: false}}>
       <Stack.Screen name={"Login"} component={Login}/>
       <Stack.Screen name={"Root"} component={TabNavigator}/>
     </Stack.Navigator>

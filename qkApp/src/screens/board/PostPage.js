@@ -1,5 +1,5 @@
 import React  from "react";
-import {View, Text, StyleSheet, ScrollView, SafeAreaView} from "react-native";
+import {View, Text, StyleSheet, ScrollView, SafeAreaView, Pressable} from "react-native";
 import GeneralHeader from "../../component/GeneralHeader";
 import BoardHeader from "./BoardHeader";
 
@@ -7,8 +7,18 @@ import BoardHeader from "./BoardHeader";
 function PostPage({ navigation, route }) {
   return (
     <SafeAreaView style={GeneralHeader.container}>
-      {/*게시판 이라는 헤더 보여줄지 말지 선택*/}
-      {/*<BoardHeader/>*/}
+      {/*게시판 이라는 헤더 보여줄지 말지 회의해서 결정하기*/}
+      <View>
+        <Pressable
+          style={({ pressed }) => [
+            {opacity: pressed ? 0.3 : 1},
+            styles.backButton]}
+          onPress={() => navigation.goBack()}
+        >
+          <Text style={styles.backButtonText}>back</Text>
+        </Pressable>
+
+      </View>
       <ScrollView
         overScrollMode={'always'}>
         {/*// style={styles.container}>*/}
@@ -27,10 +37,17 @@ function PostPage({ navigation, route }) {
 export default PostPage;
 
 const styles = StyleSheet.create({
-    // container: {
-    //   flex: 1,
-    //   backgroundColor: "white",
-    // },
+    backButton: {
+      justifyContent: "center",
+      alignItems: "flex-start",
+      marginHorizontal: 20,
+      marginVertical:0,
+    },
+    backButtonText: {
+      color: "black",
+      fontSize: 16,
+      fontWeight: "bold",
+    },
     titleBox: {
       flexDirection: 'row',
       justifyContent: 'space-between',

@@ -1,10 +1,29 @@
-import React from "react";
-import { View, Text, StyleSheet, Pressable, SafeAreaView } from "react-native";
+import React, {useCallback, useEffect} from "react";
+import {View, Text, StyleSheet, Pressable, SafeAreaView, BackHandler} from "react-native";
 import AntDesign from '@expo/vector-icons/AntDesign';
 import GeneralHeader from "../component/GeneralHeader";
+import {useFocusEffect} from "@react-navigation/native";
 
 
 function Home ({ navigation, route }) {
+  
+  // 안드로이드 뒤로가기 버튼 작동 방지 코드
+  // useEffect 대신 useFocusEffect 사용하는것은 스택 네비게이터 구조상
+  // 다른 화면 이동해도 홈 화면이 뒤에 유지되어 백핸들러가 언마운트 되지 않기 때문에
+  // 화면에 포커스가 있을때만 기능이 실행되게 함
+  useFocusEffect(
+    useCallback(() => {
+      const backAction = () => {
+        return true;
+      };
+      const backHandler = BackHandler.addEventListener(
+        "hardwareBackPress",
+        backAction,
+      );
+      return () => {
+        backHandler.remove();
+      };
+    }, []))
 
   return (
     <SafeAreaView style={GeneralHeader.container}>

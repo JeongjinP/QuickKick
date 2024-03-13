@@ -1,11 +1,11 @@
 import React from "react";
 import { defaultScreenOptions, Stack } from "./DefaultStackOptions";
-import MyPage from "../screens/MyPage";
+import MyPageMain from "../screens/myPage/MyPageMain";
 
 function MyPageStack() {
   return (
     <Stack.Navigator screenOptions={defaultScreenOptions}>
-      <Stack.Screen name={"MyPageScreen"} component={MyPage} />
+      <Stack.Screen name={"MyPageMain"} component={MyPageMain} />
     </Stack.Navigator>
   )
 }

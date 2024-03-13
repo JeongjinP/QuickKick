@@ -1,30 +1,14 @@
 import React from "react";
-import {View, Text, ScrollView} from "react-native";
+import { View, Text, SafeAreaView } from "react-native";
+import GeneralHeader from "../../component/GeneralHeader";
 
 function TeamMain () {
   return(
-    <View>
-        <Text>TeamMain</Text>
+  <SafeAreaView style={GeneralHeader.container}>
+    <View style={GeneralHeader.header}>
+      <Text style={GeneralHeader.title}>팀</Text>
     </View>
-    // <View style={{flex: 1}}>
-    //   <ScrollView StickyHeaderComponent={} contentContainerStyle={{flexGrow: 1}}>
-    //     <View style={{backgroundColor:'#0a4a9b', height: 200}}>
-    //       <Text>hello</Text>
-    //     </View>
-    //     <View style={{backgroundColor:'#0a4a9b', height: 200}}>
-    //       <Text>hello</Text>
-    //     </View>
-    //     <View style={{backgroundColor:'#0a4a9b', height: 200}}>
-    //       <Text>hello</Text>
-    //     </View>
-    //     <View style={{backgroundColor:'#0a4a9b', height: 200}}>
-    //       <Text>hello</Text>
-    //     </View>
-    //     <View style={{backgroundColor:'#0a4a9b', height: 200}}>
-    //       <Text>hello</Text>
-    //     </View>
-    //   </ScrollView>
-    // </View>
+  </SafeAreaView>
   )
 }
 

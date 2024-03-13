@@ -10,21 +10,30 @@ import axios from "axios";
   Backend 단에서 Spring boot를 통해서 DB 접근
 */
 
-useEffect(async() => {
-  try {
-    const res = await axios.get('http://localhost:8080/member?id=${id}&password=${password}')
-    const _inputData = await res.data.map((rowData)=> ({
-      ID: rowData.ID,
-      PW: rowData.password,
-      name: rowData.stdName
-      })
-    )
-    setInputData(inputData.concat(_inputData))
-  } catch(e) {
-    console.error(e.message)
-  }
-},[]);
+// 테스트 위해 주석처리
+// useEffect(async() => {
+//   try {
+//     const res = await axios.get('http://localhost:8080/member?id=${id}&password=${password}')
+//     const _inputData = await res.data.map((rowData)=> ({
+//       ID: rowData.ID,
+//       PW: rowData.password,
+//       name: rowData.stdName
+//       })
+//     )
+//     setInputData(inputData.concat(_inputData))
+//   } catch(e) {
+//     console.error(e.message)
+//   }
+// },[]);
 
+// 테스트용 더미 데이터
+// 테스트중 편하게 하려고 id pw 비워둠
+const dummyData = {
+  ID: "",
+  PW: "",
+  NAME: "이근찬",
+  TEAM: "사상 최강의 팀"
+}
 export function LoginTestComponent( props ) {
   // const baseUrl = "http://localhost:8080";
 

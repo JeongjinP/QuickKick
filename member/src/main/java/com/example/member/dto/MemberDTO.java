@@ -14,7 +14,7 @@ import lombok.ToString;
 public class MemberDTO {
     private Integer id;
     private String password;
-    private String stdname;
+    private String stdName;
 
     //lombok 어노테이션으로 getter,setter,생성자,toString 메서드 생략 가능
 
@@ -27,7 +27,7 @@ public class MemberDTO {
 
         memberDTO.setId(memberEntity.getId());
         memberDTO.setPassword(memberEntity.getPassword());
-        memberDTO.setStdname(memberEntity.getStdname());
+        memberDTO.setStdName(memberEntity.getStdName());
 
         return memberDTO;
     }

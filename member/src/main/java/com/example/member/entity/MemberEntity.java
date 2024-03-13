@@ -6,10 +6,10 @@ import lombok.Generated;
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity
+@Entity(name="login")
 @Setter
 @Getter
-@Table(name="Login")
+@Table(name="login")
 public class MemberEntity { //table 역할
     //jpa ==> database를 객체처럼 사용 가능
     @Id
@@ -19,15 +19,15 @@ public class MemberEntity { //table 역할
     @Column
     private String password;
 
-    @Column
-    private String stdname;
+    @Column(name = "std_name")
+    private String stdName;
 
     public static MemberEntity toMemberEntity(MemberDTO memberDTO){
         MemberEntity memberEntity = new MemberEntity();
 
         memberEntity.setId(memberDTO.getId());
         memberEntity.setPassword(memberDTO.getPassword());
-        memberEntity.setStdname(memberDTO.getStdname());
+        memberEntity.setStdName(memberDTO.getStdName());
         return memberEntity;
     }
 

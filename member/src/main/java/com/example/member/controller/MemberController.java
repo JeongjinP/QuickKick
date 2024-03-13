@@ -10,7 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import com.example.member.service.MemberService;
 
-@Controller
+@RestController
 @Getter
 @Setter
 @RequiredArgsConstructor
@@ -31,22 +31,18 @@ public class MemberController {
 
         return "index";
     }
-
-    @GetMapping("/member/login")
-    public String loginForm(){
-        return "login";
-    }
-
     @PostMapping("/member/login") // session : 로그인 유지
-    public String login(@ModelAttribute MemberDTO memberDTO, HttpSession session) {
+    @ResponseBody
+    public MemberDTO login(@ModelAttribute MemberDTO memberDTO, HttpSession session) {
         MemberDTO loginResult = memberService.login(memberDTO);
         if (loginResult != null) {
             // login 성공
-            session.setAttribute("login", loginResult.getId());
-            return "main";
+            session.setAttribute("login", loginResult.getStdName());
+            /*model.addAttribute("login", loginResult);*/
+            return loginResult;
         } else {
             // login 실패
-            return "login";
+            return null;
         }
     }
 

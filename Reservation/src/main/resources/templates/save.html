@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reservation page</title>
+</head>
+<body>
+    <h1>Reservation page</h1><br>
+    <form action="Reservation/save" method="post">
+        Date: <input type="date" name ="resdate" id="Date">
+        Time: <select name="restime" id="Time">
+        <option value="09:00:00">9</option>
+        <option value="10:00:00">10</option>
+        <option value="11:00:00">11</option>
+        <option value="12:00:00">12</option>
+        <option value="13:00:00">13</option>
+        <option value="14:00:00">14</option>
+        <option value="15:00:00">15</option>
+        <option value="16:00:00">16</option>
+        <option value="17:00:00">17</option>
+        <option value="18:00:00">18</option>
+        <option value="19:00:00">19</option>
+        <option value="20:00:00">20</option>
+        <option value="21:00:00">21</option>
+        <option value="22:00:00">22</option>
+        </select>
+        <br>
+        useTime: <select name="usetime" id="usetime">
+        <option value="1.0">1</option>
+        <option value="2.0">2</option>
+    </select>
+        <br>
+        groundType: <select name="groundtype" id="groundtype">
+        <option value="0">풋살</option>
+        <option value="1">축구</option>
+    </select>
+        <br>
+        useground: <select name="useground" id="useground">
+        <option value="east">동측</option>
+        <option value="west">서측</option>
+        <option value="null">마사토구장</option>
+    </select>
+        <br>
+        responsibility: <input type="text" name="responsibility">
+    <input type="submit" value="예약">
+    </form>
+</body>
+</html>

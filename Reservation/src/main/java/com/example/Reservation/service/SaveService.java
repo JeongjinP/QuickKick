@@ -21,15 +21,22 @@ import java.util.stream.Collectors;
 public class SaveService {
     private final SaveRepository saveRepository;
 
+    // 예약 저장
     public SaveDTO save(SaveDTO saveDTO) {
         SaveEntity saveEntity = SaveEntity.toSaveEntity(saveDTO);
         saveRepository.save(saveEntity);
         return saveDTO;
     }
 
+    // 날짜별 예약 저장 내역 조회
     public List<SaveDTO> findAllByResdate(String resdate) {
         List<SaveEntity> saveEntities = saveRepository.findAllByResdate(resdate);
         return saveEntities.stream().map(SaveDTO::toSaveDTO).collect(Collectors.toList());
+    }
+
+    // 날짜, 시간으로 예약 삭제
+    public void deleteByTime(String resdate, String restime) {
+        saveRepository.deleteByResdateAndRestime(resdate, restime);
     }
 
 }

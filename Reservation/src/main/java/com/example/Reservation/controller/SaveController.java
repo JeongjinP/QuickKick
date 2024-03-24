@@ -35,11 +35,16 @@ public class SaveController {
         return "search";
     }
 
-
     @PostMapping("/Reservation/search")
     @ResponseBody
     public ResponseEntity<List<SaveDTO>> findByResdate(@RequestParam String resdate) {
         List<SaveDTO> searchResult = saveService.findAllByResdate(resdate);
         return ResponseEntity.ok().body(searchResult);
+    }
+
+    @DeleteMapping("/Reservation/delete")
+    public ResponseEntity<String> deleteByTime(@RequestParam String resdate, @RequestParam String restime) {
+        saveService.deleteByTime(resdate, restime);
+        return ResponseEntity.ok().body("Reservation deleted : " + resdate + " " + restime);
     }
 }

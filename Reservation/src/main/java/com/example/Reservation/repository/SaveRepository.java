@@ -9,4 +9,6 @@ import java.util.List;
 public interface SaveRepository extends JpaRepository<SaveEntity, Integer> {
 
     List<SaveEntity> findAllByResdate(String resdate);
+
+    void deleteByResdateAndRestime(String resdate, String restime);
 }

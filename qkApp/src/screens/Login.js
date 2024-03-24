@@ -18,20 +18,21 @@ function Login ({ navigation }) {
     // 로그인 성공시 "Root"(RootStack 에서 Login => TabNavigator)로 이동하게끔 구현
     const loginHandler = () => {
     // loginResult 에 LoginTestComponent 에서 나온 return 값을을 저장
-    const loginResult = LoginTestComponent({ credential });
+      const loginResult = LoginTestComponent({ credential });
 
-    // 로그인 성공시
-    if (loginResult.success) {
-      navigation.navigate("Root", {
-        // 여러 네비게이션을 동시에 사용한 중첩 네비게이션에서는 이동할 화면 이름도 써주어야 함
-        // return 받은 userName, userTeam 까지 전달해줌
-          screen: "홈",
-          params: {userName: loginResult.userName, userTeam:loginResult.userTeam},
-      });
-    } else {
-        alert("로그인 실패");
+      // 로그인 성공시
+      if (loginResult.success) {
+        navigation.navigate("Root", {
+          // 여러 네비게이션을 동시에 사용한 중첩 네비게이션에서는 이동할 화면 이름도 써주어야 함
+          // return 받은 userName, userTeam 까지 전달해줌
+            screen: "홈",
+            params: {userName: loginResult.userName, userTeam:loginResult.userTeam},
+        });
+      } else {
+          alert("로그인 실패");
+
+      }
     }
-  }
 
   return (
     <View style={styles.container}>

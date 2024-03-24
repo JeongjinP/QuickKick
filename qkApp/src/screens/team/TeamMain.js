@@ -1,6 +1,8 @@
 import React from "react";
 import { View, Text, SafeAreaView } from "react-native";
 import GeneralHeader from "../../component/GeneralHeader";
+import axios from "axios";
+
 
 function TeamMain () {
   return(

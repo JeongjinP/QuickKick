@@ -26,7 +26,7 @@ function Login ({ navigation }) {
           // 여러 네비게이션을 동시에 사용한 중첩 네비게이션에서는 이동할 화면 이름도 써주어야 함
           // return 받은 userName, userTeam 까지 전달해줌
             screen: "홈",
-            params: {userName: loginResult.userName, userTeam:loginResult.userTeam},
+            params: {std_name: loginResult.std_name},
         });
       } else {
           alert("로그인 실패");

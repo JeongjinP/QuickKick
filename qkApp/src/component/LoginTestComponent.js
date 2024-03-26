@@ -36,46 +36,84 @@
 //     );
 // }
 //
+//
+// import axios from "axios";
+// import {useState} from "react";
+//
+// // 데이터베이스 결합기능 테스트용 LoginTestComponent
+//
+// // Login.js 에서 ID, PW를 입력받아와 유저 정보와 비교해 맞다면 Root 로 이동하게끔 구현
+//
+// export function LoginTestComponent(props) {
+//
+//   // 서버의 URL
+//   const SERVER_URL = "http://localhost:8080/member/login";
+//   const [loginResult, setLoginResult] = useState(null);
+//
+//   // ID, PW를 서버에 전송하여 사용자 인증을 시도
+//   const authenticateUser = async (id, pw) => {
+//     try {
+//       // 서버에 POST 요청을 보내기 위한 데이터
+//       const data = { id: id, password: pw };
+//       // 서버로 POST 요청
+//       const response = await axios.post(SERVER_URL, data);
+//
+//       // 서버로부터 받은 응답 처리
+//       if (response.data.success) {
+//         console.log("로그인 성공");
+//         // 성공 여부, 유저 이름, 유저 팀 반환
+//         setLoginResult({
+//           success: true,
+//           stdName: response.data.stdName,
+//           // userTeam: response.data.userTeam
+//         });
+//       } else {
+//         console.log("로그인 실패");
+//         setLoginResult({ success: false });
+//       }
+//     } catch (error) {
+//       console.error("로그인 에러:", error);
+//       setLoginResult({ success: false });
+//     }
+//   };
+//   authenticateUser(props.credential.ID, props.credential.PW);
+//   return loginResult;
+// }
 
+import React from "react";
 import axios from "axios";
-import {useState} from "react";
 
-// 데이터베이스 결합기능 테스트용 LoginTestComponent
-
-// Login.js 에서 ID, PW를 입력받아와 유저 정보와 비교해 맞다면 Root 로 이동하게끔 구현
 
 export function LoginTestComponent(props) {
 
   // 서버의 URL
-  const SERVER_URL = "http://localhost:8080/member/login";
-  const [loginResult, setLoginResult] = useState(null);
+  const SERVER_URL = "http://localhost:8080/member";
 
   // ID, PW를 서버에 전송하여 사용자 인증을 시도
   const authenticateUser = async (id, pw) => {
+    console.log(id);
+    console.log(pw);
     try {
       // 서버에 POST 요청을 보내기 위한 데이터
-      const data = { id: id, pw: pw };
-      // 서버로 POST 요청
-      const response = await axios.post(SERVER_URL, data);
-
+      const data = { id: id, password: pw };
+      const url = `${SERVER_URL}/login?id=${data.id}&password=${data.password}`
+      const response = await axios.post(url);
+      console.log(response.data);
       // 서버로부터 받은 응답 처리
       if (response.data.success) {
         console.log("로그인 성공");
         // 성공 여부, 유저 이름, 유저 팀 반환
-        setLoginResult({
-          success: true,
-          userName: response.data.userName,
-          userTeam: response.data.userTeam
-        });
+        return { success: true, std_name: response.data.std_name};
       } else {
         console.log("로그인 실패");
-        setLoginResult({ success: false });
+        return { success: false };
       }
     } catch (error) {
-      console.error("로그인 에러:", error);
-      setLoginResult({ success: false });
+        console.error("로그인 에러:", error);
+        return false;
     }
   };
-  authenticateUser(props.credential.ID, props.credential.PW);
-  return loginResult;
+
+  // props로 받은 ID, PW를 서버에 전달하여 사용자 인증 시도
+  return authenticateUser(props.credential.ID, props.credential.PW);
 }

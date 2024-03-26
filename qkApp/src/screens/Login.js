@@ -16,21 +16,31 @@ function Login ({ navigation }) {
     // 로그인 여부를 판단해주는 LoginTestComponent 라는 컴포넌트에 사용자로부터 입력받은 credential 배열을 props 로 전달
     // 결과로 true, false 와 함께 사용자 이름, 팀 userName, userTeam 을 받아옴
     // 로그인 성공시 "Root"(RootStack 에서 Login => TabNavigator)로 이동하게끔 구현
-    const loginHandler = () => {
-    // loginResult 에 LoginTestComponent 에서 나온 return 값을을 저장
-      const loginResult = LoginTestComponent({ credential });
+    const loginHandler = async () => {
+      try{
+        // id, pw 입력값 존재여부 확인
+        if (credential.ID === "" || credential.PW === "") {
+            alert("아이디, 비밀번호를 입력해주세요");
+            return;
+        }
+        // loginResult 에 LoginTestComponent 에서 나온 return 값을을 저장
+        const loginResult = await LoginTestComponent({ credential });
+        console.log("login.js loginResult: ",loginResult);
 
-      // 로그인 성공시
-      if (loginResult.success) {
-        navigation.navigate("Root", {
-          // 여러 네비게이션을 동시에 사용한 중첩 네비게이션에서는 이동할 화면 이름도 써주어야 함
-          // return 받은 userName, userTeam 까지 전달해줌
-            screen: "홈",
-            params: {std_name: loginResult.std_name},
-        });
-      } else {
-          alert("로그인 실패");
-
+        // 로그인 성공시
+        if (loginResult.success) {
+          navigation.navigate("Root", {
+            // 여러 네비게이션을 동시에 사용한 중첩 네비게이션에서는 이동할 화면 이름도 써주어야 함
+            // return 받은 userName, userTeam 까지 전달해줌
+              screen: "홈",
+              params: {stdName: loginResult.stdName},
+          });
+        } else {
+            alert("로그인 실패");
+        }
+      } catch (error) {
+        console.error("로그인 에러:", error);
+        alert("로그인 에러")
       }
     }
 

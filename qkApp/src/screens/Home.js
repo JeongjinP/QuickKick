@@ -35,7 +35,7 @@ function Home ({ navigation, route }) {
         <View>
           {/*유저 이름, 팀 표시*/}
           {/*화면 이동간 받은 데이터 수신은 route 를 통해 함. Login 컴포넌트에서 userName, userTeam 받아와서 표시해줌*/}
-          <Text style={styles.userInfoText}>{route.params.std_name}님 안녕하세요</Text>
+          <Text style={styles.userInfoText}>{route.params.stdName}님 안녕하세요</Text>
           <Text style={[styles.userInfoText,{fontSize: 20}]}>소속팀: 1</Text>
         </View>
 

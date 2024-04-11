@@ -16,14 +16,10 @@ export function LoginTestComponent(props) {
       const url = `${SERVER_URL}/login?id=${data.id}&password=${data.password}`
       const response = await axios.post(url);
 
-      // 리턴하는 json 데이터의 이름 std_name 이라고 했는데 실제 받아보면 stdName 인것 확인 해보기
       console.log("응답받은 데이터",response.data);
       // 서버로부터 받은 응답 처리
       if (response.data.id) {
         console.log("로그인 성공");
-        // 성공 여부, 유저 이름, (유저 팀)- 추가해야함/  반환
-        // console.log(response.data.id);
-        // console.log(response.data.stdName);
         return { success: true, stdName: response.data.stdName};
       } else {
         console.log("로그인 실패");

@@ -5,9 +5,8 @@ import ReservationStatusViewer from "../../component/ReservationStatusViewer";
 import GeneralHeader from "../../component/GeneralHeader";
 
 const data = [
-  { label: '구장 1', value: '1' },
-  { label: '구장 2', value: '2' },
-  { label: '구장 3', value: '3' },
+  { label: '동쪽구장', value: 'east' },
+  { label: '서쪽구장', value: 'west' },
 ];
 function ReservationSelect({ navigation }) {
   return (

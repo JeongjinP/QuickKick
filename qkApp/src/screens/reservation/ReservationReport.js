@@ -1,14 +1,13 @@
 import React from "react";
 import { View, Text, StyleSheet, SafeAreaView, TextInput, Pressable } from "react-native";
 import GeneralHeader from "../../component/GeneralHeader";
+import { useStdName } from "../../component/StdLoginContext";
 
 // 신청자명, 건물명, 전화번호, 운동장, 이메일, 신청일자, 소속(단과대), 사용인원, 예약시간,
-// 사용목적(입력), 사용내용(입력), 계획서첨부(???)
-
-// 현재 상황에서는 버튼을 눌렀을 때 홈으로 이동하면 홈 화면 내 정보에 표시할 userName 파라미터가 없어서
-// 오류 발생해 예약 메인화면으로 이동하게 해 둠
+// 사용목적(입력), 사용내용(입력)
 
 function ReservationReport ({ navigation }) {
+  const { stdName } = useStdName();
   return (
     <SafeAreaView style={GeneralHeader.container}>
       <View style={GeneralHeader.header}>
@@ -21,7 +20,7 @@ function ReservationReport ({ navigation }) {
         <TextInput
           placeholder={"신청자명"}
           style={styles.reportInput}
-          value={"이근찬"}
+          value={stdName}
         />
       </View>
 
@@ -30,7 +29,7 @@ function ReservationReport ({ navigation }) {
         <TextInput
           placeholder={"소속"}
           style={styles.reportInput}
-          value={"글로벌정경대학 무역학부 (야)"}
+          value={"컴퓨터공학과"}
         />
 
       </View>
@@ -87,14 +86,6 @@ function ReservationReport ({ navigation }) {
         />
       </View>
 
-      {/*이거 뭐지?*/}
-      <View style={styles.reportBox}>
-        <Text>계획서첨부: </Text>
-        <TextInput
-          placeholder={"계획서첨부"}
-          style={styles.reportInput}
-        />
-      </View>
       <Pressable
         style={({ pressed }) => [
           {opacity: pressed ? 0.3 : 1},

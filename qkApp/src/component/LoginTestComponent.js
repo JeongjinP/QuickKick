@@ -16,7 +16,9 @@ export function LoginTestComponent(props) {
       const url = `${SERVER_URL}/login?id=${data.id}&password=${data.password}`
       const response = await axios.post(url);
 
+      // 서버 응답 json 데이터 확인
       console.log("응답받은 데이터",response.data);
+      
       // 서버로부터 받은 응답 처리
       if (response.data.id) {
         console.log("로그인 성공");
@@ -31,6 +33,6 @@ export function LoginTestComponent(props) {
     }
   };
 
-  // props 로 받은 ID, PW를 함수에 전달하고 리턴
+  // props 로 받은 ID, PW를 함수에 전달하고 결과 리턴
   return authenticateUser(props.credential.ID, props.credential.PW);
 }

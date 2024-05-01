@@ -3,9 +3,11 @@ import {View, Text, StyleSheet, Pressable, SafeAreaView, BackHandler} from "reac
 import AntDesign from '@expo/vector-icons/AntDesign';
 import GeneralHeader from "../component/GeneralHeader";
 import {useFocusEffect} from "@react-navigation/native";
+import { useStdName } from "../component/StdLoginContext";
 
 
-function Home ({ navigation, route }) {
+function Home ({ navigation }) {
+  const { stdName } = useStdName();
   
   // 안드로이드 뒤로가기 버튼 작동 방지 코드
   // useEffect 대신 useFocusEffect 사용하는것은 스택 네비게이터 구조상
@@ -35,7 +37,7 @@ function Home ({ navigation, route }) {
         <View>
           {/*유저 이름, 팀 표시*/}
           {/*화면 이동간 받은 데이터 수신은 route 를 통해 함. Login 컴포넌트에서 userName, userTeam 받아와서 표시해줌*/}
-          <Text style={styles.userInfoText}>{route.params.stdName}님 안녕하세요</Text>
+          <Text style={styles.userInfoText}>{stdName}님 안녕하세요</Text>
           <Text style={[styles.userInfoText,{fontSize: 20}]}>소속팀: 1</Text>
         </View>
 

@@ -1,5 +1,5 @@
 import React from "react";
-import {View, FlatList, Pressable, SafeAreaView} from "react-native";
+import {View, FlatList, Pressable, SafeAreaView, Text} from "react-native";
 import GeneralHeader from "../../component/GeneralHeader";
 import BoardSection from "./BoardSection";
 import BoardHeader from "./BoardHeader";
@@ -31,9 +31,9 @@ function BoardMain({ navigation }) {
 
   return (
     <SafeAreaView style={[GeneralHeader.container]}>
+    <View>
     <FlatList
       ListHeaderComponent={BoardHeader}
-      // ListHeaderComponentStyle={BoardHeader.header}
       data={data}
       keyExtractor={(_) => _.title}
       renderItem={({item}) => {
@@ -46,7 +46,7 @@ function BoardMain({ navigation }) {
           </Pressable>
         )
       }}
-    />
+    /></View>
     </SafeAreaView>
   )
 }

@@ -7,7 +7,7 @@ import { useStdName } from "../component/StdLoginContext";
 
 
 function Home ({ navigation }) {
-  const { stdName } = useStdName();
+  const { stdName, setStdName } = useStdName();
   
   // 안드로이드 뒤로가기 버튼 작동 방지 코드
   // useEffect 대신 useFocusEffect 사용하는것은 스택 네비게이터 구조상
@@ -26,6 +26,15 @@ function Home ({ navigation }) {
         backHandler.remove();
       };
     }, []))
+
+  // 로그아웃 버튼 클릭시 ContextApi 에 저장된 사용자 이름, 네비게이터 초기화
+  const logoutHandler = () => {
+    setStdName("");
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'Login' }],
+    });
+  }
 
   return (
     <SafeAreaView style={GeneralHeader.container}>
@@ -46,9 +55,7 @@ function Home ({ navigation }) {
           style={({ pressed }) => [
             {opacity: pressed ? 0.3 : 1},
             styles.outButton]}
-          onPress={() => navigation.reset({
-          index: 0,
-          routes: [{name: "Login"}]})}
+          onPress={logoutHandler}
         >
           <AntDesign name="logout" size={30} color="white" />
         </Pressable>

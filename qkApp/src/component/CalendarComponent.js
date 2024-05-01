@@ -13,7 +13,7 @@ LocaleConfig.locales["kr"] = {
   today: "오늘",
 };
 LocaleConfig.defaultLocale = "kr";
-function CalendarComponent() {
+function CalendarComponent( {onDateSelected }) {
 
   // 선택된 날짜를 useState 사용해서 설정
   const [selectedDate, setSelectedDate] = useState("");
@@ -32,8 +32,10 @@ function CalendarComponent() {
     <Calendar
         // useState 사용해서 터치하면 날짜 선택
         onDayPress={(day) => {
-            console.log("selected day", selectedDate);
             setSelectedDate(day.dateString);
+            onDateSelected(day.dateString);
+            console.log("selected day", selectedDate);
+
         }}
         onMonthChange={(month) => {
             console.log("month changed", month);

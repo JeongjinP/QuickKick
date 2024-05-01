@@ -22,12 +22,16 @@ public class MemberEntity { //table 역할
     @Column(name = "std_name")
     private String stdName;
 
+    @Column(name="team_name")
+    private String teamName;
+
     public static MemberEntity toMemberEntity(MemberDTO memberDTO){
         MemberEntity memberEntity = new MemberEntity();
 
         memberEntity.setId(memberDTO.getId());
         memberEntity.setPassword(memberDTO.getPassword());
         memberEntity.setStdName(memberDTO.getStdName());
+        memberEntity.setTeamName(memberDTO.getTeamName());
         return memberEntity;
     }
 

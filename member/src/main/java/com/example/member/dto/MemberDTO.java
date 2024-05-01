@@ -15,6 +15,7 @@ public class MemberDTO {
     private Integer id;
     private String password;
     private String stdName;
+    private String teamName;
 
     //lombok 어노테이션으로 getter,setter,생성자,toString 메서드 생략 가능
 
@@ -28,6 +29,7 @@ public class MemberDTO {
         memberDTO.setId(memberEntity.getId());
         memberDTO.setPassword(memberEntity.getPassword());
         memberDTO.setStdName(memberEntity.getStdName());
+        memberDTO.setTeamName(memberEntity.getTeamName());
 
         return memberDTO;
     }

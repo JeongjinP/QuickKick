@@ -4,7 +4,7 @@ use QuickKickdb;
 
 create table member(
 	stdNum int(9) primary key,
-    stdName varchar(20) not null,
+    stdName varchar(20) unique,
     Major varchar(20) not null,
     hasTeam boolean not null,
     teamName varchar(20),
@@ -31,14 +31,9 @@ create table reservation(
 
 alter table reservation modify resNum int auto_increment;
 
-drop table login;
-
-create table login(
-	id int(9) primary key,
-    password varchar(20),
-    std_name varchar(20),
-    team_name varchar(20),
-    Foreign key (team_name) references team (teamName)
+create table Login(
+	ID int(9) primary key,
+    password varchar(20) not null,
+    stdName varchar(20) not null,
+	foreign key (stdName) REFERENCES member (stdName) 
 );
-
-

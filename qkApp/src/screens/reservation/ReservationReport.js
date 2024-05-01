@@ -6,8 +6,9 @@ import { useStdName } from "../../component/StdLoginContext";
 // 신청자명, 건물명, 전화번호, 운동장, 이메일, 신청일자, 소속(단과대), 사용인원, 예약시간,
 // 사용목적(입력), 사용내용(입력)
 
-function ReservationReport ({ navigation }) {
+function ReservationReport ({ navigation, route }) {
   const { stdName } = useStdName();
+  const { selectedDate } = route.params;
   return (
     <SafeAreaView style={GeneralHeader.container}>
       <View style={GeneralHeader.header}>
@@ -54,7 +55,7 @@ function ReservationReport ({ navigation }) {
         <TextInput
           placeholder={"신청일자"}
           style={styles.reportInput}
-          value={"2024-02-20"}
+          value={selectedDate}
         />
       </View>
 

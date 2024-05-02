@@ -16,3 +16,7 @@
 
 - 팀원 박정진(데이터베이스), 이근찬(프론트엔드)
 
+
+개발 회의, 참고자료, 오류 공유 등을 위한 notion page
+https://www.notion.so/6aa0cd6bc5404ec4a5d4feed74934843?v=bacf2f766cbd415f979b689477a4dae1&pvs=4
+

@@ -1,13 +1,13 @@
 import React from "react";
 import { View, Text, StyleSheet, SafeAreaView, TextInput, Pressable } from "react-native";
 import GeneralHeader from "../../component/GeneralHeader";
-import { useStdName } from "../../component/StdLoginContext";
+import { useStdData } from "../../component/StdLoginContext";
 
 // 신청자명, 건물명, 전화번호, 운동장, 이메일, 신청일자, 소속(단과대), 사용인원, 예약시간,
 // 사용목적(입력), 사용내용(입력)
 
 function ReservationReport ({ navigation, route }) {
-  const { stdName } = useStdName();
+  const { stdName, teamName } = useStdData();
   const { selectedDate } = route.params;
   return (
     <SafeAreaView style={GeneralHeader.container}>
@@ -26,11 +26,11 @@ function ReservationReport ({ navigation, route }) {
       </View>
 
       <View style={styles.reportBox}>
-        <Text>소속: </Text>
+        <Text>팀: </Text>
         <TextInput
-          placeholder={"소속"}
+          placeholder={"팀"}
           style={styles.reportInput}
-          value={"컴퓨터공학과"}
+          value={teamName}
         />
 
       </View>

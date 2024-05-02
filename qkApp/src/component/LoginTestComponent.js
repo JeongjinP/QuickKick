@@ -22,7 +22,7 @@ export function LoginTestComponent(props) {
       // 서버로부터 받은 응답 처리
       if (response.data.id) {
         console.log("로그인 성공");
-        return { success: true, stdName: response.data.stdName};
+        return { success: true, stdName: response.data.stdName, teamName: response.data.teamName};
       } else {
         console.log("로그인 실패");
         return { success: false };

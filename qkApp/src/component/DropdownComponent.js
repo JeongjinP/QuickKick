@@ -41,6 +41,7 @@ const DropdownComponent = ({data, label, holder, onValueChange}) => {
           setValue(item.value);
           onValueChange(item.value);
           setIsFocus(false);
+          // console.log('selected item', item);
         }}
         renderLeftIcon={() => (
           <AntDesign

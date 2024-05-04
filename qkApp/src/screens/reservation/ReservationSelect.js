@@ -24,7 +24,10 @@ function ReservationSelect({ navigation }) {
           label={"구장"}
           holder={"구장을 선택해주세요."}
           data={useground}
-          onValueChange={setSelectedGround} />
+          onValueChange={(value) => {
+            setSelectedGround(value);
+            console.log("selected ground", value);
+          }} />
       </View>
       
       <View>
@@ -39,7 +42,7 @@ function ReservationSelect({ navigation }) {
           style={({ pressed }) => [
             {opacity: pressed ? 0.3 : 1},
             styles.reserveButton]}
-          onPress={() => navigation.navigate('ReservationReport', {selectedDate}, {selectedGround})}
+          onPress={() => navigation.navigate('ReservationReport', {selectedDate, selectedGround})}
         >
           <Text style={styles.reserveButtonText}>신청서 작성</Text>
         </Pressable>

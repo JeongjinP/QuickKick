@@ -5,13 +5,15 @@ import ReservationStatusViewer from "../../component/ReservationStatusViewer";
 import GeneralHeader from "../../component/GeneralHeader";
 import { useState } from 'react';
 
-const data = [
+const useground = [
   { label: '동쪽구장', value: 'east' },
   { label: '서쪽구장', value: 'west' },
 ];
 
 function ReservationSelect({ navigation }) {
   const [selectedDate, setSelectedDate] = useState("");
+  const [selectedGround, setSelectedGround] = useState("");
+
   return (
     <SafeAreaView style={GeneralHeader.container}>
       <View style={GeneralHeader.header}>
@@ -21,13 +23,15 @@ function ReservationSelect({ navigation }) {
         <DropdownComponent
           label={"구장"}
           holder={"구장을 선택해주세요."}
-          data = {data}
-        />
+          data={useground}
+          onValueChange={setSelectedGround} />
       </View>
+      
       <View>
         <CalendarComponent onDateSelected={setSelectedDate}/>
       </View>
       <View style={styles.selectTime}>
+          
           <ReservationStatusViewer/>
       </View>
       <View style={{flex: 1}}>
@@ -35,7 +39,7 @@ function ReservationSelect({ navigation }) {
           style={({ pressed }) => [
             {opacity: pressed ? 0.3 : 1},
             styles.reserveButton]}
-          onPress={() => navigation.navigate('ReservationReport', {selectedDate})}
+          onPress={() => navigation.navigate('ReservationReport', {selectedDate}, {selectedGround})}
         >
           <Text style={styles.reserveButtonText}>신청서 작성</Text>
         </Pressable>

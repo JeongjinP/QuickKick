@@ -8,7 +8,9 @@ import { useStdData } from "../../component/StdLoginContext";
 
 function ReservationReport ({ navigation, route }) {
   const { stdName, teamName } = useStdData();
-  const { selectedDate } = route.params;
+  const { selectedDate, selectedGround } = route.params;
+  console.log("date: ",selectedDate);
+  console.log("ground: ", selectedGround);
   return (
     <SafeAreaView style={GeneralHeader.container}>
       <View style={GeneralHeader.header}>
@@ -39,7 +41,7 @@ function ReservationReport ({ navigation, route }) {
         <TextInput
           placeholder={"선택구장"}
           style={styles.reportInput}
-          value={"제1구장"}
+          value={selectedGround}
         />
       </View>
       <View style={styles.reportBox}>

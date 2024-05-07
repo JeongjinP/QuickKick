@@ -19,7 +19,7 @@
     "crypto": "^1.0.1",
     "eventemitter3": "^5.0.1",
     "events": "^3.3.0",
-    "expo": "^50.0.15",
+    "expo": "^50.0.17",
     "expo-status-bar": "~1.11.1",
     "express": "^4.17.1",
     "fs": "^0.0.1-security",

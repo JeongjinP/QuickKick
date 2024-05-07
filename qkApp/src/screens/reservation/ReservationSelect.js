@@ -4,6 +4,8 @@ import CalendarComponent from "../../component/CalendarComponent";
 import ReservationStatusViewer from "../../component/ReservationStatusViewer";
 import GeneralHeader from "../../component/GeneralHeader";
 import { useState } from 'react';
+import ReservationView from '../../component/ReservationView';
+
 
 const useground = [
   { label: '동쪽구장', value: 'east' },
@@ -32,6 +34,7 @@ function ReservationSelect({ navigation }) {
       
       <View>
         <CalendarComponent onDateSelected={setSelectedDate}/>
+        <ReservationView date={selectedDate}/>
       </View>
       <View style={styles.selectTime}>
           

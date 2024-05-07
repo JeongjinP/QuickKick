@@ -1,9 +1,10 @@
 import { Pressable, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { useState } from 'react';
 import DropdownComponent from "../../component/DropdownComponent";
 import CalendarComponent from "../../component/CalendarComponent";
+import TodayComponent from '../../component/TodayCompnent';
 import ReservationStatusViewer from "../../component/ReservationStatusViewer";
 import GeneralHeader from "../../component/GeneralHeader";
-import { useState } from 'react';
 import ReservationView from '../../component/ReservationView';
 
 
@@ -13,7 +14,8 @@ const useground = [
 ];
 
 function ReservationSelect({ navigation }) {
-  const [selectedDate, setSelectedDate] = useState("");
+  const today = TodayComponent();
+  const [selectedDate, setSelectedDate] = useState(today);
   const [selectedGround, setSelectedGround] = useState("");
 
   return (
@@ -32,13 +34,14 @@ function ReservationSelect({ navigation }) {
           }} />
       </View>
       
+      {/* 예약 조회, 날짜 선택용 달력 컴포넌트 */}
       <View>
         <CalendarComponent onDateSelected={setSelectedDate}/>
+        {/* 예약 조회 기능 테스트용 로그 불러오기*/}
         <ReservationView date={selectedDate}/>
       </View>
       <View style={styles.selectTime}>
-          
-          <ReservationStatusViewer/>
+          <ReservationStatusViewer date={selectedDate}/>
       </View>
       <View style={{flex: 1}}>
         <Pressable

@@ -4,7 +4,7 @@ import axios from "axios";
 
 export function LoginTestComponent(props) {
   // 로그인 URL
-  const SERVER_URL = "http://localhost:8080/member/";
+  const SERVER_URL = "http://localhost:8090/member/";
 
   // ID, PW를 서버에 전송하여 사용자 인증
   const authenticateUser = async (id, pw) => {

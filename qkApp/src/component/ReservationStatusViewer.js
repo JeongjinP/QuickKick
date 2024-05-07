@@ -1,5 +1,6 @@
 import React from "react";
 import {View, Text, ScrollView, StyleSheet, TouchableHighlight} from "react-native";
+import ReservationView from "./ReservationView";
 
 // 예약 화면 달력에서 날짜를 선택한 뒤 아래에 해당일, 해당 구장의 예약 현황을 시간 목록으로 보여줄 컴포넌트
 // 예약 현황을 해당 날짜와 구장에 맞게 가져와서 보여주기
@@ -14,7 +15,7 @@ const ReservationBox = ({time}) => {
     );
 }
 
-const ReservationStatusViewer = () => {
+const ReservationStatusViewer = ( {date} ) => {
   return (
     <ScrollView style={{flex:1, marginTop:5 }}>
       <TouchableHighlight

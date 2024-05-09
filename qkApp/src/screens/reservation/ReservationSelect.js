@@ -5,7 +5,6 @@ import CalendarComponent from "../../component/CalendarComponent";
 import TodayComponent from '../../component/TodayCompnent';
 import ReservationStatusViewer from "../../component/ReservationStatusViewer";
 import GeneralHeader from "../../component/GeneralHeader";
-import ReservationView from '../../component/ReservationView';
 
 
 const useground = [
@@ -38,8 +37,8 @@ function ReservationSelect({ navigation }) {
       <View>
         <CalendarComponent onDateSelected={setSelectedDate}/>
         {/* 예약 조회 기능 테스트용 로그 불러오기*/}
-        <ReservationView date={selectedDate}/>
       </View>
+      {/* 예약 가능 여부 표시창 */}
       <View style={styles.selectTime}>
           <ReservationStatusViewer date={selectedDate}/>
       </View>

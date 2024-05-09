@@ -31,7 +31,6 @@ function CalendarComponent( {onDateSelected }) {
   return (
     // 달력 컴포넌트
     <Calendar
-        current={new Date()}
         // useState 사용해서 터치하면 날짜 선택
         onDayPress={(day) => {
             setSelectedDate(day.dateString);

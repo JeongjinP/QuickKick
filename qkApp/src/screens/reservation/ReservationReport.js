@@ -15,7 +15,6 @@ function ReservationReport ({ navigation, route }) {
     'west': '서쪽구장',
   };
 
-
   console.log("date: ",selectedDate);
   console.log("ground: ", selectedGround);
   return (
@@ -56,7 +55,7 @@ function ReservationReport ({ navigation, route }) {
         <TextInput
           placeholder={"전화번호"}
           style={styles.reportInput}
-          value={"010-9345-9395"}
+          value={""}
         />
       </View>
       <View style={styles.reportBox}>

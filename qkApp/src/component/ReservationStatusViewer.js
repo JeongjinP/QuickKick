@@ -7,18 +7,24 @@ import { View, Text, ScrollView, StyleSheet, TouchableHighlight } from "react-na
 // 예약 현황을 해당 날짜와 구장에 맞게 가져와서 보여주기
 
 // 뷰어 안에서 예약 현황을 보여주는 박스 컴포넌트
-const ReservationBox = ({time}) => {
-    return (
-      <View style={styles.timeView}>
-        <Text style={styles.Text}>{time}:00 ~ {time+1}:00</Text>
-        <Text style={styles.Text}>  예약가능</Text>
-      </View>
-    );
+// !!! 시간대 한자리일 경우 0 붙여주는데 폰트가 고정폭이 아니여서 틀어지므로 수정 필요
+const ReservationBox = ({time, isReserved, isSelected}) => {
+  const formattedTime = String(time).padStart(2, '0');
+  const nextHour = String(time + 1).padStart(2, '0');
+  const reservationStatus = isReserved ? "예약 중" : "예약 가능";
+  const textColor = isSelected ? '#0a4a9b' : '#000000';
+  return (
+    <View style={styles.timeView}>
+      <Text style={{...styles.Text, color: textColor}}>{formattedTime}:00 ~ {nextHour}:00</Text>
+      <Text style={{...styles.Text, color: textColor}}> {reservationStatus}</Text>
+    </View>
+  );
 }
-
 
 const ReservationStatusViewer = ({date, ground}) => {
   const [reservationData, setReservationData] = useState([]);
+  const [selectedHour, setSelectedHour] = useState(null);
+
 
   const ReservationView = ({date}) => {
     const SERVER_URL = "http://localhost:8080/Reservation/";
@@ -42,26 +48,29 @@ const ReservationStatusViewer = ({date, ground}) => {
 
   ReservationView({date});
   console.log("reservationData: ", reservationData);
+  const hours = Array.from({length: 10}, (_, i) => i + 9);
 
   return (
-    <ScrollView style={{flex:1, marginTop:5 }}>
-      <TouchableHighlight
-        activeOpacity={0.6}
-        underlayColor="#DDDDDD"
-        onPress={() => 'none'}
-      >
-        <ReservationBox time={9}/>
-
-      </TouchableHighlight>
-      <ReservationBox time={10}/>
-      <ReservationBox time={11}/>
-      <ReservationBox time={12}/>
-      <ReservationBox time={13}/>
-      <ReservationBox time={14}/>
-      <ReservationBox time={15}/>
-      <ReservationBox time={16}/>
-      <ReservationBox time={17}/>
-
+    // 예약중인 시간대 보여주는 ScrollView
+    <ScrollView style={{ flex:1, marginTop:3 }}>
+      {hours.map((hour, index) => {
+        const isReserved = reservationData.some(reservation => {
+          const reservationStart = parseInt(reservation.restime.split(":")[2]);
+          const reservationEnd = reservationStart + reservation.usetime;
+          return hour >= reservationStart && hour < reservationEnd && reservation.useground === ground;
+        });
+        const isSelected = hour === selectedHour;
+        return (
+          <TouchableHighlight
+            key={index}
+            activeOpacity={0.6}
+            underlayColor="#DDDDDD"
+            onPress={() => setSelectedHour(hour)}
+          >
+            <ReservationBox time={hour} isReserved={isReserved} isSelected={isSelected} />
+          </TouchableHighlight>
+        );
+      })}
     </ScrollView>
   );
 }
@@ -78,7 +87,7 @@ const styles = StyleSheet.create({
       marginBottom: 5,
       padding: 5,
       borderBottomWidth: 1,
-      borderColor: "lightgray"
+      borderColor: "lightgray",
     },
     Text: {
       color: "black",

@@ -40,7 +40,7 @@ function ReservationSelect({ navigation }) {
       </View>
       {/* 예약 가능 여부 표시창 */}
       <View style={styles.selectTime}>
-          <ReservationStatusViewer date={selectedDate}/>
+          <ReservationStatusViewer date={selectedDate} ground={selectedGround}/>
       </View>
       <View style={{flex: 1}}>
         <Pressable

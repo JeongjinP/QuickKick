@@ -2,7 +2,7 @@ import React, {useCallback, useEffect} from "react";
 import {View, Text, StyleSheet, Pressable, SafeAreaView, BackHandler} from "react-native";
 import AntDesign from '@expo/vector-icons/AntDesign';
 import GeneralHeader from "../component/GeneralHeader";
-import {useFocusEffect} from "@react-navigation/native";
+import { useFocusEffect } from "@react-navigation/native";
 import { useStdData } from "../component/StdLoginContext";
 
 

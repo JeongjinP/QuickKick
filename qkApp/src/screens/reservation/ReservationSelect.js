@@ -16,6 +16,7 @@ function ReservationSelect({ navigation }) {
   const today = TodayComponent();
   const [selectedDate, setSelectedDate] = useState(today);
   const [selectedGround, setSelectedGround] = useState("");
+  const [selectedHour, setSelectedHour] = useState(null);
 
   return (
     <SafeAreaView style={GeneralHeader.container}>
@@ -40,14 +41,14 @@ function ReservationSelect({ navigation }) {
       </View>
       {/* 예약 가능 여부 표시창 */}
       <View style={styles.selectTime}>
-          <ReservationStatusViewer date={selectedDate} ground={selectedGround}/>
+          <ReservationStatusViewer date={selectedDate} ground={selectedGround} onHourSelected={setSelectedHour}/>
       </View>
       <View style={{flex: 1}}>
         <Pressable
           style={({ pressed }) => [
             {opacity: pressed ? 0.3 : 1},
             styles.reserveButton]}
-          onPress={() => navigation.navigate('ReservationReport', {selectedDate, selectedGround})}
+          onPress={() => navigation.navigate('ReservationReport', {selectedDate, selectedGround, selectedHour})}
         >
           <Text style={styles.reserveButtonText}>신청서 작성</Text>
         </Pressable>

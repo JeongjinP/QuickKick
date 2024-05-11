@@ -21,7 +21,7 @@ const ReservationBox = ({time, isReserved, isSelected}) => {
   );
 }
 
-const ReservationStatusViewer = ({date, ground}) => {
+const ReservationStatusViewer = ({date, ground, onHourSelected}) => {
   const [reservationData, setReservationData] = useState([]);
   const [selectedHour, setSelectedHour] = useState(null);
 
@@ -65,7 +65,10 @@ const ReservationStatusViewer = ({date, ground}) => {
             key={index}
             activeOpacity={0.6}
             underlayColor="#DDDDDD"
-            onPress={() => setSelectedHour(hour)}
+            onPress={() => {
+              setSelectedHour(hour); 
+              onHourSelected(hour);
+            }}
           >
             <ReservationBox time={hour} isReserved={isReserved} isSelected={isSelected} />
           </TouchableHighlight>

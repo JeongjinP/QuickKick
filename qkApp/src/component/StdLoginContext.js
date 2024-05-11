@@ -5,9 +5,10 @@ const StdLoginContext = createContext();
 export function StdLoginProvider({ children }) {
   const [stdName, setStdName] = useState(null);
   const [teamName, setTeamName] = useState(null);
+  const [stdId, setStdId] = useState(null);
 
   return (
-    <StdLoginContext.Provider value={{ stdName, setStdName, teamName, setTeamName }}>
+    <StdLoginContext.Provider value={{ stdName, setStdName, teamName, setTeamName, stdId, setStdId }}>
       {children}
     </StdLoginContext.Provider>
   );

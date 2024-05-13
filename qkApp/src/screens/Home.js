@@ -1,12 +1,20 @@
 import React, {useCallback, useEffect} from "react";
 import {View, Text, StyleSheet, Pressable, SafeAreaView, BackHandler} from "react-native";
-import AntDesign from '@expo/vector-icons/AntDesign';
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import GeneralHeader from "../component/GeneralHeader";
 import { useFocusEffect } from "@react-navigation/native";
 import { useStdData } from "../component/StdLoginContext";
-
+import TodayComponent from "../component/TodayCompnent";
+import useMyReservation from "../component/MyReservation";
+import { ScrollView } from "react-native";
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
 function Home ({ navigation }) {
+  const { stdId } = useStdData();
+  const today = '2024-05-01';
+  // const today = TodayComponent();
+
+  const reservationData = useMyReservation(stdId, today);
   const { stdName, setStdName, teamName, setTeamName } = useStdData();
   
   // 안드로이드 뒤로가기 버튼 작동 방지 코드
@@ -59,15 +67,31 @@ function Home ({ navigation }) {
             styles.outButton]}
           onPress={logoutHandler}
         >
-          <AntDesign name="logout" size={30} color="white" />
+          <MaterialIcons name="logout" size={30} color="#ffffff" />
+          {/* <MaterialCommunityIcons name="logout" size={30} color="white" /> */}
         </Pressable>
       </View>
 
-      <View style={styles.board}>
-        <Text style={styles.boardText}>내 예약 간단하게 표시</Text>
+      <View style={styles.reserveBoard}>
+        <ScrollView>
+          {reservationData === null || reservationData.length === 0 ? (
+            <View style={{alignItems: 'center'}}>
+              <Text style={styles.boardText}>예약 내역이 없습니다</Text>
+            </View>
+          ) : (
+            reservationData.map((item, index) => (
+              <View key={index} style={styles.resBox}>
+                <Text style={styles.outText}>예약 일자: <Text style={styles.boardText}>{item.resdate}</Text></Text>
+                <Text style={styles.outText}>예약 시간: <Text style={styles.boardText}>{item.restime.slice(-2)}:00</Text></Text>
+                <Text style={styles.outText}>이용 시간: <Text style={styles.boardText}>{item.usetime}시간</Text></Text>
+                <Text style={styles.outText}>사용 구장: <Text style={styles.boardText}>{item.useground === 'east' ? ('동쪽구장') : ('서쪽구장')}</Text></Text>
+              </View>
+              ))
+          )}
+        </ScrollView>
       </View>
 
-      <View style={styles.board}>
+      <View style={styles.greetingBoard}>
         <Text style={styles.boardText}>게시판 글 표시</Text>
       </View>
     </SafeAreaView>);
@@ -76,10 +100,6 @@ function Home ({ navigation }) {
 export default Home;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "white",
-  },
   userInfo:{
     flex: 1,
     flexDirection: "row",
@@ -101,21 +121,53 @@ const styles = StyleSheet.create({
       borderRadius: 10,
       padding: 10,
     },
-  board: {
-    flex:2,
+  reserveBoard: {
+    flex:3,
+    flexDirection: "row",
+    backgroundColor: "white",
+    margin: 20,
+    marginTop: 0,
+    marginBottom: 10,
+    padding: 5,
+    paddingHorizontal: 10,
+    borderColor: "#0A4A9B",
+    borderWidth: 1,
+    justifyContent: "center",
+    alignItems: "center",
+},  
+  greetingBoard: {
+    flex:1,
+    flexDirection: "row",
     backgroundColor: "white",
     margin: 20,
     marginTop: 0,
     borderColor: "#0A4A9B",
     borderWidth: 1,
-    // borderRadius: 10,
     justifyContent: "center",
     alignItems: "center",
 },
   boardText: {
-    fontSize: 26,
+    fontSize: 20,
     fontWeight: "bold",
     color: "#0A4A9B",
+},  
+  outText: {
+    fontSize: 16,
+    fontWeight: "",
+    color: "black",
 },
+  resBox: {
+    flex: 1,
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "start",
+    backgroundColor: "white",
+    margin: 5,
+    marginHorizontal: 0,
+    padding: 5,
+    borderColor: "#0A4A9B",
+    borderWidth: 1,
+    borderRadius: 5,
+}
   }
 )

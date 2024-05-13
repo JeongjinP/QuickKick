@@ -4,7 +4,7 @@ import axios from "axios";
 
 export function LoginTestComponent(props) {
   // 로그인 URL
-  const SERVER_URL = "http://localhost:8080/member";
+  const SERVER_URL = "http://localhost:8090/member/";
 
   // ID, PW를 서버에 전송하여 사용자 인증
   const authenticateUser = async (id, pw) => {
@@ -13,7 +13,7 @@ export function LoginTestComponent(props) {
     try {
       // 서버에 POST 요청을 보내기 위한 데이터, URL 설정하고 POST 요청
       const data = { id: id, password: pw };
-      const url = `${SERVER_URL}/login?id=${data.id}&password=${data.password}`
+      const url = `${SERVER_URL}login?id=${data.id}&password=${data.password}`
       const response = await axios.post(url);
 
       // 서버 응답 json 데이터 확인
@@ -22,7 +22,7 @@ export function LoginTestComponent(props) {
       // 서버로부터 받은 응답 처리
       if (response.data.id) {
         console.log("로그인 성공");
-        return { success: true, stdName: response.data.stdName};
+        return { success: true, stdName: response.data.stdName, teamName: response.data.teamName};
       } else {
         console.log("로그인 실패");
         return { success: false };

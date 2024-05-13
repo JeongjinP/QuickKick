@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { View, Text, StyleSheet, Image, TextInput, Pressable } from 'react-native';
 import Logo from "../img/inuLogo.png";
 import { LoginTestComponent } from "../component/LoginTestComponent";
-import { useStdName } from "../component/StdLoginContext";
-
+import { useStdData } from "../component/StdLoginContext";
+import axios from "axios";
 
 function Login ({ navigation }) {
-  const { setStdName } = useStdName();
+  const { setStdName, setTeamName, setStdId } = useStdData();
   // useState 를 사용해 ID, PW를 저장할 credential 배열 생성
   const [credential,setCredential] = useState({ID: "", PW: ""});
 
@@ -34,6 +34,8 @@ function Login ({ navigation }) {
 
           // setStdName 함수를 사용해 사용자 이름을 전역으로 사용할 수 있게 함
           setStdName(loginResult.stdName);
+          setTeamName(loginResult.teamName);
+          setStdId(credential.ID);
           navigation.navigate("Root", {
             // 여러 네비게이션을 동시에 사용한 중첩 네비게이션에서는 이동할 화면 이름도 써주어야 함
             // return 받은 userName, userTeam 까지 전달해줌
@@ -78,10 +80,10 @@ function Login ({ navigation }) {
         />
       </View>
 
-      <View style={styles.loginOptions}>
+      {/* <View style={styles.loginOptions}>
         <Text style={styles.Text}>아이디저장</Text>
         <Text style={styles.Text}>자동로그인</Text>
-      </View>
+      </View> */}
 
       {/*로그인 버튼*/}
       <View style={{flex:2}}>

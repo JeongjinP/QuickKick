@@ -1,10 +1,10 @@
 import React from "react";
 import { View, Text, SafeAreaView } from "react-native";
 import GeneralHeader from "../../component/GeneralHeader";
-import { useStdName } from "../../component/StdLoginContext";
+import { useStdData } from "../../component/StdLoginContext";
 
 function MyPageMain() {
-  const { stdName } = useStdName();
+  const { stdName, teamName } = useStdData();
 
   return (
     <SafeAreaView style={GeneralHeader.container}>
@@ -14,7 +14,7 @@ function MyPageMain() {
 
       <View>
         <Text>이름: {stdName}</Text>
-        <Text>팀: </Text>
+        <Text>팀: {teamName} </Text>
       </View>
     </SafeAreaView>
   );

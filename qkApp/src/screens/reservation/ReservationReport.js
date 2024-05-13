@@ -1,14 +1,47 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, StyleSheet, SafeAreaView, TextInput, Pressable } from "react-native";
 import GeneralHeader from "../../component/GeneralHeader";
-import { useStdName } from "../../component/StdLoginContext";
+import { useStdData } from "../../component/StdLoginContext";
+import axios from "axios";
+// import { Picker } from "@react-native-picker/picker";
+
 
 // 신청자명, 건물명, 전화번호, 운동장, 이메일, 신청일자, 소속(단과대), 사용인원, 예약시간,
 // 사용목적(입력), 사용내용(입력)
 
 function ReservationReport ({ navigation, route }) {
-  const { stdName } = useStdName();
-  const { selectedDate } = route.params;
+  const { stdName, teamName, stdId } = useStdData();
+  const { selectedDate, selectedGround, selectedHour } = route.params;
+
+
+  const [useTime, setUseTime] = useState('');
+
+  const groundName = {
+    'east': '동쪽구장',
+    'west': '서쪽구장',
+  };
+
+  console.log("date: ",selectedDate);
+  console.log("ground: ", selectedGround);
+
+  const SERVER_URL = "http://localhost:8080/Reservation/";
+
+  const ReportData = async () => {
+    const url = `${SERVER_URL}save?resdate=${selectedDate}&restime=${selectedHour}&usetime=${useTime}&groundtype=1&useground=${selectedGround}&responsibility=${stdId}`;
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+      });
+      if (!response.ok) {
+        throw new Error('HTTP error ' + response.status);
+      }
+      alert('예약이 성공적으로 완료되었습니다.');
+    } catch (error) {
+      console.error('There was an error!', error);
+    }
+  };
+
+
   return (
     <SafeAreaView style={GeneralHeader.container}>
       <View style={GeneralHeader.header}>
@@ -26,11 +59,11 @@ function ReservationReport ({ navigation, route }) {
       </View>
 
       <View style={styles.reportBox}>
-        <Text>소속: </Text>
+        <Text>팀: </Text>
         <TextInput
-          placeholder={"소속"}
+          placeholder={"팀"}
           style={styles.reportInput}
-          value={"컴퓨터공학과"}
+          value={teamName}
         />
 
       </View>
@@ -39,15 +72,15 @@ function ReservationReport ({ navigation, route }) {
         <TextInput
           placeholder={"선택구장"}
           style={styles.reportInput}
-          value={"제1구장"}
+          value={groundName[selectedGround]}
         />
       </View>
       <View style={styles.reportBox}>
-        <Text>전화번호: </Text>
+        <Text>학번: </Text>
         <TextInput
-          placeholder={"전화번호"}
+          placeholder={"학번"}
           style={styles.reportInput}
-          value={"010-9345-9395"}
+          value={stdId}
         />
       </View>
       <View style={styles.reportBox}>
@@ -64,34 +97,39 @@ function ReservationReport ({ navigation, route }) {
         <TextInput
           placeholder={"예약시간"}
           style={styles.reportInput}
-          value={"09:00 ~ 12:00"}
+          value={selectedHour.toString() + ":00"}
         />
       </View>
       <View style={styles.reportBox}>
-        <Text>사용인원: </Text>
+        <Text>사용시간: </Text>
         <TextInput
-          placeholder={"사용인원"}
+          placeholder={"사용시간"}
           style={styles.reportInput}
+          keyboardType='numeric'
+          onChangeText={(text) => setUseTime(text)}
         />
       </View>
-      <View style={styles.reportBox}>
+      {/* <View style={styles.reportBox}>
         <Text>사용목적: </Text>
         <TextInput
           style={styles.reportInput}
         />
-      </View>
-      <View style={styles.reportBox}>
+      </View> */}
+      {/* <View style={styles.reportBox}>
         <Text>사용내용: </Text>
         <TextInput
           style={styles.reportInput}
         />
-      </View>
+      </View> */}
 
       <Pressable
         style={({ pressed }) => [
           {opacity: pressed ? 0.3 : 1},
           styles.reserveButton]}
-        onPress={() => navigation.navigate('ReservationMain')}
+        onPress={async () => {
+          await ReportData();
+          navigation.navigate('ReservationMain');
+        }}
       >
         <Text style={styles.reserveButtonText}>신청서 작성</Text>
       </Pressable>

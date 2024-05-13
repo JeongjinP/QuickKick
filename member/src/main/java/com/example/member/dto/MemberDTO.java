@@ -30,7 +30,6 @@ public class MemberDTO {
         memberDTO.setPassword(memberEntity.getPassword());
         memberDTO.setStdName(memberEntity.getStdName());
         memberDTO.setTeamName(memberEntity.getTeamName());
-
         return memberDTO;
     }
 }

@@ -10,5 +10,7 @@ public interface SaveRepository extends JpaRepository<SaveEntity, Integer> {
 
     List<SaveEntity> findAllByResdate(String resdate);
 
+    List<SaveEntity> findAllByResponsibility(Integer responsibility);
+
     void deleteByResdateAndRestime(String resdate, String restime);
 }

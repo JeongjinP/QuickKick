@@ -42,6 +42,13 @@ public class SaveController {
         return ResponseEntity.ok().body(searchResult);
     }
 
+    @PostMapping("/Reservation/search/res")
+    @ResponseBody
+    public ResponseEntity<List<SaveDTO>> findByResponsibility(@RequestParam Integer stdnum) {
+        List<SaveDTO> searchResult = saveService.findAllByResponsibility(stdnum);
+        return ResponseEntity.ok().body(searchResult);
+    }
+
     @DeleteMapping("/Reservation/delete")
     public ResponseEntity<String> deleteByTime(@RequestParam String resdate, @RequestParam String restime) {
         saveService.deleteByTime(resdate, restime);

@@ -34,6 +34,12 @@ public class SaveService {
         return saveEntities.stream().map(SaveDTO::toSaveDTO).collect(Collectors.toList());
     }
 
+    // 학번별 예약 저장 내역 조회 (예약 책임자 기준)
+    public List<SaveDTO> findAllByResponsibility(Integer responsibility) {
+        List<SaveEntity> saveEntities = saveRepository.findAllByResponsibility(responsibility);
+        return saveEntities.stream().map(SaveDTO::toSaveDTO).collect(Collectors.toList());
+    }
+
     // 날짜, 시간으로 예약 삭제
     public void deleteByTime(String resdate, String restime) {
         saveRepository.deleteByResdateAndRestime(resdate, restime);

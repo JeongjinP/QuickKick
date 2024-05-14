@@ -2451,10 +2451,10 @@ babel-plugin-transform-flow-enums@^0.0.2:
   dependencies:
     "@babel/plugin-syntax-flow" "^7.12.1"
 
-babel-preset-expo@~11.0.5:
-  version "11.0.5"
-  resolved "https://registry.npmjs.org/babel-preset-expo/-/babel-preset-expo-11.0.5.tgz"
-  integrity sha512-IjqR4B7wnBU55pofLeLGjwUGrWJE1buamgzE9CYpYCNicZmJcNjXUcinQiurXCMuClF2hOff3QfZsLxnGj1UaA==
+babel-preset-expo@~11.0.6:
+  version "11.0.6"
+  resolved "https://registry.npmjs.org/babel-preset-expo/-/babel-preset-expo-11.0.6.tgz"
+  integrity sha512-jRi9I5/jT+dnIiNJDjDg+I/pV+AlxrIW/DNbdqYoRWPZA/LHDqD6IJnJXLxbuTcQ+llp+0LWcU7f/kC/PgGpkw==
   dependencies:
     "@babel/plugin-proposal-decorators" "^7.12.9"
     "@babel/plugin-transform-export-namespace-from" "^7.22.11"
@@ -3714,10 +3714,10 @@ expo-status-bar@~1.12.1:
   resolved "https://registry.npmjs.org/expo-status-bar/-/expo-status-bar-1.12.1.tgz"
   integrity sha512-/t3xdbS8KB0prj5KG5w7z+wZPFlPtkgs95BsmrP/E7Q0xHXTcDcQ6Cu2FkFuRM+PKTb17cJDnLkawyS5vDLxMA==
 
-expo@*, expo@^51.0.4:
-  version "51.0.4"
-  resolved "https://registry.npmjs.org/expo/-/expo-51.0.4.tgz"
-  integrity sha512-3DaOnsouiZlDH1k04nvYtfJyLFCj6Po8EL4lqDkLpV8ZXCbA89vo6w/2TFQpk8MpUfbapAlhuyigrnXPTEpRtg==
+expo@*, expo@^51.0.5:
+  version "51.0.5"
+  resolved "https://registry.npmjs.org/expo/-/expo-51.0.5.tgz"
+  integrity sha512-i+AfkfToYPFCobX0NUT9PmDtsB3L19vhCB/XUE1Ph6FVrBF6GipkHzTADuRLMaVg5u/2sm/fdzGzBcMjXSHqmA==
   dependencies:
     "@babel/runtime" "^7.20.0"
     "@expo/cli" "0.18.11"
@@ -3725,7 +3725,7 @@ expo@*, expo@^51.0.4:
     "@expo/config-plugins" "8.0.4"
     "@expo/metro-config" "0.18.3"
     "@expo/vector-icons" "^14.0.0"
-    babel-preset-expo "~11.0.5"
+    babel-preset-expo "~11.0.6"
     expo-asset "~10.0.6"
     expo-file-system "~17.0.1"
     expo-font "~12.0.5"

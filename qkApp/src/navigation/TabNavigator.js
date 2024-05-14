@@ -50,14 +50,14 @@ function TabNavigator() {
       }}/>
 
       {/* <Tab.Screen name={"팀"} component={TeamStack} options={{headerShown:false}}/> */}
-      <Tab.Screen name={"내정보"} component={MyPageStack} options={{
+      {/* <Tab.Screen name={"내정보"} component={MyPageStack} options={{
         tabBarIcon: ({ focused }) => (
           <Feather name="user" size={24} color={focused ? "#0A4A9B": "#808080"} />
         ),
         tabBarLabel: ({ focused }) => (
           <Text style={{color: focused ? "#0A4A9B": "#808080", fontSize: 10}}>내정보</Text>
         )
-      }}/>
+      }}/> */}
     </Tab.Navigator>
   );
 }

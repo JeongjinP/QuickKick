@@ -5,16 +5,30 @@ import GeneralHeader from "../../component/GeneralHeader";
 import { useStdData } from "../../component/StdLoginContext";
 import TodayComponent from "../../component/TodayCompnent";
 import useMyReservation from "../../component/MyReservation";
+import { useFocusEffect } from "@react-navigation/native";
+import { useIsFocused } from "@react-navigation/native";
 
 
 
 function ReservationMain({ navigation }){
   const { stdId } = useStdData();
-  // const today = TodayComponent();
-  const today = '2024-05-01';
+  const isFocused = useIsFocused();
+  const [today, setToday] = useState(TodayComponent());
+  const { reservationData, fetchReservationData } = useMyReservation();
+  // const today = '2024-05-14';
   console.log("stdId: ",stdId);
   console.log("today: ",today);
-  const reservationData = useMyReservation(stdId, today);
+
+  // const reservationData = useMyReservation(stdId, today);
+
+  useEffect(() => {
+    if (isFocused) {
+      setToday(TodayComponent());
+      fetchReservationData(stdId, today);
+    }
+  }, [isFocused]);
+  
+  
 
   return (
     <SafeAreaView style={GeneralHeader.container}>
@@ -72,7 +86,7 @@ const styles = StyleSheet.create({
     flex: 6,
     flexDirection: "row",
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "start",
     marginHorizontal: 20,
     marginVertical: 20,
     backgroundColor: "white",

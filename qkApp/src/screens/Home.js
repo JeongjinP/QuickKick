@@ -1,6 +1,6 @@
-import React, {useCallback, useEffect} from "react";
+import React, { useCallback, useEffect, useState } from "react";
+import { useIsFocused } from "@react-navigation/native";
 import {View, Text, StyleSheet, Pressable, SafeAreaView, BackHandler} from "react-native";
-import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import GeneralHeader from "../component/GeneralHeader";
 import { useFocusEffect } from "@react-navigation/native";
 import { useStdData } from "../component/StdLoginContext";
@@ -10,12 +10,20 @@ import { ScrollView } from "react-native";
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
 function Home ({ navigation }) {
+  const isFocused = useIsFocused();
   const { stdId } = useStdData();
-  const today = '2024-05-01';
-  // const today = TodayComponent();
+  // const today = '2024-05-01';
+  const [today, setToday] = useState(TodayComponent());
 
-  const reservationData = useMyReservation(stdId, today);
+  const { reservationData, fetchReservationData } = useMyReservation();
   const { stdName, setStdName, teamName, setTeamName } = useStdData();
+
+  useEffect(() => {
+    if (isFocused) {
+      setToday(TodayComponent());
+      fetchReservationData(stdId, today);
+    }
+  }, [isFocused]);
   
   // 안드로이드 뒤로가기 버튼 작동 방지 코드
   // useEffect 대신 useFocusEffect 사용하는것은 스택 네비게이터 구조상
@@ -124,6 +132,8 @@ const styles = StyleSheet.create({
   reserveBoard: {
     flex:3,
     flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "start",
     backgroundColor: "white",
     margin: 20,
     marginTop: 0,
@@ -132,8 +142,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     borderColor: "#0A4A9B",
     borderWidth: 1,
-    justifyContent: "center",
-    alignItems: "center",
+
 },  
   greetingBoard: {
     flex:1,

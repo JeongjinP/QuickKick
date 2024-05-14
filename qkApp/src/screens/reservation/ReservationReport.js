@@ -13,7 +13,6 @@ function ReservationReport ({ navigation, route }) {
   const { stdName, teamName, stdId } = useStdData();
   const { selectedDate, selectedGround, selectedHour } = route.params;
 
-
   const [useTime, setUseTime] = useState('');
 
   const groundName = {

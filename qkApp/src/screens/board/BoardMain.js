@@ -7,7 +7,7 @@ import { StyleSheet } from "react-native";
 
 function BoardMain({ navigation }) {
 
-  const ITEMS_PER_PAGE = 5;
+  const ITEMS_PER_PAGE = 4;
   const [page, setPage] = useState(1);
   // 게시글 더미 데이터
   const data = [

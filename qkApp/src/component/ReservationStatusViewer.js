@@ -26,17 +26,17 @@ const ReservationStatusViewer = ({date, ground, onHourSelected}) => {
   const [selectedHour, setSelectedHour] = useState(null);
 
 
-  const ReservationView = ({date}) => {
     const SERVER_URL = "http://localhost:8080/Reservation/";
+
     useEffect(() => {
         const fetchData = async () => {
-            try{
-                const url = `${SERVER_URL}search?resdate=${date}`
-                const response = await axios.post(url);
-                if(response.data) {
-                  setReservationData(response.data);
-                } else {
-                    console.log("데이터가 없습니다.");
+          try{
+              const url = `${SERVER_URL}search?resdate=${date}`
+              const response = await axios.post(url);
+              if(response.data) {
+                setReservationData(response.data);
+              } else {
+                  console.log("데이터가 없습니다.");
                 }
             } catch (error){
                 console.error("예약 조회 에러:", error);
@@ -44,12 +44,11 @@ const ReservationStatusViewer = ({date, ground, onHourSelected}) => {
         };
         fetchData();
     }, [date]);
-  }
 
-  ReservationView({date});
+  // ReservationView({date});
+
   console.log("reservationData: ", reservationData);
   const hours = Array.from({length: 10}, (_, i) => i + 9);
-
   return (
     // 예약중인 시간대 보여주는 ScrollView
     <ScrollView style={{ flex:1, marginTop:3 }}>

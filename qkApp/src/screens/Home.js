@@ -1,22 +1,19 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { useIsFocused } from "@react-navigation/native";
-import {View, Text, StyleSheet, Pressable, SafeAreaView, BackHandler} from "react-native";
+import { Alert, View, Text, StyleSheet, Pressable, SafeAreaView, ScrollView, BackHandler} from "react-native";
+import { useIsFocused, useFocusEffect } from "@react-navigation/native";
 import GeneralHeader from "../component/GeneralHeader";
-import { useFocusEffect } from "@react-navigation/native";
 import { useStdData } from "../component/StdLoginContext";
 import TodayComponent from "../component/TodayCompnent";
-import useMyReservation from "../component/MyReservation";
-import { ScrollView } from "react-native";
+import useMyReservation from "../component/useMyReservation";
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
 function Home ({ navigation }) {
   const isFocused = useIsFocused();
-  const { stdId } = useStdData();
   // const today = '2024-05-01';
   const [today, setToday] = useState(TodayComponent());
 
   const { reservationData, fetchReservationData } = useMyReservation();
-  const { stdName, setStdName, teamName, setTeamName } = useStdData();
+  const { stdId, setStdId, stdName, setStdName, teamName, setTeamName } = useStdData();
 
   useEffect(() => {
     if (isFocused) {
@@ -45,14 +42,20 @@ function Home ({ navigation }) {
 
   // 로그아웃 버튼 클릭시 ContextApi 에 저장된 사용자 이름, 네비게이터 초기화
   const logoutHandler = () => {
-    setStdName(null);
-    setTeamName(null);
-    console.log("로그아웃: ",stdName, teamName);
-    navigation.reset({
-      index: 0,
-      routes: [{ name: 'Login' }],
-    });
-  }
+    Alert.alert("","로그아웃 하시겠습니까?",
+    [{text: "네", onPress: () =>{ 
+      setStdName(null);
+      setTeamName(null);
+      setStdId(null);
+      console.log("로그아웃: ",stdName, teamName)
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'Login' }],
+      });
+    },},
+    {text: "아니요"}
+  ]);
+};
 
   return (
     <SafeAreaView style={GeneralHeader.container}>
@@ -118,17 +121,18 @@ const styles = StyleSheet.create({
     justifyContent:"space-around",
     alignItems: "center"
 },
-    userInfoText: {
-      margin: 10,
-      fontSize: 22,
-      fontWeight: "bold",
-      color: "white",
-    },
-    outButton: {
-      backgroundColor: "#ffa600",
-      borderRadius: 10,
-      padding: 10,
-    },
+  userInfoText: {
+    margin: 10,
+    fontSize: 22,
+    fontWeight: "bold",
+    color: "white",
+},
+  outButton: {
+    backgroundColor: "#ffa600",
+    borderRadius: 10,
+    padding: 10,
+    marginRight: 10,
+},
   reserveBoard: {
     flex:3,
     flexDirection: "row",

@@ -7,16 +7,25 @@ import ReservationStatusViewer from "../../component/ReservationStatusViewer";
 import GeneralHeader from "../../component/GeneralHeader";
 
 
-const useground = [
+const futsalGround = [
   { label: '동쪽구장', value: 'east' },
   { label: '서쪽구장', value: 'west' },
 ];
 
-function ReservationSelect({ navigation }) {
+const footballGround = [
+  { label: '잔디구장', value: 'east' },
+  { label: '마사토구장', value: 'west'}
+]
+
+function ReservationSelect({ navigation, route }) {
   const today = TodayComponent();
   const [selectedDate, setSelectedDate] = useState(today);
   const [selectedGround, setSelectedGround] = useState("");
-  const [selectedHour, setSelectedHour] = useState(null);
+  const [selectedHour, setSelectedHour] = useState(9);
+
+  // 풋살 = 0, 축구 = 1
+  const selectedSport = route.params;
+  console.log("selectedSport: ", selectedSport);
 
   return (
     <SafeAreaView style={GeneralHeader.container}>
@@ -27,7 +36,7 @@ function ReservationSelect({ navigation }) {
         <DropdownComponent
           label={"구장"}
           holder={"구장을 선택해주세요."}
-          data={useground}
+          data={selectedSport === 0 ? futsalGround : footballGround}
           onValueChange={(value) => {
             setSelectedGround(value);
             console.log("selected ground", value);
@@ -41,14 +50,14 @@ function ReservationSelect({ navigation }) {
       </View>
       {/* 예약 가능 여부 표시창 */}
       <View style={styles.selectTime}>
-          <ReservationStatusViewer date={selectedDate} ground={selectedGround} onHourSelected={setSelectedHour}/>
+          <ReservationStatusViewer date={selectedDate} ground={selectedGround} onHourSelected={setSelectedHour} selectedSport={selectedSport}/>
       </View>
       <View style={{flex: 1}}>
         <Pressable
           style={({ pressed }) => [
             {opacity: pressed ? 0.3 : 1},
             styles.reserveButton]}
-          onPress={() => navigation.navigate('ReservationReport', {selectedDate, selectedGround, selectedHour})}
+          onPress={() => navigation.navigate('ReservationReport', {selectedDate, selectedGround, selectedHour, selectedSport})}
         >
           <Text style={styles.reserveButtonText}>신청서 작성</Text>
         </Pressable>

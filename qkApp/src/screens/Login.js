@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, Image, TextInput, Pressable } from 'react-native';
+import { View, Text, StyleSheet, Image, TextInput, Pressable, Alert } from 'react-native';
 import Logo from "../img/inuLogo.png";
 import { LoginTestComponent } from "../component/LoginTestComponent";
 import { useStdData } from "../component/StdLoginContext";
@@ -22,7 +22,7 @@ function Login ({ navigation }) {
       try{
         // id, pw 입력값 존재여부 확인
         if (credential.ID === "" || credential.PW === "") {
-            alert("아이디, 비밀번호를 입력해주세요");
+            Alert.alert("경고!","아이디, 비밀번호를 모두 입력해주세요",[{text: "알겠습니다"}]);
             return;
         }
         // loginResult 에 LoginTestComponent 에서 나온 return 값을 저장
@@ -44,11 +44,11 @@ function Login ({ navigation }) {
               // 전역으로 ContextApi 사용할 수 있으므로 params 사용하지 않고 전역으로 사용
           });
         } else {
-            alert("로그인 실패");
+            Alert.alert("로그인 실패","아이디, 비밀번호를 확인해주세요!",[{text: "알겠습니다"}]);
         }
       } catch (error) {
         console.error("로그인 에러:", error);
-        alert("로그인 에러")
+        Alert.alert('error',"로그인 에러 발생")
       }
     }
 

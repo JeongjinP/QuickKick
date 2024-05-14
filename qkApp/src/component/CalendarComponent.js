@@ -1,6 +1,8 @@
 import React, { useState }  from "react";
+import { Alert } from "react-native";
 import { Calendar, LocaleConfig } from "react-native-calendars";
 import TodayComponent from "./TodayCompnent";
+import e from "cors";
 
 // react-native-calendars 라이브러리를 사용해 달력 컴포넌트 구성
 // https://github.com/wix/react-native-calendars
@@ -33,10 +35,15 @@ function CalendarComponent( {onDateSelected }) {
     <Calendar
         // useState 사용해서 터치하면 날짜 선택
         onDayPress={(day) => {
+          if (day.dateString < today) {
+            Alert.alert("날짜 선택 오류", "오늘 이전의 날짜를 선택할 수 없습니다!", [{text: "알겠습니다"}]);
+            setSelectedDate(today);
+            onDateSelected(today);
+          }
+          else{
             setSelectedDate(day.dateString);
             onDateSelected(day.dateString);
-            console.log("selected day", selectedDate);
-
+          }
         }}
         onMonthChange={(month) => {
             console.log("month changed", month);

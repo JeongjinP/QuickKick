@@ -1,52 +1,50 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, SafeAreaView, TextInput, Pressable } from "react-native";
+import { View, Text, StyleSheet, SafeAreaView, TextInput, Pressable, Alert } from "react-native";
 import GeneralHeader from "../../component/GeneralHeader";
 import { useStdData } from "../../component/StdLoginContext";
 import axios from "axios";
-// import { Picker } from "@react-native-picker/picker";
 
-
-// 신청자명, 건물명, 전화번호, 운동장, 이메일, 신청일자, 소속(단과대), 사용인원, 예약시간,
-// 사용목적(입력), 사용내용(입력)
+// selectedSport 0 === 풋살, 1 === 축구
+// 풋살 east, west = 동쪽 서쪽구장, 축구 east = 잔디구장, west = 마사토구장
 
 function ReservationReport ({ navigation, route }) {
   const { stdName, teamName, stdId } = useStdData();
   const { selectedDate, selectedGround, selectedHour } = route.params;
-
+  const selectedSport = route.params.selectedSport;
   const [useTime, setUseTime] = useState('');
+  let groundName;
+  if (selectedSport === 0) {
+    groundName = { east: '동쪽구장', west: '서쪽구장' };
+  } else {
+    groundName = { east: '잔디구장', west: '마사토구장' };
+  }
 
-  const groundName = {
-    'east': '동쪽구장',
-    'west': '서쪽구장',
-  };
+  // console.log("date: ",selectedDate);
+  // console.log("ground: ", selectedGround);
+  // console.log("sport: ", selectedSport);
 
-  console.log("date: ",selectedDate);
-  console.log("ground: ", selectedGround);
-
+  // 서버로 post요청 하는 부분
   const SERVER_URL = "http://localhost:8080/Reservation/";
-
   const ReportData = async () => {
-    const url = `${SERVER_URL}save?resdate=${selectedDate}&restime=${selectedHour}&usetime=${useTime}&groundtype=1&useground=${selectedGround}&responsibility=${stdId}`;
+    const url = `${SERVER_URL}save?resdate=${selectedDate}&restime=${selectedHour}&usetime=${useTime}&groundtype=${selectedSport}&useground=${selectedGround}&responsibility=${stdId}`;
+  
     try {
-      const response = await fetch(url, {
-        method: 'POST',
-      });
-      if (!response.ok) {
+      const response = await axios.post(url);
+  
+      if (response.status !== 200) {
         throw new Error('HTTP error ' + response.status);
       }
-      alert('예약이 성공적으로 완료되었습니다.');
+      Alert.alert('예약 완료', '예약이 성공적으로 완료되었습니다!', [{ text: '좋아요!' }]);
     } catch (error) {
-      console.error('There was an error!', error);
+      console.error('오류가 발생했습니다', error);
     }
   };
-
 
   return (
     <SafeAreaView style={GeneralHeader.container}>
       <View style={GeneralHeader.header}>
         <Text style={GeneralHeader.title}>예약 서류 작성</Text>
       </View>
-
 
       <View style={styles.reportBox}>
         <Text>신청자명: </Text>

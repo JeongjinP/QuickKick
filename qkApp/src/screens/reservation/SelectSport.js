@@ -12,16 +12,17 @@ function SelectSport ({ navigation }) {
         style={({ pressed }) => [
           {opacity: pressed ? 0.3 : 1},
           styles.board]}
-        onPress={() => {navigation.navigate('ReservationSelect')}}
+        onPress={() => {navigation.navigate('ReservationSelect',1)}}
       >
         <Text style={styles.Text}>축구</Text>
       </Pressable>
+
       <Pressable
         style={({ pressed }) => [
           {opacity: pressed ? 0.3 : 1},
           styles.board, {marginTop: 0}]}
 
-        onPress={() => {navigation.navigate('ReservationSelect')}}
+        onPress={() => {navigation.navigate('ReservationSelect',0)}}
       >
         <Text style={styles.Text}>풋살</Text>
       </Pressable>

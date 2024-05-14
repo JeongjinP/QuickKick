@@ -21,11 +21,13 @@ const ReservationBox = ({time, isReserved, isSelected}) => {
   );
 }
 
-const ReservationStatusViewer = ({date, ground, onHourSelected}) => {
+const ReservationStatusViewer = ({date, ground, onHourSelected, selectedSport}) => {
   const [reservationData, setReservationData] = useState([]);
   const [selectedHour, setSelectedHour] = useState(null);
+  console.log("스테이터스뷰어 : ", date, ground, selectedSport);
 
-
+  // 종목 선택에 따라 예약을 보기 위한 groundType 설정 (풋살 = false, 축구 = true)
+  const groundType = selectedSport === 0 ? false : true;
     const SERVER_URL = "http://localhost:8080/Reservation/";
 
     useEffect(() => {
@@ -56,7 +58,7 @@ const ReservationStatusViewer = ({date, ground, onHourSelected}) => {
         const isReserved = reservationData.some(reservation => {
           const reservationStart = parseInt(reservation.restime.split(":")[2]);
           const reservationEnd = reservationStart + reservation.usetime;
-          return hour >= reservationStart && hour < reservationEnd && reservation.useground === ground;
+          return hour >= reservationStart && hour < reservationEnd && reservation.useground === ground && reservation.groundtype === groundType;
         });
         const isSelected = hour === selectedHour;
         return (

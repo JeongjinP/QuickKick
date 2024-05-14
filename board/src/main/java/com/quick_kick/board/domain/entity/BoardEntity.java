@@ -9,14 +9,16 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import com.quick_kick.board.domain.entity.TimeEntity;
+
 @Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 
-public class Board extends TimeEntity {
+public class BoardEntity extends TimeEntity {
 
     @Id @GeneratedValue
-    private long id;
+    private Long id;
 
     @Column(length=10,nullable = false)
     private String writer;
@@ -28,7 +30,7 @@ public class Board extends TimeEntity {
     private String content;
 
     @Builder
-    public Board(long id, String title, String content, String writer){
+    public BoardEntity(long id, String title, String content, String writer){
         this.id = id;
         this.title = title;
         this.content = content;

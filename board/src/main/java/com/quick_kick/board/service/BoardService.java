@@ -1,15 +1,27 @@
 package com.quick_kick.board.service;
 
+import com.quick_kick.board.BoardApplication;
+import com.quick_kick.board.domain.entity.BoardEntity;
 import com.quick_kick.board.domain.repository.BoardRepository;
 import com.quick_kick.board.dto.BoardDto;
 
 import jakarta.transaction.Transactional;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.*;
 
 
 @Service
+@RequiredArgsConstructor
+@Getter
+@Setter
 public class BoardService {
 
+    @Autowired
     private BoardRepository boardRepository;
 
     public BoardService(BoardRepository boardRepository) {
@@ -17,43 +29,44 @@ public class BoardService {
     }
 
     @Transactional
-    public void savePost(BoardDto boardDto) {
+    public BoardDto savePost(BoardDto boardDto) {
         boardRepository.save(boardDto.toEntity()).getId();
+        return boardDto;
+    }
 
-
-
-    @Transactional
-    public List<BoardDto> getBoardlist() {
-        List<Board> boards = boardRepository.findAll();
+    public List<BoardDto> getBoardlist(BoardDto boardDto) {
+        List<BoardEntity> boards = boardRepository.findAll();
         List<BoardDto> boardDtoList = new ArrayList<>();
 
-        for(Board board : boards){
-            BoardDto boardDto = BoardDto.builder()
+        for(BoardEntity board : boards){
+            BoardDto boardDtos = BoardDto.builder()
                     .id(board.getId())
                     .title(board.getTitle())
                     .content(board.getContent())
                     .writer(board.getWriter())
-                    .createdDate(board.getCreatedDate())
+                    .createDate(board.getCreateDate())
                     .build();
 
-            boardDtoList.add(boardDto);
+            boardDtoList.add(boardDtos);
         }
 
         return boardDtoList;
     }
     @Transactional
     public BoardDto getPost(Long id){
-        Optional<board> boardWrapper = boardRepository.findById(id);
-        Board board = boardWrapper.get();
+        Optional<BoardEntity> boardWrapper = boardRepository.findById(id);
+        if (boardWrapper.isEmpty()) {
+            throw new NoSuchElementException("게시물을 찾을 수 없습니다.");
+        }
+        BoardEntity board = boardWrapper.get();
 
         BoardDto boardDto = BoardDto.builder()
                 .id(board.getId())
                 .title(board.getTitle())
                 .content(board.getContent())
                 .writer(board.getWriter())
-                .createdDate(board.getCreatedDate())
+                .createDate(board.getCreateDate())
                 .build();
-
         return boardDto;
-        }
+    }
 }

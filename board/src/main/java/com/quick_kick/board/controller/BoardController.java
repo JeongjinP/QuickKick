@@ -1,10 +1,12 @@
 package com.quick_kick.board.controller;
 
+import ch.qos.logback.core.model.Model;
 import com.quick_kick.board.service.BoardService;
 import com.quick_kick.board.dto.BoardDto;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @Controller
@@ -16,34 +18,24 @@ public class BoardController {
         this.boardService = boardService;
     }
 
-    @GetMapping("/")
-    public String list(Model model) {
-
-        List<BoardDto> boardDtoList = boarDtoList = boardService.getBoardlist();
-        model.addAttribute("boardList",boardDtoList);
-        return "board/list.html";
-    }
-
-    @GetMapping("/post")
-    public String write(){
-        return "board/write.html";
+    @GetMapping("/boardlist")
+    @ResponseBody
+    public List<BoardDto> show(@ModelAttribute BoardDto boardDto) {
+        List<BoardDto> showResult = boardService.getBoardlist(boardDto);
+        return showResult;
     }
 
     @PostMapping("/post")
     public String write(BoardDto boardDto){
         boardService.savePost(boardDto);
-        return "redirect:/";
-
+        return "redirect:/boardlist";
     }
 
-    @GetMapping("/post/{no}")
-    public String detail(@PathVariable("no") Long id, Model model){
+    @GetMapping("/post/{id}")
+    @ResponseBody
+    public BoardDto detail(@PathVariable Long id){
         BoardDto boardDto = boardService.getPost(id);
-
-        model.addAttruibute("boardDto",boardDto);
-        return "board/detail.html";
-
-
+        return boardDto;
     }
 
 }

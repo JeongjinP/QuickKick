@@ -9,7 +9,7 @@
 </head>
 <body>
 <!-- header 추가 -->
-<div th:insert="common/header.html" id="header"></div>
+<div th:insert="~{common/header.html}" id="header"></div>
 
 <div id="wrap">
     <a th:href="@{/post}">글쓰기</a>
@@ -61,6 +61,6 @@
 </div>
 
 <!-- footer 추가 -->
-<div th:insert="common/footer.html" id="footer"></div>
+<div th:insert="~{common/footer.html}" id="footer"></div>
 </body>
 </html>

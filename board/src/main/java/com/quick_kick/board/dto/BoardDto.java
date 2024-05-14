@@ -1,6 +1,6 @@
 package com.quick_kick.board.dto;
 
-import com.quick_kick.board.domain.entity.Board;
+import com.quick_kick.board.domain.entity.BoardEntity;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -18,8 +18,8 @@ public class BoardDto {
     private LocalDateTime createDate;
     private LocalDateTime modifiedDate;
 
-    public Board toEntity(){
-        Board build = Board.builder()
+    public BoardEntity toEntity(){
+        BoardEntity build = BoardEntity.builder()
                 .id(id)
                 .writer(writer)
                 .title(title)

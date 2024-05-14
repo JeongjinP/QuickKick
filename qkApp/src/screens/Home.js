@@ -11,10 +11,18 @@ function Home ({ navigation }) {
   const isFocused = useIsFocused();
   // const today = '2024-05-01';
   const [today, setToday] = useState(TodayComponent());
-
   const { reservationData, fetchReservationData } = useMyReservation();
   const { stdId, setStdId, stdName, setStdName, teamName, setTeamName } = useStdData();
+  const [noReservation, setNoReservation] = useState(null);
 
+  useEffect(() => {
+    if (reservationData === null || reservationData.length === 0) {
+      setNoReservation(true);
+    } else {
+      setNoReservation(false);
+    }
+  }, [reservationData]);
+  
   useEffect(() => {
     if (isFocused) {
       setToday(TodayComponent());
@@ -57,6 +65,23 @@ function Home ({ navigation }) {
   ]);
 };
 
+// 예약창 스타일 예약상태 참조용으로 뺌 (noReservation) 참조하려면 빼야함
+const getReserveBoardStyle = (noReservation) => ({
+  flex:3,
+  flexDirection: "row",
+  justifyContent: "center",
+  alignItems: noReservation ? "center" : "start",
+  backgroundColor: "white",
+  margin: 20,
+  marginTop: 0,
+  marginBottom: 10,
+  padding: 5,
+  paddingHorizontal: 10,
+  borderColor: "#0A4A9B",
+  borderWidth: 1,
+});
+
+
   return (
     <SafeAreaView style={GeneralHeader.container}>
       <View style={GeneralHeader.header}>
@@ -83,7 +108,7 @@ function Home ({ navigation }) {
         </Pressable>
       </View>
 
-      <View style={styles.reserveBoard}>
+      <View style={getReserveBoardStyle(noReservation)}>
         <ScrollView>
           {reservationData === null || reservationData.length === 0 ? (
             <View style={{alignItems: 'center'}}>
@@ -133,21 +158,20 @@ const styles = StyleSheet.create({
     padding: 10,
     marginRight: 10,
 },
-  reserveBoard: {
-    flex:3,
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "start",
-    backgroundColor: "white",
-    margin: 20,
-    marginTop: 0,
-    marginBottom: 10,
-    padding: 5,
-    paddingHorizontal: 10,
-    borderColor: "#0A4A9B",
-    borderWidth: 1,
-
-},  
+  // reserveBoard: {
+  //   flex:3,
+  //   flexDirection: "row",
+  //   justifyContent: "center",
+  //   alignItems: noReservation ? "center" : "start",
+  //   backgroundColor: "white",
+  //   margin: 20,
+  //   marginTop: 0,
+  //   marginBottom: 10,
+  //   padding: 5,
+  //   paddingHorizontal: 10,
+  //   borderColor: "#0A4A9B",
+  //   borderWidth: 1,
+// },  
   greetingBoard: {
     flex:1,
     flexDirection: "row",
@@ -166,7 +190,6 @@ const styles = StyleSheet.create({
 },  
   outText: {
     fontSize: 16,
-    fontWeight: "",
     color: "black",
 },
   resBox: {

@@ -7,7 +7,6 @@ import TodayComponent from "../../component/TodayCompnent";
 import useMyReservation from "../../component/useMyReservation";
 
 
-
 function ReservationMain({ navigation }){
   // 예약 조회를 위한 useMyReservation 훅 사용
   // 학번 정보는 useStdData 훅을 사용하여 가져옴
@@ -35,8 +34,31 @@ function ReservationMain({ navigation }){
     groundName = (reservationData.useground === 'east' ? '잔디구장' : '마사토구장')
   }
 
-  console.log("sportType: ",sportType);
-  console.log("reservationData: ",reservationData);
+
+  // 예약 있을땐 상단 정렬, 없을땐 중앙 정렬하기 위한 코드
+  const [noReservation, setNoReservation] = useState(null);
+
+  useEffect(() => {
+    if (reservationData === null || reservationData.length === 0) {
+      setNoReservation(true);
+    } else {
+      setNoReservation(false);
+    }
+  }, [reservationData]);
+
+  const getReserveBoardStyle = (noReservation) => ({
+      flex: 6,
+      flexDirection: "row",
+      justifyContent: "center",
+      alignItems: "start",
+      marginHorizontal: 20,
+      marginVertical: 20,
+      backgroundColor: "white",
+      borderColor: "#0A4A9B",
+      borderWidth: 1,
+  });
+  // console.log("sportType: ",sportType);
+  // console.log("reservationData: ",reservationData);
 
   return (
     
@@ -52,7 +74,7 @@ function ReservationMain({ navigation }){
       >
         <Text style={styles.reserveButtonText}>예약하기</Text>
       </Pressable>
-      <View style={styles.board}>
+      <View style={getReserveBoardStyle(noReservation)}>
       <ScrollView>
         {reservationData === null || reservationData.length === 0 ? (
           <View style={{alignItems: 'center'}}>
@@ -92,18 +114,17 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "white",
   },
-  board: {
-    flex: 6,
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "start",
-    marginHorizontal: 20,
-    marginVertical: 20,
-    backgroundColor: "white",
-    borderColor: "#0A4A9B",
-    borderWidth: 1,
-    // borderRadius: 30,
-  },
+  // board: {
+  //   flex: 6,
+  //   flexDirection: "row",
+  //   justifyContent: "center",
+  //   alignItems: "start",
+  //   marginHorizontal: 20,
+  //   marginVertical: 20,
+  //   backgroundColor: "white",
+  //   borderColor: "#0A4A9B",
+  //   borderWidth: 1,
+  // },
   boardText: {
     fontSize: 18,
     fontWeight: "bold",

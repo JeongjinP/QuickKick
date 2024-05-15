@@ -29,12 +29,16 @@ public class BoardEntity extends TimeEntity {
     @Column(columnDefinition ="TEXT",nullable = false)
     private String content;
 
+    @Column
+    private String category;
+
     @Builder
-    public BoardEntity(long id, String title, String content, String writer){
+    public BoardEntity(Long id, String title, String content, String writer, String category){
         this.id = id;
         this.title = title;
         this.content = content;
         this.writer = writer;
+        this.category = category;
     }
 
 

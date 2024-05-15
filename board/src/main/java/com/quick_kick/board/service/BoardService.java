@@ -1,6 +1,5 @@
 package com.quick_kick.board.service;
 
-import com.quick_kick.board.BoardApplication;
 import com.quick_kick.board.domain.entity.BoardEntity;
 import com.quick_kick.board.domain.repository.BoardRepository;
 import com.quick_kick.board.dto.BoardDto;
@@ -24,16 +23,17 @@ public class BoardService {
     @Autowired
     private BoardRepository boardRepository;
 
+    @Autowired
     public BoardService(BoardRepository boardRepository) {
         this.boardRepository = boardRepository;
     }
-
     @Transactional
     public BoardDto savePost(BoardDto boardDto) {
         boardRepository.save(boardDto.toEntity()).getId();
         return boardDto;
     }
 
+    @Transactional
     public List<BoardDto> getBoardlist(BoardDto boardDto) {
         List<BoardEntity> boards = boardRepository.findAll();
         List<BoardDto> boardDtoList = new ArrayList<>();
@@ -45,6 +45,7 @@ public class BoardService {
                     .content(board.getContent())
                     .writer(board.getWriter())
                     .createDate(board.getCreateDate())
+                    .category(board.getCategory())
                     .build();
 
             boardDtoList.add(boardDtos);
@@ -52,13 +53,34 @@ public class BoardService {
 
         return boardDtoList;
     }
+
+    public List<BoardDto> getBoardByCategory(String Category) {
+        List<BoardEntity> boards = boardRepository.findByCategory(Category);
+        List<BoardDto> boardDtoList = new ArrayList<>();
+
+        for(BoardEntity board : boards){
+            BoardDto boardDtos = BoardDto.builder()
+                    .id(board.getId())
+                    .title(board.getTitle())
+                    .content(board.getContent())
+                    .writer(board.getWriter())
+                    .createDate(board.getCreateDate())
+                    .category(board.getCategory())
+                    .build();
+
+            boardDtoList.add(boardDtos);
+        }
+
+        return boardDtoList;
+    }
+
     @Transactional
     public BoardDto getPost(Long id){
-        Optional<BoardEntity> boardWrapper = boardRepository.findById(id);
-        if (boardWrapper.isEmpty()) {
+        Optional<BoardEntity> optionalBoardEntity = boardRepository.findById(id);
+        if (optionalBoardEntity.isEmpty()) {
             throw new NoSuchElementException("게시물을 찾을 수 없습니다.");
         }
-        BoardEntity board = boardWrapper.get();
+        BoardEntity board = optionalBoardEntity.get();
 
         BoardDto boardDto = BoardDto.builder()
                 .id(board.getId())
@@ -66,6 +88,7 @@ public class BoardService {
                 .content(board.getContent())
                 .writer(board.getWriter())
                 .createDate(board.getCreateDate())
+                .category(board.getCategory())
                 .build();
         return boardDto;
     }

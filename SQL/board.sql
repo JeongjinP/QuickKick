@@ -31,6 +31,7 @@ CREATE TABLE `board` (
   `writer` varchar(10) NOT NULL,
   `title` varchar(100) NOT NULL,
   `content` text NOT NULL,
+  `category` varchar(20),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -41,7 +42,7 @@ CREATE TABLE `board` (
 
 LOCK TABLES `board` WRITE;
 /*!40000 ALTER TABLE `board` DISABLE KEYS */;
-INSERT INTO `board` VALUES ('2024-05-14 17:31:30.771797',1,'2024-05-14 17:31:30.771797','ㅇㅇ','ㅇㅇ','ㅇㅇ');
+/*INSERT INTO `board` VALUES ('2024-05-14 17:31:30.771797',1,'2024-05-14 17:31:30.771797','ㅇㅇ','ㅇㅇ','ㅇㅇ');*/
 /*!40000 ALTER TABLE `board` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

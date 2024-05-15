@@ -31,7 +31,14 @@ public class BoardController {
         return "redirect:/boardlist";
     }
 
-    @GetMapping("/post/{id}")
+    @GetMapping("/post/category/{category}")
+    @ResponseBody
+    public List<BoardDto> ShowByCategory(@PathVariable String category){
+        List<BoardDto> ShowByCategoryResult = boardService.getBoardByCategory(category);
+        return ShowByCategoryResult;
+    }
+
+    @GetMapping("/post/id/{id}")
     @ResponseBody
     public BoardDto detail(@PathVariable Long id){
         BoardDto boardDto = boardService.getPost(id);

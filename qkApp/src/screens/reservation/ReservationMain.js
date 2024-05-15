@@ -70,7 +70,7 @@ function ReservationMain({ navigation }){
       flex: 6,
       flexDirection: "row",
       justifyContent: "center",
-      alignItems: "start",
+      alignItems: noReservation ? "center" : "start",
       marginHorizontal: 20,
       marginVertical: 20,
       backgroundColor: "white",

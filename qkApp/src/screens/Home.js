@@ -162,7 +162,7 @@ const getReserveBoardStyle = (noReservation) => ({
           ): (
             boardList.slice(0, 4).map((item, index) => (
               <View style={styles.boardPreview}>
-              <Pressable key={index} style={({ pressed }) => [
+              <Pressable style={({ pressed }) => [
                 {opacity: pressed ? 0.6 : 1},
               ]}
               onPress={() => navigation.navigate('게시판', {

@@ -6,6 +6,8 @@ import { useStdData } from "../component/StdLoginContext";
 import TodayComponent from "../component/TodayCompnent";
 import useMyReservation from "../component/useMyReservation";
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+// import ReservationStack from "../navigation/ReservationStack";
+// import ReservationMain from "./reservation/ReservationMain";
 
 function Home ({ navigation }) {
   const isFocused = useIsFocused();
@@ -116,12 +118,14 @@ const getReserveBoardStyle = (noReservation) => ({
             </View>
           ) : (
             reservationData.map((item, index) => (
-              <View key={index} style={styles.resBox}>
+              <Pressable key={index} style={({ pressed }) => [
+                {opacity: pressed ? 0.6 : 1},
+                styles.resBox]}
+                onPress={() => navigation.navigate('예약', { screen:'ReservationMain' })}>
                 <Text style={styles.outText}>예약 일자: <Text style={styles.boardText}>{item.resdate}</Text></Text>
                 <Text style={styles.outText}>예약 시간: <Text style={styles.boardText}>{item.restime.slice(-2)}:00</Text></Text>
                 <Text style={styles.outText}>이용 시간: <Text style={styles.boardText}>{item.usetime}시간</Text></Text>
-                <Text style={styles.outText}>사용 구장: <Text style={styles.boardText}>{item.useground === 'east' ? ('동쪽구장') : ('서쪽구장')}</Text></Text>
-              </View>
+              </Pressable>
               ))
           )}
         </ScrollView>

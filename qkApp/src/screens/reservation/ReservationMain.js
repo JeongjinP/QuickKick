@@ -25,15 +25,35 @@ function ReservationMain({ navigation }){
       fetchReservationData(stdId, today);
     }
   }, [isFocused]);
-  
-  const sportType = (reservationData.groundtype === 0 ? '풋살' : '축구');
-  let groundName;
-  if (reservationData.groundtype === true) {
-    groundName = (reservationData.useground === 'east' ? '동쪽구장' : '서쪽구장');
-  } else {
-    groundName = (reservationData.useground === 'east' ? '잔디구장' : '마사토구장')
-  }
 
+  // console.log("reservationData: ",reservationData.useground);
+  // const sportType = (reservationData.groundtype === 0 ? '풋살' : '축구');
+  // let groundName;
+  // if (reservationData.groundtype === false) {
+  //   groundName = (reservationData.useground === 'east' ? '동쪽구장' : '서쪽구장');
+  // } else {
+  //   groundName = (reservationData.useground === "east" ? '잔디구장' : '마사토구장')
+  // }
+
+  const renderReservation = (item, index) => {
+    const sportType = (item.groundtype === 0 ? '풋살' : '축구');
+    let groundName;
+    if (item.groundtype === false) {
+      groundName = (item.useground === 'east' ? '동쪽구장' : '서쪽구장');
+    } else {
+      groundName = (item.useground === "east" ? '잔디구장' : '마사토구장')
+    }
+  
+    return (
+      <View key={index} style={styles.resBox}>
+        <Text style={styles.outText}>예약 일자: <Text style={styles.boardText}>{item.resdate}</Text></Text>
+        <Text style={styles.outText}>예약 시간: <Text style={styles.boardText}>{item.restime.slice(-2)}:00</Text></Text>
+        <Text style={styles.outText}>이용 시간: <Text style={styles.boardText}>{item.usetime}시간</Text></Text>
+        <Text style={styles.outText}>선택 종목: <Text style={styles.boardText}>{sportType}</Text></Text>
+        <Text style={styles.outText}>사용 구장: <Text style={styles.boardText}>{groundName}</Text></Text>
+      </View>
+    )
+  }
 
   // 예약 있을땐 상단 정렬, 없을땐 중앙 정렬하기 위한 코드
   const [noReservation, setNoReservation] = useState(null);
@@ -81,15 +101,7 @@ function ReservationMain({ navigation }){
             <Text style={styles.boardText}>예약 내역이 없습니다</Text>
           </View>
         ) : (
-          reservationData.map((item, index) => (
-            <View key={index} style={styles.resBox}>
-              <Text style={styles.outText}>예약 일자: <Text style={styles.boardText}>{item.resdate}</Text></Text>
-              <Text style={styles.outText}>예약 시간: <Text style={styles.boardText}>{item.restime.slice(-2)}:00</Text></Text>
-              <Text style={styles.outText}>이용 시간: <Text style={styles.boardText}>{item.usetime}시간</Text></Text>
-              <Text style={styles.outText}>선택 종목: <Text style={styles.boardText}>{sportType}</Text></Text>
-              <Text style={styles.outText}>사용 구장: <Text style={styles.boardText}>{groundName}</Text></Text>
-            </View>
-            ))
+          reservationData.map(renderReservation)
         )}
       </ScrollView>
       </View>

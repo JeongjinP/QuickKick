@@ -1,35 +1,36 @@
 import React  from "react";
-import {View, Text, StyleSheet, ScrollView, SafeAreaView, Pressable} from "react-native";
+import {View, Text, StyleSheet, ScrollView, SafeAreaView, Pressable, FlatList} from "react-native";
 import GeneralHeader from "../../component/GeneralHeader";
-import BoardHeader from "./BoardHeader";
+import PostHeader from "./PostHeader";
 
 // 페이지 디자인 할 예정
 function PostPage({ navigation, route }) {
+  const { id, title, content, writer, tag, time } = route.params;
+  const date = new Date(time);
+  const formattedTime = `${date.getMonth() + 1}/${date.getDate()} ${date.getHours()}:${date.getMinutes() < 10 ? '0' : ''}${date.getMinutes()}`;
+  console.log("PostPage: ", id, title, content, writer, tag, formattedTime);
+  const data = [{id, title, content, writer, tag, formattedTime}]
   return (
     <SafeAreaView style={GeneralHeader.container}>
-      {/*게시판 이라는 헤더 보여줄지 말지 회의해서 결정하기*/}
-      <View>
-        <Pressable
-          style={({ pressed }) => [
-            {opacity: pressed ? 0.3 : 1},
-            styles.backButton]}
-          onPress={() => navigation.goBack()}
-        >
-          <Text style={styles.backButtonText}>back</Text>
-        </Pressable>
-
-      </View>
-      <ScrollView
-        overScrollMode={'always'}>
-        {/*// style={styles.container}>*/}
-        <View style={styles.titleBox}>
-          <Text style={styles.title}>{route.params.title}</Text>
-          <View style={{justifyContent: 'flex-end'}}>
-            <Text style={styles.tag}>[{route.params.tag}]</Text>
+      <FlatList
+        ListHeaderComponent={PostHeader}
+        data={data}
+        renderItem={({ item }) => (
+          <View>
+            <View style={styles.titleBox}>
+              <View style={{flexDirection:"column"}}>
+                <Text style={styles.writerName}>작성자: {item.writer}</Text>
+                
+                <Text style={styles.writerName}>{item.formattedTime}</Text>
+              </View>
+              <Text style={styles.tag}>[{item.tag}]</Text>
+            </View>
+            <Text style={styles.title}>{item.title}</Text>
+            <Text style={styles.content}>{item.content}</Text>
           </View>
-        </View>
-        <Text style={styles.content}>{route.params.content}</Text>
-      </ScrollView>
+        )}
+        keyExtractor={item => item.id.toString()}
+      />
     </SafeAreaView>
   )
 }
@@ -37,17 +38,6 @@ function PostPage({ navigation, route }) {
 export default PostPage;
 
 const styles = StyleSheet.create({
-    backButton: {
-      justifyContent: "center",
-      alignItems: "flex-start",
-      marginHorizontal: 20,
-      marginVertical:0,
-    },
-    backButtonText: {
-      color: "black",
-      fontSize: 16,
-      fontWeight: "bold",
-    },
     titleBox: {
       flexDirection: 'row',
       justifyContent: 'space-between',
@@ -69,11 +59,17 @@ const styles = StyleSheet.create({
       color: "gray",
       fontSize: 16,
     },
+    writerName: {
+      marginHorizontal: 20,
+      marginBottom: 5,
+      color: "gray",
+      fontSize: 16,
+    },
     content: {
       color: "black",
       fontSize: 18,
       marginHorizontal: 30,
       marginVertical: 20,
-    }
+    },
 
 })

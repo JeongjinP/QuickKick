@@ -21,6 +21,7 @@ function BoardSection({ title, content, writer, time, tag }) {
       <View style={styles.footer}>
         <Text style={styles.info}>{writer} |</Text>
         <Text style={styles.info}>{timeDifference}</Text>
+        
       </View>
     </View>
   )

@@ -30,6 +30,7 @@
     "react-native": "^0.74.1",
     "react-native-calendars": "^1.1303.0",
     "react-native-crypto": "^2.2.0",
+    "react-native-debounce-input": "^1.0.5",
     "react-native-element-dropdown": "^2.10.1",
     "react-native-gesture-handler": "~2.16.1",
     "react-native-randombytes": "^3.6.1",

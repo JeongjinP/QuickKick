@@ -6,8 +6,21 @@ import { useStdData } from "../component/StdLoginContext";
 import TodayComponent from "../component/TodayCompnent";
 import useMyReservation from "../component/useMyReservation";
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import axios from "axios";
 // import ReservationStack from "../navigation/ReservationStack";
 // import ReservationMain from "./reservation/ReservationMain";
+
+async function getBoardList() {
+  try {
+    const response = await axios.get("http://localhost:8070/boardlist");
+    console.log("게시글 조회 결과:", response.data);
+    const sortedData = response.data.sort((a, b) => new Date(b.createDate) - new Date(a.createDate));
+    return sortedData;
+  } catch (error) {
+    console.error("게시글 조회 에러:", error);  
+  } 
+}
+
 
 function Home ({ navigation }) {
   const isFocused = useIsFocused();
@@ -16,6 +29,15 @@ function Home ({ navigation }) {
   const { reservationData, fetchReservationData } = useMyReservation();
   const { stdId, setStdId, stdName, setStdName, teamName, setTeamName } = useStdData();
   const [noReservation, setNoReservation] = useState(null);
+  const [boardList, setBoardList] = useState([]);
+
+
+  // 게시판 표시용 데이터 가져오기
+  useEffect(() => {
+    if (isFocused) {
+      getBoardList().then((data) => setBoardList(data));
+    }
+  }, [isFocused])
 
   useEffect(() => {
     if (reservationData === null || reservationData.length === 0) {
@@ -131,10 +153,30 @@ const getReserveBoardStyle = (noReservation) => ({
         </ScrollView>
       </View>
 
-      <View style={styles.greetingBoard}>
-        <Text style={styles.boardText}>게시판 글 표시</Text>
+      <View style={styles.postBoard}>
+      <ScrollView>
+          {boardList === null || boardList.length === 0 ? (
+            <View style={{alignItems: 'center', justifyContent:'center'}}>
+              <Text style={styles.boardText}>게시글 내역이 없습니다</Text>
+            </View>
+          ): (
+            boardList.slice(0, 4).map((item, index) => (
+              <View style={styles.boardPreview}>
+              <Pressable key={index} style={({ pressed }) => [
+                {opacity: pressed ? 0.6 : 1},
+              ]}
+              onPress={() => navigation.navigate('게시판', {
+                screen: 'PostPage',
+                params: {id: item.id, title: item.title, content: item.content, writer: item.writer, tag: item.category, time: item.createDate}})}>             
+                <Text style={styles.boardPreviewText} numberOfLines={1} ellipsizeMode='tail'>‣  {item.title}</Text>          
+              </Pressable>
+          </View>
+          ))
+        )}
+        </ScrollView>
       </View>
-    </SafeAreaView>);
+    </SafeAreaView>
+  );
 }
 
 export default Home;
@@ -176,8 +218,8 @@ const styles = StyleSheet.create({
   //   borderColor: "#0A4A9B",
   //   borderWidth: 1,
 // },  
-  greetingBoard: {
-    flex:1,
+  postBoard: {
+    flex:2,
     flexDirection: "row",
     backgroundColor: "white",
     margin: 20,
@@ -208,6 +250,27 @@ const styles = StyleSheet.create({
     borderColor: "#0A4A9B",
     borderWidth: 1,
     borderRadius: 5,
-}
+},
+  boardPreview: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    padding: 5,
+    borderColor: "#0A4A9B",
+    borderBottomWidth: 1,
+    borderRadius: 5,
+    backgroundColor: "white",
+    // marginHorizontal: 20,
+    marginVertical: 5,
+    paddingHorizontal: 10,
+
+    borderRadius: 5,
+  },  
+  boardPreviewText: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#0A4A9B",
+},  
   }
 )

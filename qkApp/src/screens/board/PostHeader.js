@@ -12,7 +12,7 @@ function PostHeader() {
         <Pressable         
           style={({ pressed }) => (
           {opacity: pressed ? 0.3 : 1})}
-          onPress={() => navigation.goBack()}>
+          onPress={() => navigation.navigate('BoardMain')}>
             <Ionicons name="chevron-back" size={24} color="#0a4a9b" style={{marginLeft:15}}/>       
         </Pressable>
       </View>
@@ -30,7 +30,7 @@ export default PostHeader;
 
 const styles = StyleSheet.create({
   header: {
-    flex:1,
+    // flex:1,
     flexDirection: "row",
     // justifyContent: "center",
     // alignItems: "center",

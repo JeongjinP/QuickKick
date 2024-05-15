@@ -18,9 +18,13 @@ async function getBoardList() {
     console.error("게시글 조회 에러:", error);  } 
 }
 
+
+// 게시판 메인 화면
 function BoardMain({ navigation }) {
   const isFocused = useIsFocused();
   const [boardList, setBoardList] = useState([]);
+  const [filteredBoardList, setFilteredBoardList] = useState([]); // 필터링된 게시글 목록을 저장하기 위한 state
+  const [selectedTag, setSelectedTag] = useState(''); // BoardHeader에서 선택한 태그를 저장하기 위한 state
 
   useEffect(() => {
     if (isFocused) {
@@ -28,20 +32,28 @@ function BoardMain({ navigation }) {
     }
   }, [isFocused])
 
+  useEffect(() => {
+    if (selectedTag === '') {
+      setFilteredBoardList(boardList); // 선택된 태그가 없으면 모든 게시글을 보여줌
+    } else {
+      setFilteredBoardList(boardList.filter(item => item.category === selectedTag)); // 선택된 태그와 일치하는 게시글만 필터링
+    }
+  }, [selectedTag, boardList]) // selectedTag 또는 boardList가 변경될 때마다 필터링 수행
+
 
   return (
     <SafeAreaView style={[GeneralHeader.container]}>
     <FlatList
-      ListHeaderComponent={BoardHeader}
-      data={boardList}
+      ListHeaderComponent={<BoardHeader selectedTag={selectedTag} setSelectedTag={setSelectedTag}/>}
+      data={filteredBoardList}
       keyExtractor={(item) => item.id.toString()}
       renderItem={({item}) => {
-        const {id, writer, title, content, tag, createDate} = item;
+        const {id, writer, title, content, category, createDate} = item;
         return (
           <Pressable
             onPress={() => navigation.navigate('PostPage',
-              {id: id, title: title, content: content, writer: writer, tag: tag, time: createDate})}>
-            <BoardSection title={title} content={content} writer={writer} time={createDate} tag={tag}/>
+              {id: id, title: title, content: content, writer: writer, tag: category, time: createDate})}>
+            <BoardSection title={title} content={content} writer={writer} time={createDate} tag={category}/>
           </Pressable>
         )
       }}

@@ -4,8 +4,8 @@ import { Dropdown } from 'react-native-element-dropdown';
 import AntDesign from '@expo/vector-icons/AntDesign';
 
 
-const DropdownComponent = ({data, label, holder, onValueChange}) => {
-  const [value, setValue] = useState("");
+const DropdownComponent = ({ data, label, holder, onValueChange, defaultValue }) => {
+  const [value, setValue] = useState(defaultValue || "");
   const [isFocus, setIsFocus] = useState(false);
 
   const renderLabel = () => {
@@ -18,7 +18,8 @@ const DropdownComponent = ({data, label, holder, onValueChange}) => {
     }
     return null;
   };
-
+// 인천대학교 축제 기간동안 운동장 예약이 제한됩니다.
+// 이용에 참고 바랍니다.
   return (
     <View style={styles.container}>
       {renderLabel()}

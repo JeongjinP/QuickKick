@@ -2,13 +2,27 @@ import React  from "react";
 import {View, Text, StyleSheet, ScrollView, SafeAreaView, Pressable, FlatList} from "react-native";
 import GeneralHeader from "../../component/GeneralHeader";
 import PostHeader from "./PostHeader";
+import axios from "axios";
+
 
 // 페이지 디자인 할 예정
 function PostPage({ navigation, route }) {
   const { id, title, content, writer, tag, time } = route.params;
+
+  async function getPost(id) {
+    try {
+      const response = await axios.get(`http://localhost:8070/post/id/${id}`);
+      console.log("게시글 조회 결과:", response.data);
+      return response.data;
+    } catch (error) {
+      console.error("게시글 조회 에러:", error);
+    }
+  }
+  getPost(id);
+
+  // 날짜정보 포맷 변경
   const date = new Date(time);
-  const formattedTime = `${date.getMonth() + 1}/${date.getDate()} ${date.getHours()}:${date.getMinutes() < 10 ? '0' : ''}${date.getMinutes()}`;
-  console.log("PostPage: ", id, title, content, writer, tag, formattedTime);
+  const formattedTime = `${date.getMonth() + 1 < 10 ? '0' : ''}${date.getMonth() + 1}/${date.getDate()} ${date.getHours()}:${date.getMinutes() < 10 ? '0' : ''}${date.getMinutes()}`;  console.log("PostPage: ", id, title, content, writer, tag, formattedTime);
   const data = [{id, title, content, writer, tag, formattedTime}]
   return (
     <SafeAreaView style={GeneralHeader.container}>

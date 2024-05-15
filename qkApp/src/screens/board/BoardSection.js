@@ -12,11 +12,11 @@ function BoardSection({ title, content, writer, time, tag }) {
   return (
     <View style={styles.container}>
       <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.title} numberOfLines={1}>{title}</Text>
         <Text style={styles.tag}>[{tag}]</Text>
       </View>
       <View style={styles.contentZone}>
-        <Text style={styles.content}>{content}</Text>
+      <Text style={styles.content} numberOfLines={1}>{content}</Text>
       </View>
       <View style={styles.footer}>
         <Text style={styles.info}>{writer} |</Text>

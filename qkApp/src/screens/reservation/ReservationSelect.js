@@ -1,4 +1,4 @@
-import { Pressable, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { Pressable, SafeAreaView, StyleSheet, Text, View, Alert } from 'react-native';
 import { useState } from 'react';
 import DropdownComponent from "../../component/DropdownComponent";
 import CalendarComponent from "../../component/CalendarComponent";
@@ -21,7 +21,7 @@ function ReservationSelect({ navigation, route }) {
   const today = TodayComponent();
   const [selectedDate, setSelectedDate] = useState(today);
   const [selectedGround, setSelectedGround] = useState("");
-  const [selectedHour, setSelectedHour] = useState(9);
+  const [selectedHour, setSelectedHour] = useState("");
 
   // 풋살 = 0, 축구 = 1
   const selectedSport = route.params;
@@ -57,7 +57,15 @@ function ReservationSelect({ navigation, route }) {
           style={({ pressed }) => [
             {opacity: pressed ? 0.3 : 1},
             styles.reserveButton]}
-          onPress={() => navigation.navigate('ReservationReport', {selectedDate, selectedGround, selectedHour, selectedSport})}
+          onPress={() => {
+            if (selectedGround === "") {
+              Alert.alert('',"구장을 선택해주세요.", [{ text: '알겠습니다' }]);
+              return;
+            } else if (selectedHour === "") {
+              Alert.alert('',"예약할 시간을 선택해주세요.", [{ text: '알겠습니다' }]);
+              return;
+            }
+            navigation.navigate('ReservationReport', {selectedDate, selectedGround, selectedHour, selectedSport})}}
         >
           <Text style={styles.reserveButtonText}>신청서 작성</Text>
         </Pressable>

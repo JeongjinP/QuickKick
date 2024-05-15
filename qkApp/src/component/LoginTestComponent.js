@@ -1,10 +1,10 @@
-// import React from "react";
 import axios from "axios";
+import querystring from "querystring";
 
 
 export function LoginTestComponent(props) {
   // 로그인 URL
-  const SERVER_URL = "http://localhost:8090/member/";
+  const SERVER_URL = "http://localhost:8090/member/login";
 
   // ID, PW를 서버에 전송하여 사용자 인증
   const authenticateUser = async (id, pw) => {
@@ -12,12 +12,20 @@ export function LoginTestComponent(props) {
     console.log("입력 pw:",pw);
     try {
       // 서버에 POST 요청을 보내기 위한 데이터, URL 설정하고 POST 요청
-      const data = { id: id, password: pw };
-      const url = `${SERVER_URL}login?id=${data.id}&password=${data.password}`
-      const response = await axios.post(url);
+      // const data = { id: id, password: pw };
+      // const url = `${SERVER_URL}login?id=${data.id}&password=${data.password}`
+      // const response = await axios.post(SERVER_URL, data);
+
+      // 서버에 보내는 요청 주소에서 id, password를 노출하지 않기 위해 
+      const data = querystring.stringify({ id: id, password: pw });
+      const response = await axios.post(SERVER_URL, data, {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      });
 
       // 서버 응답 json 데이터 확인
-      console.log("응답받은 데이터",response.data);
+      console.log("서버에서 응답받은 데이터: ",response.data);
       
       // 서버로부터 받은 응답 처리
       if (response.data.id) {

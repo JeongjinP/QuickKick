@@ -7,7 +7,6 @@ import TodayComponent from "../../component/TodayCompnent";
 import useMyReservation from "../../component/useMyReservation";
 
 
-
 function ReservationMain({ navigation }){
   // 예약 조회를 위한 useMyReservation 훅 사용
   // 학번 정보는 useStdData 훅을 사용하여 가져옴
@@ -26,17 +25,60 @@ function ReservationMain({ navigation }){
       fetchReservationData(stdId, today);
     }
   }, [isFocused]);
+
+  // console.log("reservationData: ",reservationData.useground);
+  // const sportType = (reservationData.groundtype === 0 ? '풋살' : '축구');
+  // let groundName;
+  // if (reservationData.groundtype === false) {
+  //   groundName = (reservationData.useground === 'east' ? '동쪽구장' : '서쪽구장');
+  // } else {
+  //   groundName = (reservationData.useground === "east" ? '잔디구장' : '마사토구장')
+  // }
+
+  const renderReservation = (item, index) => {
+    const sportType = (item.groundtype === 0 ? '풋살' : '축구');
+    let groundName;
+    if (item.groundtype === false) {
+      groundName = (item.useground === 'east' ? '동쪽구장' : '서쪽구장');
+    } else {
+      groundName = (item.useground === "east" ? '잔디구장' : '마사토구장')
+    }
   
-  const sportType = (reservationData.groundtype === 0 ? '풋살' : '축구');
-  let groundName;
-  if (reservationData.groundtype === true) {
-    groundName = (reservationData.useground === 'east' ? '동쪽구장' : '서쪽구장');
-  } else {
-    groundName = (reservationData.useground === 'east' ? '잔디구장' : '마사토구장')
+    return (
+      <View key={index} style={styles.resBox}>
+        <Text style={styles.outText}>예약 일자: <Text style={styles.boardText}>{item.resdate}</Text></Text>
+        <Text style={styles.outText}>예약 시간: <Text style={styles.boardText}>{item.restime.slice(-2)}:00</Text></Text>
+        <Text style={styles.outText}>이용 시간: <Text style={styles.boardText}>{item.usetime}시간</Text></Text>
+        <Text style={styles.outText}>선택 종목: <Text style={styles.boardText}>{sportType}</Text></Text>
+        <Text style={styles.outText}>사용 구장: <Text style={styles.boardText}>{groundName}</Text></Text>
+      </View>
+    )
   }
 
-  console.log("sportType: ",sportType);
-  console.log("reservationData: ",reservationData);
+  // 예약 있을땐 상단 정렬, 없을땐 중앙 정렬하기 위한 코드
+  const [noReservation, setNoReservation] = useState(null);
+
+  useEffect(() => {
+    if (reservationData === null || reservationData.length === 0) {
+      setNoReservation(true);
+    } else {
+      setNoReservation(false);
+    }
+  }, [reservationData]);
+
+  const getReserveBoardStyle = (noReservation) => ({
+      flex: 6,
+      flexDirection: "row",
+      justifyContent: "center",
+      alignItems: "start",
+      marginHorizontal: 20,
+      marginVertical: 20,
+      backgroundColor: "white",
+      borderColor: "#0A4A9B",
+      borderWidth: 1,
+  });
+  // console.log("sportType: ",sportType);
+  // console.log("reservationData: ",reservationData);
 
   return (
     
@@ -52,22 +94,14 @@ function ReservationMain({ navigation }){
       >
         <Text style={styles.reserveButtonText}>예약하기</Text>
       </Pressable>
-      <View style={styles.board}>
+      <View style={getReserveBoardStyle(noReservation)}>
       <ScrollView>
         {reservationData === null || reservationData.length === 0 ? (
           <View style={{alignItems: 'center'}}>
             <Text style={styles.boardText}>예약 내역이 없습니다</Text>
           </View>
         ) : (
-          reservationData.map((item, index) => (
-            <View key={index} style={styles.resBox}>
-              <Text style={styles.outText}>예약 일자: <Text style={styles.boardText}>{item.resdate}</Text></Text>
-              <Text style={styles.outText}>예약 시간: <Text style={styles.boardText}>{item.restime.slice(-2)}:00</Text></Text>
-              <Text style={styles.outText}>이용 시간: <Text style={styles.boardText}>{item.usetime}시간</Text></Text>
-              <Text style={styles.outText}>선택 종목: <Text style={styles.boardText}>{sportType}</Text></Text>
-              <Text style={styles.outText}>사용 구장: <Text style={styles.boardText}>{groundName}</Text></Text>
-            </View>
-            ))
+          reservationData.map(renderReservation)
         )}
       </ScrollView>
       </View>
@@ -92,18 +126,17 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "white",
   },
-  board: {
-    flex: 6,
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "start",
-    marginHorizontal: 20,
-    marginVertical: 20,
-    backgroundColor: "white",
-    borderColor: "#0A4A9B",
-    borderWidth: 1,
-    // borderRadius: 30,
-  },
+  // board: {
+  //   flex: 6,
+  //   flexDirection: "row",
+  //   justifyContent: "center",
+  //   alignItems: "start",
+  //   marginHorizontal: 20,
+  //   marginVertical: 20,
+  //   backgroundColor: "white",
+  //   borderColor: "#0A4A9B",
+  //   borderWidth: 1,
+  // },
   boardText: {
     fontSize: 18,
     fontWeight: "bold",

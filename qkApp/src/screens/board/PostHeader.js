@@ -1,29 +1,32 @@
 import {Text, StyleSheet, View, Pressable } from "react-native";
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { useNavigation } from "@react-navigation/native";
+import { Ionicons } from '@expo/vector-icons';
 
-function BoardHeader() {
+function PostHeader() {
   const navigation = useNavigation();
 
   return (
     <View style={styles.header}>
       <View style={{flex:1}}>
-        <Text style={{flex:1}}></Text>
+        <Pressable         
+          style={({ pressed }) => (
+          {opacity: pressed ? 0.3 : 1})}
+          onPress={() => navigation.goBack()}>
+            <Ionicons name="chevron-back" size={24} color="#0a4a9b" style={{marginLeft:15}}/>       
+        </Pressable>
       </View>
       <View style={{flex:1, alignItems:'center'}}>
        <Text style={styles.title}>게시판</Text>
       </View>
-      <View style={styles.writeButton}>
-        <Pressable         
-          style={({ pressed }) => (
-          {opacity: pressed ? 0.3 : 1})}
-          onPress={() => navigation.navigate('WritePage')}>
-          <MaterialCommunityIcons name="pencil" size={22} color="#0A4A9B" style={{marginRight:15}} />
-        </Pressable>
+      <View style={{flex:1}}>
+        <Text style={{flex:1}}></Text>
       </View>
     </View>
   )
 }
+
+export default PostHeader;
 
 const styles = StyleSheet.create({
   header: {
@@ -52,5 +55,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default BoardHeader;
 

@@ -19,6 +19,7 @@ const footballGround = [
 
 function ReservationSelect({ navigation, route }) {
   const today = TodayComponent();
+  const [reservationStatus, setReservationStatus] = useState('');
   const [selectedDate, setSelectedDate] = useState(today);
   const [selectedGround, setSelectedGround] = useState("");
   const [selectedHour, setSelectedHour] = useState("");
@@ -50,7 +51,13 @@ function ReservationSelect({ navigation, route }) {
       </View>
       {/* 예약 가능 여부 표시창 */}
       <View style={styles.selectTime}>
-          <ReservationStatusViewer date={selectedDate} ground={selectedGround} onHourSelected={setSelectedHour} selectedSport={selectedSport}/>
+          <ReservationStatusViewer 
+            date={selectedDate} 
+            ground={selectedGround} 
+            onHourSelected={setSelectedHour} 
+            selectedSport={selectedSport}
+            onStatusUpdate={setReservationStatus}  
+          />
       </View>
       <View style={{flex: 1}}>
         <Pressable
@@ -63,6 +70,9 @@ function ReservationSelect({ navigation, route }) {
               return;
             } else if (selectedHour === "") {
               Alert.alert('',"예약할 시간을 선택해주세요.", [{ text: '알겠습니다' }]);
+              return;
+            } else if (reservationStatus === "예약 중") {
+              Alert.alert('',"이미 예약된 시간입니다.", [{ text: '알겠습니다' }]);
               return;
             }
             navigation.navigate('ReservationReport', {selectedDate, selectedGround, selectedHour, selectedSport})}}

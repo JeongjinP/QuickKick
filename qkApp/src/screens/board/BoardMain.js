@@ -52,7 +52,8 @@ function BoardMain({ navigation }) {
         return (
           <Pressable
             onPress={() => navigation.navigate('PostPage',
-              {id: id, title: title, content: content, writer: writer, tag: category, time: createDate})}>
+              {id: id, title: title, content: content, writer: writer, tag: category, time: createDate})}
+          >
             <BoardSection title={title} content={content} writer={writer} time={createDate} tag={category}/>
           </Pressable>
         )

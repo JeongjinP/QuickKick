@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { View, Text, ScrollView, StyleSheet, TouchableHighlight } from "react-native";
+import { View, Text, ScrollView, StyleSheet, TouchableHighlight, Alert } from "react-native";
 
 
 // 예약 화면 달력에서 날짜를 선택한 뒤 아래에 해당일, 해당 구장의 예약 현황을 시간 목록으로 보여줄 컴포넌트
@@ -8,11 +8,17 @@ import { View, Text, ScrollView, StyleSheet, TouchableHighlight } from "react-na
 
 // 뷰어 안에서 예약 현황을 보여주는 박스 컴포넌트
 // !!! 시간대 한자리일 경우 0 붙여주는데 폰트가 고정폭이 아니여서 틀어지므로 수정 필요
-const ReservationBox = ({time, isReserved, isSelected}) => {
+
+const ReservationBox = ({ time, isReserved, isSelected, onStatusUpdate }) => {
   const formattedTime = String(time).padStart(2, '0');
   const nextHour = String(time + 1).padStart(2, '0');
   const reservationStatus = isReserved ? "예약 중" : "예약 가능";
   const textColor = isSelected ? '#0a4a9b' : '#000000';
+
+  useEffect(() => {
+    onStatusUpdate(reservationStatus);
+  }, [reservationStatus, onStatusUpdate]);
+  
   return (
     <View style={styles.timeView}>
       <Text style={{...styles.Text, color: textColor}}>{formattedTime}:00 ~ {nextHour}:00</Text>
@@ -21,7 +27,7 @@ const ReservationBox = ({time, isReserved, isSelected}) => {
   );
 }
 
-const ReservationStatusViewer = ({date, ground, onHourSelected, selectedSport}) => {
+const ReservationStatusViewer = ({date, ground, onHourSelected, selectedSport, onStatusUpdate}) => {
   const [reservationData, setReservationData] = useState([]);
   const [selectedHour, setSelectedHour] = useState(null);
   console.log("스테이터스뷰어 : ", date, ground, selectedSport);
@@ -71,7 +77,12 @@ const ReservationStatusViewer = ({date, ground, onHourSelected, selectedSport}) 
               onHourSelected(hour);
             }}
           >
-            <ReservationBox time={hour} isReserved={isReserved} isSelected={isSelected} />
+            <ReservationBox 
+              time={hour} 
+              isReserved={isReserved} 
+              isSelected={isSelected}
+              onStatusUpdate={onStatusUpdate}  
+            />
           </TouchableHighlight>
         );
       })}

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState, useMemo } from "react";
 import { Alert, View, Text, StyleSheet, Pressable, SafeAreaView, ScrollView, BackHandler} from "react-native";
 import { useIsFocused, useFocusEffect } from "@react-navigation/native";
 import GeneralHeader from "../component/GeneralHeader";
@@ -105,6 +105,20 @@ const getReserveBoardStyle = (noReservation) => ({
   borderWidth: 1,
 });
 
+const reservationItems = useMemo(() => reservationData.map((item, index) => {
+  const key = `${item.resdate}-${item.resnum}`;
+  console.log('Key:', key);
+  return (
+    <Pressable key={key} style={({ pressed }) => [
+      {opacity: pressed ? 0.6 : 1},
+      styles.resBox]}
+      onPress={() => navigation.navigate('예약', { screen:'ReservationMain' })}>
+      <Text style={styles.outText}>예약 일자: <Text style={styles.boardText}>{item.resdate}</Text></Text>
+      <Text style={styles.outText}>예약 시간: <Text style={styles.boardText}>{item.restime.slice(-2)}:00</Text></Text>
+      <Text style={styles.outText}>이용 시간: <Text style={styles.boardText}>{item.usetime}시간</Text></Text>
+    </Pressable>
+  );
+}), [reservationData]);
 
   return (
     <SafeAreaView style={GeneralHeader.container}>
@@ -133,23 +147,12 @@ const getReserveBoardStyle = (noReservation) => ({
       </View>
 
       <View style={getReserveBoardStyle(noReservation)}>
-        <ScrollView>
-          {reservationData === null || reservationData.length === 0 ? (
-            <View style={{alignItems: 'center'}}>
-              <Text style={styles.boardText}>예약 내역이 없습니다</Text>
-            </View>
-          ) : (
-            reservationData.map((item, index) => (
-              <Pressable key={index} style={({ pressed }) => [
-                {opacity: pressed ? 0.6 : 1},
-                styles.resBox]}
-                onPress={() => navigation.navigate('예약', { screen:'ReservationMain' })}>
-                <Text style={styles.outText}>예약 일자: <Text style={styles.boardText}>{item.resdate}</Text></Text>
-                <Text style={styles.outText}>예약 시간: <Text style={styles.boardText}>{item.restime.slice(-2)}:00</Text></Text>
-                <Text style={styles.outText}>이용 시간: <Text style={styles.boardText}>{item.usetime}시간</Text></Text>
-              </Pressable>
-              ))
-          )}
+          <ScrollView>
+            {reservationData === null || reservationData.length === 0 ? (
+              <View style={{alignItems: 'center'}}>
+                <Text style={styles.boardText}>예약 내역이 없습니다</Text>
+              </View>
+            ) : reservationItems}
         </ScrollView>
       </View>
 
@@ -160,10 +163,10 @@ const getReserveBoardStyle = (noReservation) => ({
               <Text style={styles.boardText}>게시글 내역이 없습니다</Text>
             </View>
           ): (
-            boardList.slice(0, 4).map((item, index) => (
+            boardList.slice(0, 4).map((item) => (
               
               <View style={styles.boardPreview}>
-              <Pressable key={item.id || index} style={({ pressed }) => [
+              <Pressable key={`${item.id}-${item.title}`} style={({ pressed }) => [
                 {opacity: pressed ? 0.6 : 1},
               ]}
               onPress={() => navigation.navigate('게시판', {

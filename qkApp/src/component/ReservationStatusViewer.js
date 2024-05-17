@@ -9,15 +9,12 @@ import { View, Text, ScrollView, StyleSheet, TouchableHighlight, Alert } from "r
 // 뷰어 안에서 예약 현황을 보여주는 박스 컴포넌트
 // !!! 시간대 한자리일 경우 0 붙여주는데 폰트가 고정폭이 아니여서 틀어지므로 수정 필요
 
-const ReservationBox = ({ time, isReserved, isSelected, onStatusUpdate }) => {
+const ReservationBox = ({ time, isReserved, isSelected }) => {
   const formattedTime = String(time).padStart(2, '0');
   const nextHour = String(time + 1).padStart(2, '0');
   const reservationStatus = isReserved ? "예약 중" : "예약 가능";
   const textColor = isSelected ? '#0a4a9b' : '#000000';
 
-  useEffect(() => {
-    onStatusUpdate(reservationStatus);
-  }, [reservationStatus, onStatusUpdate]);
   
   return (
     <View style={styles.timeView}>
@@ -27,7 +24,7 @@ const ReservationBox = ({ time, isReserved, isSelected, onStatusUpdate }) => {
   );
 }
 
-const ReservationStatusViewer = ({date, ground, onHourSelected, selectedSport, onStatusUpdate}) => {
+const ReservationStatusViewer = ({date, ground, onHourSelected, selectedSport}) => {
   const [reservationData, setReservationData] = useState([]);
   const [selectedHour, setSelectedHour] = useState(null);
   console.log("스테이터스뷰어 : ", date, ground, selectedSport);
@@ -68,20 +65,38 @@ const ReservationStatusViewer = ({date, ground, onHourSelected, selectedSport, o
         });
         const isSelected = hour === selectedHour;
         return (
+          // <TouchableHighlight
+          //   key={index}
+          //   activeOpacity={0.6}
+          //   underlayColor="#DDDDDD"
+          //   onPress={() => {
+          //     setSelectedHour(hour); 
+          //     onHourSelected(hour);
+          //   }}
+          // >
+          //   <ReservationBox 
+          //     time={hour} 
+          //     isReserved={isReserved} 
+          //     isSelected={isSelected}
+          //   />
+          // </TouchableHighlight>
           <TouchableHighlight
             key={index}
             activeOpacity={0.6}
             underlayColor="#DDDDDD"
             onPress={() => {
-              setSelectedHour(hour); 
-              onHourSelected(hour);
+              if (isReserved) {
+                Alert.alert('', "이미 예약된 시간입니다.", [{ text: '알겠습니다' }]);
+              } else {
+                setSelectedHour(hour); 
+                onHourSelected(hour);
+              }
             }}
           >
             <ReservationBox 
               time={hour} 
               isReserved={isReserved} 
               isSelected={isSelected}
-              onStatusUpdate={onStatusUpdate}  
             />
           </TouchableHighlight>
         );

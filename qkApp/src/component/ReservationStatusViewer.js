@@ -50,8 +50,6 @@ const ReservationStatusViewer = ({date, ground, onHourSelected, selectedSport}) 
         fetchData();
     }, [date]);
 
-  // ReservationView({date});
-
   console.log("reservationData: ", reservationData);
   const hours = Array.from({length: 10}, (_, i) => i + 9);
   return (
@@ -65,21 +63,6 @@ const ReservationStatusViewer = ({date, ground, onHourSelected, selectedSport}) 
         });
         const isSelected = hour === selectedHour;
         return (
-          // <TouchableHighlight
-          //   key={index}
-          //   activeOpacity={0.6}
-          //   underlayColor="#DDDDDD"
-          //   onPress={() => {
-          //     setSelectedHour(hour); 
-          //     onHourSelected(hour);
-          //   }}
-          // >
-          //   <ReservationBox 
-          //     time={hour} 
-          //     isReserved={isReserved} 
-          //     isSelected={isSelected}
-          //   />
-          // </TouchableHighlight>
           <TouchableHighlight
             key={index}
             activeOpacity={0.6}

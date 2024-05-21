@@ -80,10 +80,12 @@ function Login ({ navigation }) {
         />
       </View>
 
-      {/* <View style={styles.loginOptions}>
+      {/* 구 홈 로그인 옵션
+      <View style={styles.loginOptions}>
         <Text style={styles.Text}>아이디저장</Text>
         <Text style={styles.Text}>자동로그인</Text>
-      </View> */}
+      </View> 
+      */}
 
       {/*로그인 버튼*/}
       <View style={{flex:2}}>
@@ -153,7 +155,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#0A4A9B",
     padding: 16,
     marginHorizontal: 10,
-    // borderRadius: 5,
     },
     buttonText: {
       color: "white",

@@ -98,8 +98,6 @@ export default WritePage;
 const styles = StyleSheet.create({
     titleBox: {
       flexDirection: 'row',
-      // justifyContent: 'space-between',
-      // marginVertical: 0,
       marginHorizontal: 10,
       borderBottomWidth: 1,
       padding: 10,

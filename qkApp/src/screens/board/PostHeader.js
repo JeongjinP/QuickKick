@@ -30,26 +30,18 @@ export default PostHeader;
 
 const styles = StyleSheet.create({
   header: {
-    // flex:1,
     flexDirection: "row",
-    // justifyContent: "center",
-    // alignItems: "center",
-    // borderBottomWidth: 1,
     borderColor: "lightgray",
     paddingVertical: 10,
   },
   title: {
     flex:1,
-    // marginHorizontal: 30,
-    // marginTop: 5,
-    // marginBottom: 10,
     color: "#0A4A9B",
     fontSize: 18,
     fontWeight: '600',
   },
   writeButton: {
     flex:1,
-    // paddingRight: 10,
     alignItems: 'space-between',
     justifyContent: 'top',
   }

@@ -185,19 +185,6 @@ const boardItems = useMemo(() => boardList.map((item, index) => {
             </View>
           ): 
             boardItems
-          //   boardList.slice(0, 4).map((item) => (
-              
-          //     <View style={styles.boardPreview}>
-          //     <Pressable key={`${item.id}-${item.title}-${item.content}`} style={({ pressed }) => [
-          //       {opacity: pressed ? 0.6 : 1},
-          //     ]}
-          //     onPress={() => navigation.navigate('게시판', {
-          //       screen: 'PostPage',
-          //       params: {id: item.id, title: item.title, content: item.content, writer: item.writer, tag: item.category, time: item.createDate}})}>             
-          //       <Text style={styles.boardPreviewText} numberOfLines={1} ellipsizeMode='tail'>‣  {item.title}</Text>          
-          //     </Pressable>
-          // </View>
-          // ))
         }
         </ScrollView>
       </View>
@@ -230,20 +217,6 @@ const styles = StyleSheet.create({
     padding: 10,
     marginRight: 10,
 },
-  // reserveBoard: {
-  //   flex:3,
-  //   flexDirection: "row",
-  //   justifyContent: "center",
-  //   alignItems: noReservation ? "center" : "start",
-  //   backgroundColor: "white",
-  //   margin: 20,
-  //   marginTop: 0,
-  //   marginBottom: 10,
-  //   padding: 5,
-  //   paddingHorizontal: 10,
-  //   borderColor: "#0A4A9B",
-  //   borderWidth: 1,
-// },  
   postBoard: {
     flex:2,
     flexDirection: "row",

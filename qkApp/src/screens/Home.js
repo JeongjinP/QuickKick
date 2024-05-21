@@ -56,8 +56,8 @@ function Home ({ navigation }) {
   
   // 안드로이드 뒤로가기 버튼 작동 방지 코드
   // useEffect 대신 useFocusEffect 사용하는것은 스택 네비게이터 구조상
-  // 다른 화면 이동해도 홈 화면이 뒤에 유지되어 백핸들러가 언마운트 되지 않기 때문에
-  // 화면에 포커스가 있을때만 기능이 실행되게 함
+  // 다른 화면 이동해도 홈 화면이 뒤에 유지되어 백 핸들러가 언마운트 되지 않기 때문에
+  // 홈 화면에 포커스가 있을때만 기능이 실행되게 함
   useFocusEffect(
     useCallback(() => {
       const backAction = () => {
@@ -72,7 +72,7 @@ function Home ({ navigation }) {
       };
     }, []))
 
-  // 로그아웃 버튼 클릭시 ContextApi 에 저장된 사용자 이름, 네비게이터 초기화
+  // 로그아웃 버튼 클릭시 ContextApi 에 저장된 사용자 이름, 네비게이터 초기화하는 함수
   const logoutHandler = () => {
     Alert.alert("","로그아웃 하시겠습니까?",
     [{text: "네", onPress: () =>{ 
@@ -89,7 +89,8 @@ function Home ({ navigation }) {
   ]);
 };
 
-// 예약창 스타일 예약상태 참조용으로 뺌 (noReservation) 참조하려면 빼야함
+// 예약창 스타일 예약상태 참조용으로 뺌 (noReservation ? "center" : "start")
+// 스타일 쪽에 두면 noReservation 값에 따라 다른 스타일을 적용할 수 없어서 함수로 빼둠
 const getReserveBoardStyle = (noReservation) => ({
   flex:3,
   flexDirection: "row",
@@ -119,6 +120,26 @@ const reservationItems = useMemo(() => reservationData.map((item, index) => {
     </Pressable>
   );
 }), [reservationData]);
+
+const boardItems = useMemo(() => boardList.map((item, index) => {
+  if (index > 3) { 
+    return null;
+  }
+
+  const key = `${item.id}-${item.title}`;
+  return (
+    <View style={styles.boardPreview} key={key}>
+      <Pressable  style={({ pressed }) => [
+        {opacity: pressed ? 0.6 : 1},
+      ]}
+      onPress={() => navigation.navigate('게시판', {
+        screen: 'PostPage',
+        params: {id: item.id, title: item.title, content: item.content, writer: item.writer, tag: item.category, time: item.createDate}})}>             
+        <Text style={styles.boardPreviewText} numberOfLines={1} ellipsizeMode='tail'>‣  {item.title}</Text>          
+      </Pressable>
+    </View>
+);
+}).filter(Boolean), [boardList]);
 
   return (
     <SafeAreaView style={GeneralHeader.container}>
@@ -162,21 +183,22 @@ const reservationItems = useMemo(() => reservationData.map((item, index) => {
             <View style={{alignItems: 'center', justifyContent:'center'}}>
               <Text style={styles.boardText}>게시글 내역이 없습니다</Text>
             </View>
-          ): (
-            boardList.slice(0, 4).map((item) => (
+          ): 
+            boardItems
+          //   boardList.slice(0, 4).map((item) => (
               
-              <View style={styles.boardPreview}>
-              <Pressable key={`${item.id}-${item.title}-${item.content}`} style={({ pressed }) => [
-                {opacity: pressed ? 0.6 : 1},
-              ]}
-              onPress={() => navigation.navigate('게시판', {
-                screen: 'PostPage',
-                params: {id: item.id, title: item.title, content: item.content, writer: item.writer, tag: item.category, time: item.createDate}})}>             
-                <Text style={styles.boardPreviewText} numberOfLines={1} ellipsizeMode='tail'>‣  {item.title}</Text>          
-              </Pressable>
-          </View>
-          ))
-        )}
+          //     <View style={styles.boardPreview}>
+          //     <Pressable key={`${item.id}-${item.title}-${item.content}`} style={({ pressed }) => [
+          //       {opacity: pressed ? 0.6 : 1},
+          //     ]}
+          //     onPress={() => navigation.navigate('게시판', {
+          //       screen: 'PostPage',
+          //       params: {id: item.id, title: item.title, content: item.content, writer: item.writer, tag: item.category, time: item.createDate}})}>             
+          //       <Text style={styles.boardPreviewText} numberOfLines={1} ellipsizeMode='tail'>‣  {item.title}</Text>          
+          //     </Pressable>
+          // </View>
+          // ))
+        }
         </ScrollView>
       </View>
     </SafeAreaView>

@@ -7,3 +7,5 @@ insert into reservation (resDate, resTime, useTime, groundType, useGround, respo
            ('2024-01-25', '10:00:00', '2.0', 0, '서측', 201700326);
 
 select * from reservation;
+
+DELETE from reservation where resNum = 28;

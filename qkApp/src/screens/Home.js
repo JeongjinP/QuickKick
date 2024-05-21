@@ -166,7 +166,7 @@ const reservationItems = useMemo(() => reservationData.map((item, index) => {
             boardList.slice(0, 4).map((item) => (
               
               <View style={styles.boardPreview}>
-              <Pressable key={`${item.id}-${item.title}`} style={({ pressed }) => [
+              <Pressable key={`${item.id}-${item.title}-${item.content}`} style={({ pressed }) => [
                 {opacity: pressed ? 0.6 : 1},
               ]}
               onPress={() => navigation.navigate('게시판', {

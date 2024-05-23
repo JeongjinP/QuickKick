@@ -13,7 +13,7 @@ import axios from "axios";
 async function getBoardList() {
   try {
     const response = await axios.get("http://localhost:8070/boardlist");
-    console.log("게시글 조회 결과:", response.data);
+    // console.log("게시글 조회 결과:", response.data);
     const sortedData = response.data.sort((a, b) => new Date(b.createDate) - new Date(a.createDate));
     return sortedData;
   } catch (error) {
@@ -108,7 +108,7 @@ const getReserveBoardStyle = (noReservation) => ({
 
 const reservationItems = useMemo(() => reservationData.map((item, index) => {
   const key = `${item.resdate}-${item.resnum}`;
-  console.log('Key:', key);
+  // console.log('Key:', key);
   return (
     <Pressable key={key} style={({ pressed }) => [
       {opacity: pressed ? 0.6 : 1},
@@ -132,11 +132,11 @@ const boardItems = useMemo(() => boardList.map((item, index) => {
       <Pressable  style={({ pressed }) => [
         {opacity: pressed ? 0.6 : 1},
       ]}
-      onPress={() => navigation.navigate('게시판', {
+        onPress={() => navigation.navigate('게시판', {
         screen: 'PostPage',
         params: {id: item.id, title: item.title, content: item.content, writer: item.writer, tag: item.category, time: item.createDate}})}>             
         <Text style={styles.boardPreviewText} numberOfLines={1} ellipsizeMode='tail'>‣  {item.title}</Text>          
-      </Pressable>
+      </Pressable >
     </View>
 );
 }).filter(Boolean), [boardList]);
@@ -178,14 +178,13 @@ const boardItems = useMemo(() => boardList.map((item, index) => {
       </View>
 
       <View style={styles.postBoard}>
-      <ScrollView>
+        <ScrollView>
           {boardList === null || boardList.length === 0 ? (
             <View style={{alignItems: 'center', justifyContent:'center'}}>
               <Text style={styles.boardText}>게시글 내역이 없습니다</Text>
             </View>
-          ): 
-            boardItems
-        }
+            ): boardItems
+          }
         </ScrollView>
       </View>
     </SafeAreaView>
@@ -204,19 +203,19 @@ const styles = StyleSheet.create({
     paddingHorizontal: 5,
     justifyContent:"space-around",
     alignItems: "center"
-},
+  },
   userInfoText: {
     margin: 10,
     fontSize: 22,
     fontWeight: "bold",
     color: "white",
-},
+  },
   outButton: {
     backgroundColor: "#ffa600",
     borderRadius: 10,
     padding: 10,
     marginRight: 10,
-},
+  },
   postBoard: {
     flex:2,
     flexDirection: "row",
@@ -227,16 +226,16 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     justifyContent: "center",
     alignItems: "center",
-},
+  },
   boardText: {
     fontSize: 20,
     fontWeight: "bold",
     color: "#0A4A9B",
-},  
+  },  
   outText: {
     fontSize: 16,
     color: "black",
-},
+  },
   resBox: {
     flex: 1,
     flexDirection: "column",
@@ -249,7 +248,7 @@ const styles = StyleSheet.create({
     borderColor: "#0A4A9B",
     borderWidth: 1,
     borderRadius: 5,
-},
+  },
   boardPreview: {
     flex: 1,
     flexDirection: "row",
@@ -260,16 +259,13 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderRadius: 5,
     backgroundColor: "white",
-    // marginHorizontal: 20,
     marginVertical: 5,
     paddingHorizontal: 10,
-
     borderRadius: 5,
   },  
   boardPreviewText: {
     fontSize: 18,
     fontWeight: "bold",
     color: "#0A4A9B",
-},  
-  }
-)
+  },  
+})

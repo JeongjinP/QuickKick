@@ -27,13 +27,6 @@ function ReservationMain({ navigation }){
   }, [isFocused]);
 
   // console.log("reservationData: ",reservationData.useground);
-  // const sportType = (reservationData.groundtype === 0 ? '풋살' : '축구');
-  // let groundName;
-  // if (reservationData.groundtype === false) {
-  //   groundName = (reservationData.useground === 'east' ? '동쪽구장' : '서쪽구장');
-  // } else {
-  //   groundName = (reservationData.useground === "east" ? '잔디구장' : '마사토구장')
-  // }
 
   const renderReservation = (item, index) => {
     const sportType = (item.groundtype === 0 ? '풋살' : '축구');
@@ -126,17 +119,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "white",
   },
-  // board: {
-  //   flex: 6,
-  //   flexDirection: "row",
-  //   justifyContent: "center",
-  //   alignItems: "start",
-  //   marginHorizontal: 20,
-  //   marginVertical: 20,
-  //   backgroundColor: "white",
-  //   borderColor: "#0A4A9B",
-  //   borderWidth: 1,
-  // },
   boardText: {
     fontSize: 18,
     fontWeight: "bold",

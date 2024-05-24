@@ -1,3 +1,5 @@
+// 오늘 날짜를 2024-05-31 형식으로 가져올 컴포넌트
+
 function TodayComponent() {
     let today = new Date();
 

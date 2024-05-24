@@ -59,7 +59,7 @@ function ReservationMain({ navigation }){
     }
   }, [reservationData]);
 
-  const getReserveBoardStyle = (noReservation) => ({
+  const getReserveBoardStyle = ( noReservation ) => ({
       flex: 6,
       flexDirection: "row",
       justifyContent: "center",
@@ -88,15 +88,15 @@ function ReservationMain({ navigation }){
         <Text style={styles.reserveButtonText}>예약하기</Text>
       </Pressable>
       <View style={getReserveBoardStyle(noReservation)}>
-      <ScrollView>
-        {reservationData === null || reservationData.length === 0 ? (
-          <View style={{alignItems: 'center'}}>
-            <Text style={styles.boardText}>예약 내역이 없습니다</Text>
-          </View>
-        ) : (
-          reservationData.map(renderReservation)
-        )}
-      </ScrollView>
+        <ScrollView>
+          {reservationData === null || reservationData.length === 0 ? (
+            <View style={{alignItems: 'center'}}>
+              <Text style={styles.boardText}>예약 내역이 없습니다</Text>
+            </View>
+          ) : (
+            reservationData.map(renderReservation)
+          )}
+        </ScrollView>
       </View>
     </SafeAreaView>
   )

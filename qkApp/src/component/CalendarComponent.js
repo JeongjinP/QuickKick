@@ -2,7 +2,7 @@ import React, { useState }  from "react";
 import { Alert } from "react-native";
 import { Calendar, LocaleConfig } from "react-native-calendars";
 import TodayComponent from "./TodayCompnent";
-import e from "cors";
+// import e from "cors";
 
 // react-native-calendars 라이브러리를 사용해 달력 컴포넌트 구성
 // https://github.com/wix/react-native-calendars
@@ -16,7 +16,7 @@ LocaleConfig.locales["kr"] = {
   today: "오늘",
 };
 LocaleConfig.defaultLocale = "kr";
-function CalendarComponent( {onDateSelected }) {
+function CalendarComponent({ onDateSelected }) {
 
   // 선택된 날짜를 useState 사용해서 설정
   const today = TodayComponent();

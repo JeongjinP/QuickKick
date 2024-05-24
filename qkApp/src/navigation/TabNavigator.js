@@ -4,12 +4,11 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Home from "../screens/Home";
 import ReservationStack from "./ReservationStack";
 import BoardStack from "./BoardStack";
-import TeamStack from "./TeamStack";
-import MyPageStack from "./MyPageStack";
+// import TeamStack from "./TeamStack";
+// import MyPageStack from "./MyPageStack";
 import {defaultScreenOptions} from "./DefaultStackOptions";
 import AntDesign from '@expo/vector-icons/AntDesign';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
-import Feather from '@expo/vector-icons/Feather';
 
 
 // 하단바 5개를 가지는 화면이동 네비게이터 TabNavigator

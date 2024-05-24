@@ -13,7 +13,7 @@ function ReservationReport ({ navigation, route }) {
   const selectedSport = route.params.selectedSport;
   const [useTime, setUseTime] = useState('');
   let groundName;
-  if (selectedSport === 0) {
+  if ( selectedSport === 0 ) {
     groundName = { east: '동쪽구장', west: '서쪽구장' };
   } else {
     groundName = { east: '잔디구장', west: '마사토구장' };
@@ -40,6 +40,8 @@ function ReservationReport ({ navigation, route }) {
     }
   };
 
+  // 예약서 작성 화면
+  // 예약서 작성 후에는 예약 메인화면으로 이동
   return (
     <SafeAreaView style={GeneralHeader.container}>
       <View style={GeneralHeader.header}>
@@ -106,18 +108,6 @@ function ReservationReport ({ navigation, route }) {
           onChangeText={(text) => setUseTime(text)}
         />
       </View>
-      {/* <View style={styles.reportBox}>
-        <Text>사용목적: </Text>
-        <TextInput
-          style={styles.reportInput}
-        />
-      </View> */}
-      {/* <View style={styles.reportBox}>
-        <Text>사용내용: </Text>
-        <TextInput
-          style={styles.reportInput}
-        />
-      </View> */}
 
       <Pressable
         style={({ pressed }) => [
